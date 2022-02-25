@@ -15,7 +15,7 @@ team-project-epic-bytes created by GitHub Classroom
 ### Rishab Reddy Karakala
 
 ## Quick Links
-### [Github Repository] (https://github.com/gopinathsjsu/team-project-epic-bytes)
+### [Github Repository](https://github.com/gopinathsjsu/team-project-epic-bytes)
 ### [Project Board]
 ### [Project Journal]
 ### [Google Sprint Task Sheet]
