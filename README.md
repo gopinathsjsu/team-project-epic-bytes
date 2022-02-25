@@ -9,13 +9,13 @@ team-project-epic-bytes created by GitHub Classroom
     Rishab Reddy Karakala
     
 ## Areas of Contributions
-    ### Kanupriya Sanjay Agrawal
-    ### Kusuma Padma Kavya Bandi
-    ### Nikhil Konduru
-    ### Rishab Reddy Karakala
+### Kanupriya Sanjay Agrawal
+### Kusuma Padma Kavya Bandi
+### Nikhil Konduru
+### Rishab Reddy Karakala
 
 ## Quick Links
-    ### Github Repository
-    ### Project Board
-    ### Project Journal
-    ### Google Sprint Task Sheet
+### [Github Repository]
+### [Project Board]
+### [Project Journal]
+### [Google Sprint Task Sheet]
