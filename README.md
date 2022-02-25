@@ -16,6 +16,6 @@ team-project-epic-bytes created by GitHub Classroom
 
 ## Quick Links
 ### [Github Repository](https://github.com/gopinathsjsu/team-project-epic-bytes)
-### [Project Board]
+### [Project Board](https://github.com/gopinathsjsu/team-project-epic-bytes/projects/1?fullscreen=true)
 ### [Project Journal]
 ### [Google Sprint Task Sheet]
