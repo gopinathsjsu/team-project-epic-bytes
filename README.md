@@ -2,17 +2,17 @@
 team-project-epic-bytes created by GitHub Classroom
 
 # The Epic Bytes
-### Team Members:
+## Team Members:
     Kanupriya Sanjay Agrawal
     Kusuma Padma Kavya Bandi
     Nikhil Konduru
     Rishab Reddy Karakala
     
 ## Areas of Contributions
-#### Kanupriya Sanjay Agrawal
-#### Kusuma Padma Kavya Bandi
-#### Nikhil Konduru
-#### Rishab Reddy Karakala
+#### Kanupriya Sanjay Agrawal:
+#### Kusuma Padma Kavya Bandi:
+#### Nikhil Konduru:
+#### Rishab Reddy Karakala:
 
 ## Scrum Artifacts and Diagrams
 1. [Github Repository](https://github.com/gopinathsjsu/team-project-epic-bytes)
