@@ -15,10 +15,9 @@ team-project-epic-bytes created by GitHub Classroom
 ### Rishab Reddy Karakala
 
 ## Scrum Artifacts
-[Github Repository](https://github.com/gopinathsjsu/team-project-epic-bytes)
-
-[Project Board](https://github.com/gopinathsjsu/team-project-epic-bytes/projects/1?fullscreen=true)
-
-[Project Journal]
-
-[Google Sprint Task Sheet]
+1. [Github Repository](https://github.com/gopinathsjsu/team-project-epic-bytes)
+2. [Project Board](https://github.com/gopinathsjsu/team-project-epic-bytes/projects/1?fullscreen=true)
+3. [Project Journal]
+4. [Google Sprint Task Sheet]
+5. [Design and Diagrams]
+6. [Wireframes]
