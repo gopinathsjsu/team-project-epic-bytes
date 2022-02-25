@@ -16,6 +16,9 @@ team-project-epic-bytes created by GitHub Classroom
 
 ## Scrum Artifacts
 [Github Repository](https://github.com/gopinathsjsu/team-project-epic-bytes)
+
 [Project Board](https://github.com/gopinathsjsu/team-project-epic-bytes/projects/1?fullscreen=true)
+
 [Project Journal]
+
 [Google Sprint Task Sheet]
