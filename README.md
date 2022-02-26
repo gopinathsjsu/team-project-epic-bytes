@@ -1,7 +1,4 @@
-# team-project-epic-bytes
-team-project-epic-bytes created by GitHub Classroom
-
-# The Epic Bytes
+# Team 'The Epic Bytes'
 ## Team Members:
 1. Kanupriya Sanjay Agrawal
 2. Kusuma Padma Kavya Bandi
