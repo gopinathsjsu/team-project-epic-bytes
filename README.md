@@ -1,5 +1,5 @@
 # Team 'The Epic Bytes'
-## Team Members:
+## Team Members
 1. Kanupriya Sanjay Agrawal
 2. Kusuma Padma Kavya Bandi
 3. Nikhil Konduru
