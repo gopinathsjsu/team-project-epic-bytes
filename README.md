@@ -14,7 +14,7 @@
 ## Scrum Artifacts and Diagrams
 1. [Github Repository](https://github.com/gopinathsjsu/team-project-epic-bytes)
 2. [Project Board](https://github.com/gopinathsjsu/team-project-epic-bytes/projects/1?fullscreen=true)
-3. [Project Journal](team-project-epic-bytes/Documents/)
+3. [Project Journal](https://github.com/gopinathsjsu/team-project-epic-bytes/tree/main/Documents)
 4. [Google Sprint Task Sheet]
 5. [Design and Diagrams]
 6. [Wireframes]
