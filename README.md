@@ -8,7 +8,7 @@
 ## Areas of Contributions
 #### Kanupriya Sanjay Agrawal:
 #### Kusuma Padma Kavya Bandi:
-#### Nikhil Konduru:
+#### Nikhil konduru:
 #### Rishab Reddy Karakala:
 
 ## Scrum Artifacts and Diagrams
