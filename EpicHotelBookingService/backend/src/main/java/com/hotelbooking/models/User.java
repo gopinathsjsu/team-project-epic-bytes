@@ -22,9 +22,6 @@ public class User {
         @Column(name = "last_name")
         private String lastName;
 
-//        @Column(name = "dob")
-//        private LocalDate dateOfBirth;
-
         @Column(name = "contact_ph")
         private String phone;
 
