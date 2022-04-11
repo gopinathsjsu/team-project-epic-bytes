@@ -1,5 +1,6 @@
 package com.hotelbooking.security;
 
+import com.hotelbooking.models.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -19,11 +20,11 @@ public class JwtUtil {
   private String secret;
 
   //  private final long EXPIRATION = 1000 * 60 * 60 * 10L;
-  private final long EXPIRATION = 1000 * 60L;
+  private final long EXPIRATION = 1000 * 60 * 60L;
 
-  public String generateToken(final UserDetails userDetails) {
+  public String generateToken(final String username) {
     final Map<String, Object> claims = new HashMap<>();
-    return createToken(claims, userDetails.getUsername());
+    return createToken(claims, username);
   }
 
   public String validateTokenAndReturnUsername(final String token) {
