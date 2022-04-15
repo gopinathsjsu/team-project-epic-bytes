@@ -42,7 +42,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     http.csrf()
         .disable()
         .authorizeRequests()
-        .antMatchers(LOGIN_ENDPOINT, SIGNUP_ENDPOINT, "/hotels/**")
+        .antMatchers(LOGIN_ENDPOINT, SIGNUP_ENDPOINT, "/hotels/**", "/rooms/**")
         .permitAll()
         .anyRequest()
         .authenticated()
