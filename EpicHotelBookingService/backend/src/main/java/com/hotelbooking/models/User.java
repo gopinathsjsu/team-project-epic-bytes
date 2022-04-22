@@ -5,10 +5,11 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity @Getter @Setter @ToString @NoArgsConstructor
-public class User {
+public class User implements Serializable {
 
         public User(String username, String password, String firstName, String lastName, String phone, String email, String role) {
                 this.username = username;
@@ -21,9 +22,6 @@ public class User {
         }
 
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        private Integer id;
-
         @Column(length = 15, unique = true)
         private String username;
 
@@ -40,15 +38,12 @@ public class User {
         @Column(name = "contact_ph")
         private String phone;
 
-        @Column(name = "email", unique = true)
+        @Column(unique=true)
         @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}", flags = Pattern.Flag.CASE_INSENSITIVE)
         private String email;
 
         @Column(name = "role")
         private String role;
-
-        @Column
-        private int loyaltyPoints;
 
         @Column
         private int rewardPoints;
