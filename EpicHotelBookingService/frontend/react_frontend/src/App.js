@@ -1,9 +1,13 @@
-import { Routes } from './Routes';
+import { Routes } from "./Routes";
+import { AppContext, AppContextComponent } from "./store/appContext";
 
 export const App = () => {
-    return (
-        <div className="page-container">
-            <Routes />
-        </div>
-    );
-}
+  const contextComponent = AppContextComponent();
+  return (
+    <AppContext.Provider value={contextComponent}>
+      <div className="page-container">
+        <Routes />
+      </div>
+    </AppContext.Provider>
+  );
+};
