@@ -6,6 +6,15 @@ const initialContext = {
   isDataLoading: false,
   isErrorLoading: false,
   LoginUser: (username, password) => {},
+  regdata: {
+    username: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+  },
+  RegisterUser: (data) => {},
 };
 
 export const AppContext = createContext(initialContext);
@@ -17,6 +26,15 @@ export const AppContextComponent = () => {
     username: "",
     password: "",
     token: "",
+  });
+
+  const [regdata, setRegData] = useState({
+    username: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
   });
 
   const LoginUser = useCallback(
@@ -40,10 +58,37 @@ export const AppContextComponent = () => {
     [userdata, setUserData]
   );
 
+  const RegisterUser = useCallback(
+    (data) => {
+      setIsDataLoading(true);
+      setRegData(data);
+      ApiInstance.post("users", data)
+        .then((response) => {
+          if (response.status === 200) {
+            sessionStorage.setItem("token", response.data);
+            setUserData({
+              username: data.username,
+              password: data.password,
+              token: response.data,
+            });
+          }
+          setIsDataLoading(false);
+        })
+        .catch((error) => {
+          console.error(error);
+          setIsDataLoading(false);
+          setisErrorLoading(true);
+        });
+    },
+    [regdata, setRegData]
+  );
+
   return {
     LoginUser,
     isDataLoading,
     isErrorLoading,
     userdata,
+    regdata,
+    RegisterUser,
   };
 };
