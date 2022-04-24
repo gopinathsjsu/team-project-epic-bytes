@@ -24,27 +24,38 @@ export const LogInPage = () => {
   };
 
   return (
-    <div className="content-container">
-      <h1>Log In</h1>
-      {errorMessage && <div className="fail">{errorMessage}</div>}
-      <input
-        value={emailValue}
-        onChange={(e) => setEmailValue(e.target.value)}
-        placeholder="someone@gmail.com"
-      />
-      <input
-        type="password"
-        value={passwordValue}
-        onChange={(e) => setPasswordValue(e.target.value)}
-        placeholder="password"
-      />
-      <hr />
-      <button disabled={!emailValue || !passwordValue} onClick={onLogInClicked}>
-        Log In
-      </button>
-      <button onClick={() => history.push("/signup")}>
-        Don't have an account? Sign Up
-      </button>
+    <div className="page-container">
+      <div className="content-container">
+        <h1>Log In</h1>
+        {errorMessage && <div className="fail">{errorMessage}</div>}
+        <input
+          className="button-input"
+          value={emailValue}
+          onChange={(e) => setEmailValue(e.target.value)}
+          placeholder="someone@gmail.com"
+        />
+        <input
+          className="button-input"
+          type="password"
+          value={passwordValue}
+          onChange={(e) => setPasswordValue(e.target.value)}
+          placeholder="password"
+        />
+        <hr />
+        <button
+          className="button-input"
+          disabled={!emailValue || !passwordValue}
+          onClick={onLogInClicked}
+        >
+          Log In
+        </button>
+        <button
+          className="button-input"
+          onClick={() => history.push("/signup")}
+        >
+          Don't have an account? Sign Up
+        </button>
+      </div>
     </div>
   );
 };

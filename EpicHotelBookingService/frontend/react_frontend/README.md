@@ -4,6 +4,16 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+To install yarn command use the command 
+### `npm install -g yarn`
+
+yarn works only in cmd propmt not in powershell
+
+In the project directory, you have to install node modules using command : 
+### `yarn install`
+
+Please note that npm install is not working 
+
 In the project directory, you can run:
 
 ### `npm start`
