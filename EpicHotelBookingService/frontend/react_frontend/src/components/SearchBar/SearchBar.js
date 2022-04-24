@@ -3,6 +3,7 @@ import { styled, alpha } from "@mui/material/styles";
 import { styles } from "./SearchBarStyle";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import InputBase from "@mui/material/InputBase";
@@ -13,8 +14,12 @@ import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { Tooltip } from "@mui/material";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import Button from "@material-ui/core/Button";
 import "./SearchBar.css";
+
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 export const SearchBar = (props) => {
   const [anchorEl, setAnchorEl] = useState();
@@ -23,6 +28,18 @@ export const SearchBar = (props) => {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  const [value, setValue] = useState(new Date());
+  const [checkout, setCheckout] = useState(new Date());
+
+  const handleChange = (newValue) => {
+    setValue(newValue);
+  };
+  const handleCheckout = (newValue) => {
+    setCheckout(newValue);
+  };
+
+
+  
   const { history, user } = props;
 
   const logOut = () => {
@@ -107,20 +124,26 @@ export const SearchBar = (props) => {
                 onInput={onSearchInputChange}
               />
             </Search>
-            <Search>
-              <StyledInputBase
-                placeholder="Check-In"
-                inputProps={{ "aria-label": "search" }}
-                onInput={onSearchInputChange}
-              />
-            </Search>
-            <Search>
-              <StyledInputBase
-                placeholder="Check-Out"
-                inputProps={{ "aria-label": "search" }}
-                onInput={onSearchInputChange}
-              />
-            </Search>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DesktopDatePicker className="datepicker"
+          label="checkin"
+          inputFormat="MM/dd/yyyy"
+          value={value}
+          onChange={handleChange}
+          renderInput={(params) => <TextField {...params} />}
+        />
+        </LocalizationProvider>
+
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DesktopDatePicker className="datepicker"
+          label="checkout"
+          inputFormat="MM/dd/yyyy"
+          value={checkout}
+          onChange={handleCheckout}
+          renderInput={(params) => <TextField {...params} />}
+        />
+        </LocalizationProvider>
+
             <Button variant="contained" className="primary-text-btn-search">
               Search
             </Button>
