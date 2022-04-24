@@ -34,4 +34,7 @@ public class Hotel {
 
   @Column
   private String hotelPhone;
+
+  @Column
+  private double hotelBasePrice;
 }

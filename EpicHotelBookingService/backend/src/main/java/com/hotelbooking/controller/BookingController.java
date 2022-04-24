@@ -1,2 +1,63 @@
-package com.hotelbooking.controller;public class BookingController {
+package com.hotelbooking.controller;
+
+import com.hotelbooking.models.BookingJournal;
+import com.hotelbooking.models.request.BookingRequest;
+import com.hotelbooking.service.BookingService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
+
+@Slf4j
+@RestController
+public class BookingController {
+
+  private BookingService bookingService;
+
+  public BookingController(BookingService bookingService) {
+    this.bookingService = bookingService;
+  }
+
+  @PostMapping("/bookings")   // admin and customer
+  public void createbooking(@Valid @RequestBody BookingRequest bookingRequest) {
+    String username = SecurityContextHolder.getContext().getAuthentication().getName();
+    bookingService.createBooking(bookingRequest, username);
+  }
+
+  @GetMapping("/bookings") // admin
+  public List<BookingJournal> getAllBookings() {
+    return bookingService.getAllBookings();
+  }
+
+  @GetMapping("/bookings/{bookingID}") // admin
+  public Optional<BookingJournal> getBookingById(@PathVariable Integer bookingID) {
+    return bookingService.getBookingById(bookingID);
+  }
+
+  @GetMapping("/bookings/users") // admin and customer
+  public Optional<List<BookingJournal>> getBookingsForUser() throws Exception {
+    log.info("Entering getBookingsForUser Api");
+    try {
+      String username = SecurityContextHolder.getContext().getAuthentication().getName();
+      return bookingService.getBookingsForUser(username);
+    } catch (Exception e) {
+      log.error("Error occured in getBookingsForUser :{}", e);
+    }
+
+    return null;
+  }
+
+  @PutMapping("/bookings/{bookingID}")  // admin and customer
+  public void updateBookingDetails(
+      @RequestBody BookingJournal bookingJournal, @PathVariable Integer bookingID) {
+    bookingService.updateBookingDetails(bookingJournal, bookingID);
+  }
+
+  @DeleteMapping("/bookings/{bookingID}") // admin and customer
+  public void cancelBooking(@PathVariable Integer bookingID) {
+    bookingService.cancelBooking(bookingID);
+  }
 }

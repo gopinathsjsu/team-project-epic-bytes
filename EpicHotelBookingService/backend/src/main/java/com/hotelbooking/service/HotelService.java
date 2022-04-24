@@ -1,8 +1,6 @@
 package com.hotelbooking.service;
 
 import com.hotelbooking.models.Hotel;
-import com.hotelbooking.models.request.BookingRequest;
-import com.hotelbooking.models.request.BookingResponse;
 import com.hotelbooking.repository.HotelRepository;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -21,7 +19,10 @@ public class HotelService {
 
   public List<Hotel> searchHotelByLocation(String location) throws Exception {
     Optional<List<Hotel>> hotelList = hotelRepository.getHotels(location);
-    hotelList.orElseThrow(() -> new UsernameNotFoundException("No hotels found for: " + location));
+    hotelList.orElseThrow(
+        () ->
+            new UsernameNotFoundException(
+                "No hotels found for " + location + ". Let's try something else."));
     return hotelList.get();
   }
 
@@ -40,9 +41,9 @@ public class HotelService {
     currentHotel.setHotelAddress(hotel.getHotelAddress());
     currentHotel.setHotelEmail(hotel.getHotelEmail());
     currentHotel.setHotelPhone(hotel.getHotelPhone());
+    currentHotel.setHotelBasePrice(hotel.getHotelBasePrice());
     currentHotel = hotelRepository.save(hotel);
   }
-
 
   public void deleteHotel(Integer id) {
     hotelRepository.deleteById(id);
@@ -50,10 +51,5 @@ public class HotelService {
 
   public void addHotel(Hotel hotel) {
     hotelRepository.save(hotel);
-  }
-
-  public BookingResponse createBooking(BookingRequest bookingRequest) {
-
-    return null;
   }
 }

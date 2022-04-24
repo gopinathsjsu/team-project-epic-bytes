@@ -25,7 +25,7 @@ public class HotelController {
     @GetMapping("/hotels")
     public List<Hotel> searchHotel(@RequestParam(required = false) String location) throws Exception {
         if (location != null) {
-            return hotelService.searchHotelByLocation(location);
+            return hotelService.searchHotelByLocation(location.toLowerCase());
         }
         else {
             return hotelService.getAllHotels();
