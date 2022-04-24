@@ -44,8 +44,8 @@ export const AppContextComponent = () => {
       ApiInstance.post("login", { username, password })
         .then((response) => {
           if (response.status === 200) {
-            sessionStorage.setItem("token", response.data);
-            setUserData({ ...userdata, token: response.data });
+            sessionStorage.setItem("token", response.data?.jwt);
+            setUserData({ ...userdata, token: response.data?.jwt });
           }
           setIsDataLoading(false);
         })
@@ -65,11 +65,11 @@ export const AppContextComponent = () => {
       ApiInstance.post("users", data)
         .then((response) => {
           if (response.status === 200) {
-            sessionStorage.setItem("token", response.data);
+            sessionStorage.setItem("token", response.data?.jwt);
             setUserData({
               username: data.username,
               password: data.password,
-              token: response.data,
+              token: response.data?.jwt,
             });
           }
           setIsDataLoading(false);
