@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { LogInPage } from "./pages/LogInPage";
 import { SignUpPage } from "./pages/SignUpPage";
-import { UserInfoPage } from "./pages/UserInfoPage";
+import { UserInfoDashboard } from "./pages/UserInfoDashboard";
 import { PrivateRoute } from "./auth/PrivateRoute";
 import { EmployeeDashboard } from "./pages/EmployeeDashboard";
 
@@ -10,7 +10,7 @@ export const Routes = () => {
     <Router>
       <Switch>
         <Route path="/" exact>
-          <UserInfoPage />
+          <UserInfoDashboard />
         </Route>
         <Route path="/employee" exact>
           <EmployeeDashboard />
