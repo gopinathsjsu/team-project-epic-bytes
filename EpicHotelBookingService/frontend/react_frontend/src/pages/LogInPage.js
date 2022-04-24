@@ -5,7 +5,7 @@ import { AppContext } from "../store/appContext";
 export const LogInPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
-  const [emailValue, setEmailValue] = useState("");
+  const [username, setUserName] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
 
   const history = useHistory();
@@ -19,7 +19,7 @@ export const LogInPage = () => {
   }, [isErrorLoading]);
 
   const onLogInClicked = async () => {
-    LoginUser(emailValue, passwordValue);
+    LoginUser(username, passwordValue);
     history.push("/");
   };
 
@@ -30,9 +30,9 @@ export const LogInPage = () => {
         {errorMessage && <div className="fail">{errorMessage}</div>}
         <input
           className="button-input"
-          value={emailValue}
-          onChange={(e) => setEmailValue(e.target.value)}
-          placeholder="someone@gmail.com"
+          value={username}
+          onChange={(e) => setUserName(e.target.value)}
+          placeholder="username"
         />
         <input
           className="button-input"
@@ -44,7 +44,7 @@ export const LogInPage = () => {
         <hr />
         <button
           className="button-input"
-          disabled={!emailValue || !passwordValue}
+          disabled={!username || !passwordValue}
           onClick={onLogInClicked}
         >
           Log In

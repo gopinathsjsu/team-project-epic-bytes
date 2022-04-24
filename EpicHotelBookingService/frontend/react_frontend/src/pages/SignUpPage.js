@@ -9,13 +9,14 @@ export const SignUpPage = () => {
 
   const [errorMessage, setErrorMessage] = useState("");
 
+  const [username, setUserName] = useState("");
   const [emailValue, setEmailValue] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [latName, setLastName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [firstname, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
+  const [phonenumber, setPhoneNumber] = useState("");
 
   const [passwordValue, setPasswordValue] = useState("");
-  const [confirmPasswordValue, setConfirmPasswordValue] = useState("");
+  const [confirmpasswordValue, setConfirmPasswordValue] = useState("");
 
   const { RegisterUser, isErrorLoading } = useContext(AppContext);
 
@@ -29,12 +30,13 @@ export const SignUpPage = () => {
 
   const onSignUpClicked = async () => {
     RegisterUser({
-      username: emailValue,
-      password: passwordValue,
-      firstName: firstName,
-      lastName: latName,
+      username: username,
       email: emailValue,
-      phone: phoneNumber,
+      password: passwordValue,
+      firstname: firstname,
+      lastname: lastname,
+      email: emailValue,
+      phone: phonenumber,
     });
     history.push("/");
   };
@@ -46,27 +48,33 @@ export const SignUpPage = () => {
         {errorMessage && <div className="fail">{errorMessage}</div>}
         <input
           className="button-input"
+          value={username}
+          onChange={(e) => setUserName(e.target.value)}
+          placeholder="username"
+        />
+        <input
+          className="button-input"
           value={emailValue}
           onChange={(e) => setEmailValue(e.target.value)}
           placeholder="someone@gmail.com"
         />
         <input
           className="button-input"
-          value={firstName}
+          value={firstname}
           onChange={(e) => setFirstName(e.target.value)}
-          placeholder="first Name"
+          placeholder="first name"
         />
         <input
           className="button-input"
-          value={latName}
+          value={lastname}
           onChange={(e) => setLastName(e.target.value)}
-          placeholder="Last Name"
+          placeholder="last name"
         />
         <input
           className="button-input"
-          value={phoneNumber}
+          value={phonenumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
-          placeholder="Phone Number"
+          placeholder="phone number"
         />
         <input
           className="button-input"
@@ -78,17 +86,17 @@ export const SignUpPage = () => {
         <input
           className="button-input"
           type="password"
-          value={confirmPasswordValue}
+          value={confirmpasswordValue}
           onChange={(e) => setConfirmPasswordValue(e.target.value)}
-          placeholder="confirm Password"
+          placeholder="confirm password"
         />
         <hr />
         <button
           className="button-input"
           disabled={
-            !emailValue ||
+            !username ||
             !passwordValue ||
-            passwordValue !== confirmPasswordValue
+            passwordValue !== confirmpasswordValue
           }
           onClick={onSignUpClicked}
         >
