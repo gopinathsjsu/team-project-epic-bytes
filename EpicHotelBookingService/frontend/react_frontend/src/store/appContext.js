@@ -80,7 +80,7 @@ export const AppContextComponent = () => {
           setisErrorLoading(true);
         });
     },
-    [regdata, setRegData]
+    [setRegData]
   );
 
   return {

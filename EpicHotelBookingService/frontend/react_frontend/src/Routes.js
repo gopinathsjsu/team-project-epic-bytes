@@ -3,14 +3,18 @@ import { LogInPage } from "./pages/LogInPage";
 import { SignUpPage } from "./pages/SignUpPage";
 import { UserInfoPage } from "./pages/UserInfoPage";
 import { PrivateRoute } from "./auth/PrivateRoute";
+import { EmployeeDashboard } from "./pages/EmployeeDashboard";
 
 export const Routes = () => {
   return (
     <Router>
       <Switch>
-        <PrivateRoute path="/" exact>
+        <Route path="/" exact>
           <UserInfoPage />
-        </PrivateRoute>
+        </Route>
+        <Route path="/employee" exact>
+          <EmployeeDashboard />
+        </Route>
         <Route path="/login">
           <LogInPage />
         </Route>

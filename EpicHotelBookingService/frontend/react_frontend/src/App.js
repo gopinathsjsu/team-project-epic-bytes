@@ -5,9 +5,7 @@ export const App = () => {
   const contextComponent = AppContextComponent();
   return (
     <AppContext.Provider value={contextComponent}>
-      <div className="page-container">
-        <Routes />
-      </div>
+      <Routes />
     </AppContext.Provider>
   );
 };
