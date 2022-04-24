@@ -25,8 +25,14 @@ public class RoomController {
     }
 
     @GetMapping("/rooms")
-    public List<Room> getAllRooms() {
-        return roomService.getAllRooms();
+    public List<Room> getAllRooms(@RequestParam(required = false) Integer noOfGuests) throws Exception {
+        if (noOfGuests != null) {
+            return roomService.getRoomByBeds(noOfGuests);
+        }
+
+        else {
+            return roomService.getAllRooms();
+        }
     }
 
 
