@@ -7,6 +7,7 @@ import { CustomerHeader } from "../components/CustomerHeader/CustomerHeader";
 import { SearchBar } from "../components/SearchBar/SearchBar";
 import HotelDisplayCard from "../components/HotelDisplayCard/HotelDisplayCard";
 import "../styles/UserInfoDashboard.css";
+import Hero from "../components/hero/Hero";
 
 export const UserInfoDashboard = () => {
   const user = useUser();
@@ -39,16 +40,7 @@ export const UserInfoDashboard = () => {
   return (
     <>
       <CustomerHeader history={history} user={user} />
-      <SearchBar history={history} user={user} />
-      <div className="hotel-body">
-        <HotelDisplayCard
-          image={require("../images/motel6.webp")}
-          name="Motel6"
-          loc="SanJose"
-          rooms={10}
-          type="Deluxe"
-        />
-      </div>
+      <Hero />
     </>
   );
 };
