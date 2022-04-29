@@ -1,5 +1,6 @@
 import { createContext, useCallback, useState } from "react";
 import { ApiInstance } from "../api/axiosInstance";
+import { admin_username } from "../api/constants";
 
 const initialContext = {
   userdata: { username: "", password: "", token: "" },
@@ -15,6 +16,13 @@ const initialContext = {
     phone: "",
   },
   RegisterUser: (data) => {},
+  clearLoginUser: () => {},
+  getHotels: (location) => {},
+  hoteldata: {
+    data: [],
+    isDataLoading: false,
+    isErrorLoading: false,
+  },
 };
 
 export const AppContext = createContext(initialContext);
@@ -22,10 +30,16 @@ export const AppContext = createContext(initialContext);
 export const AppContextComponent = () => {
   const [isDataLoading, setIsDataLoading] = useState(false);
   const [isErrorLoading, setisErrorLoading] = useState(false);
+  const [hoteldata, setHotelData] = useState({
+    data: [],
+    isDataLoading: false,
+    isErrorLoading: false,
+  });
   const [userdata, setUserData] = useState({
     username: "",
     password: "",
     token: "",
+    usertype: "",
   });
 
   const [regdata, setRegData] = useState({
@@ -40,13 +54,23 @@ export const AppContextComponent = () => {
   const LoginUser = useCallback(
     (username, password) => {
       setIsDataLoading(true);
-      setUserData({ username, password });
+      setisErrorLoading(false);
       ApiInstance.post("login", { username, password })
         .then((response) => {
           if (response.status === 200) {
-            sessionStorage.setItem("token", response.data?.jwt);
-            setUserData({ ...userdata, token: response.data?.jwt });
+            localStorage.setItem("token", response.data?.jwt);
+            let data = {
+              username: username,
+              password: password,
+              token: response.data?.jwt,
+              usertype: "user",
+            };
+            if (username === admin_username) {
+              data.usertype = "admin";
+            }
+            setUserData(data);
           }
+          setisErrorLoading(false);
           setIsDataLoading(false);
         })
         .catch((error) => {
@@ -55,7 +79,7 @@ export const AppContextComponent = () => {
           setisErrorLoading(true);
         });
     },
-    [userdata, setUserData]
+    [setUserData]
   );
 
   const RegisterUser = useCallback(
@@ -65,7 +89,7 @@ export const AppContextComponent = () => {
       ApiInstance.post("users", data)
         .then((response) => {
           if (response.status === 200) {
-            sessionStorage.setItem("token", response.data?.jwt);
+            localStorage.setItem("token", response.data?.jwt);
             setUserData({
               username: data.username,
               password: data.password,
@@ -83,6 +107,43 @@ export const AppContextComponent = () => {
     [setRegData]
   );
 
+  const clearLoginUser = () => {
+    localStorage.removeItem("token");
+    setUserData({
+      username: "",
+      password: "",
+      token: "",
+      usertype: "",
+    });
+  };
+
+  const getHotels = useCallback(
+    (data) => {
+      setHotelData({ ...hoteldata, isDataLoading: true });
+      let url = data === undefined ? "hotels" : `hotels?location=${data}`;
+      ApiInstance.get(url)
+        .then((response) => {
+          if (response.status === 200) {
+            setHotelData({ ...hoteldata, data: response.data });
+          }
+          setHotelData({
+            ...hoteldata,
+            isDataLoading: false,
+            isErrorLoading: false,
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+          setHotelData({
+            ...hoteldata,
+            isDataLoading: false,
+            isErrorLoading: true,
+          });
+        });
+    },
+    [hoteldata]
+  );
+
   return {
     LoginUser,
     isDataLoading,
@@ -90,5 +151,8 @@ export const AppContextComponent = () => {
     userdata,
     regdata,
     RegisterUser,
+    clearLoginUser,
+    getHotels,
+    hoteldata,
   };
 };

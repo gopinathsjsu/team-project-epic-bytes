@@ -1,10 +1,15 @@
-import { Redirect, Route } from 'react-router-dom';
-import { useUser } from './useUser';
+import { Redirect, Route } from "react-router-dom";
+import { AppContext } from "../store/appContext";
+import { useContext } from "react";
+import { getPayloadFromToken } from "../util/useQueryParams";
 
-export const PrivateRoute = props => {
-    const user = useUser();
+export const PrivateRoute = (props) => {
+  const { userdata, clearLoginUser } = useContext(AppContext);
 
-    if (!user) return <Redirect to="/login" />
+  let user =
+    userdata.token !== "" ? getPayloadFromToken(userdata.token) : undefined;
+  console.log(user);
+  if (!user) return <Redirect to="/login" />;
 
-    return <Route {...props} />
-}
+  return <Route {...props} />;
+};

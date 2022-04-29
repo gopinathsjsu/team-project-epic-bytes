@@ -2,11 +2,8 @@ import { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { AppContext } from "../store/appContext";
-import { useToken } from "../auth/useToken";
 
 export const SignUpPage = () => {
-  const [token, setToken] = useToken();
-
   const [errorMessage, setErrorMessage] = useState("");
 
   const [username, setUserName] = useState("");

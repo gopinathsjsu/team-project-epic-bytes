@@ -10,7 +10,7 @@ export const LogInPage = () => {
 
   const history = useHistory();
 
-  const { LoginUser, isErrorLoading } = useContext(AppContext);
+  const { LoginUser, isErrorLoading, userdata } = useContext(AppContext);
 
   useEffect(() => {
     if (isErrorLoading) {
@@ -20,8 +20,15 @@ export const LogInPage = () => {
 
   const onLogInClicked = async () => {
     LoginUser(username, passwordValue);
-    history.push("/");
   };
+
+  useEffect(() => {
+    if (userdata?.usertype === "user" && isErrorLoading === false) {
+      history.push("/");
+    } else if (userdata?.usertype === "admin" && isErrorLoading === false) {
+      history.push("/admin");
+    }
+  }, [userdata]);
 
   return (
     <div className="page-container">

@@ -1,17 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
-import { useToken } from "../auth/useToken";
-import { useUser } from "../auth/useUser";
 import { CustomerHeader } from "../components/CustomerHeader/CustomerHeader";
 import { SearchBar } from "../components/SearchBar/SearchBar";
 import HotelDisplayCard from "../components/HotelDisplayCard/HotelDisplayCard";
 import "../styles/UserInfoDashboard.css";
 import Hero from "../components/hero/Hero";
+import { AppContext } from "../store/appContext";
 
-export const UserInfoDashboard = () => {
-  const user = useUser();
-  const [token, setToken] = useToken();
+export const UserInfoDashboard = (props) => {
+  const { userdata } = useContext(AppContext);
   // We'll use the history to navigate the user
   // programmatically later on (we're not using it yet)
   const history = useHistory();
@@ -39,7 +36,7 @@ export const UserInfoDashboard = () => {
 
   return (
     <>
-      <CustomerHeader history={history} user={user} />
+      <CustomerHeader history={history} />
       <Hero />
     </>
   );

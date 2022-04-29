@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import { styles } from "./CustomerHeaderStyle";
 import AppBar from "@mui/material/AppBar";
@@ -14,6 +14,9 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import { Tooltip } from "@mui/material";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Button from "@material-ui/core/Button";
+import LoginIcon from "@mui/icons-material/Login";
+import { getPayloadFromToken } from "../../util/useQueryParams";
+import { AppContext } from "../../store/appContext";
 import "./CustomerHeader.css";
 
 export const CustomerHeader = (props) => {
@@ -23,13 +26,16 @@ export const CustomerHeader = (props) => {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const { history, user } = props;
+  const { history } = props;
+  const { userdata, clearLoginUser } = useContext(AppContext);
+  let user = userdata.token !== "" ? getPayloadFromToken(userdata.token) : {};
 
   const logOut = () => {
-    sessionStorage.removeItem("token");
-    history.push("/login");
+    localStorage.removeItem("token");
+    clearLoginUser();
+    setAnchorEl(null);
+    history.push("/");
   };
-
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -115,42 +121,63 @@ export const CustomerHeader = (props) => {
     </Menu>
   );
 
+  const handleUserLogin = () => {
+    history.push("/login");
+  };
   const onRewardsClick = () => {};
 
+  const userProfileRenderer = () => {
+    return userdata.username === "" ? (
+      <IconButton
+        size="large"
+        edge="end"
+        aria-label="account of current user"
+        aria-controls={menuId}
+        aria-haspopup="true"
+        onClick={handleUserLogin}
+        color="inherit"
+      >
+        <Tooltip title="Login">
+          <LoginIcon />
+        </Tooltip>
+      </IconButton>
+    ) : (
+      <Box sx={{ display: { xs: "none", md: "flex" } }}>
+        <IconButton
+          size="large"
+          aria-label="show 4 new mails"
+          color="inherit"
+          className="rewards-icon"
+          onClick={onRewardsClick}
+        >
+          <Tooltip title="Rewards">
+            <RedeemIcon />
+          </Tooltip>
+        </IconButton>
+        <Button className="primary-text-btn">Bookings</Button>
+        <IconButton
+          size="large"
+          edge="end"
+          aria-label="account of current user"
+          aria-controls={menuId}
+          aria-haspopup="true"
+          onClick={handleProfileMenuOpen}
+          color="inherit"
+        >
+          <Tooltip title={user?.sub}>
+            <AccountCircle />
+          </Tooltip>
+        </IconButton>
+      </Box>
+    );
+  };
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar sx={styles} position="static">
           <Toolbar>
-
             <Box sx={{ flexGrow: 1 }} />
-            <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <IconButton
-                size="large"
-                aria-label="show 4 new mails"
-                color="inherit"
-                onClick={onRewardsClick}
-              >
-                <Tooltip title="Rewards">
-                  <RedeemIcon />
-                </Tooltip>
-              </IconButton>
-              <Button className="primary-text-btn">Bookings</Button>
-
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <Tooltip title={user?.sub}>
-                  <AccountCircle />
-                </Tooltip>
-              </IconButton>
-            </Box>
+            {userProfileRenderer()}
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
