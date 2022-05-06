@@ -1,5 +1,6 @@
 package com.hotelbooking.service;
 
+import com.hotelbooking.exception.HotelExceptions;
 import com.hotelbooking.models.Hotel;
 import com.hotelbooking.repository.HotelRepository;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,7 +22,7 @@ public class HotelService {
     Optional<List<Hotel>> hotelList = hotelRepository.getHotels(location);
     hotelList.orElseThrow(
         () ->
-            new UsernameNotFoundException(
+            new HotelExceptions(
                 "No hotels found for " + location + ". Let's try something else."));
     return hotelList.get();
   }

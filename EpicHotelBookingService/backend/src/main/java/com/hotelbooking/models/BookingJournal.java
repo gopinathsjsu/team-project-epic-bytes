@@ -3,8 +3,10 @@ package com.hotelbooking.models;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -15,39 +17,15 @@ public class BookingJournal {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
-
+  @Column(unique = true)
+  private UUID bookingId;
   @Column private String username;
-  @Column private String customerName;
-  @Column private Integer hotelID;
-  @Column private String roomType;
-  @Column private int numberOfRooms;
-  @Column private int numberOfGuestsPerRoom;
-  @Column private LocalDate checkInDate;
-  @Column private LocalDate checkOutDate;
-  @Column private double price;
-  @Column private Integer rewardPoints;
-  @Column private String email;
-  @Column private String phone;
-  @Column private LocalDateTime localDateTime;
 
-  public BookingJournal(
-      String username,
-      String customerName,
-      Integer hotelID,
-      String roomType,
-      int numberOfRooms,
-      int numberOfGuestsPerRoom,
-      LocalDate checkInDate,
-      LocalDate checkOutDate,
-      double price,
-      Integer rewardPoints,
-      String email,
-      String phone,
-      LocalDateTime localDateTime) {
+  public BookingJournal(UUID bookingId, String username, Integer hotelId, Integer roomId, int numberOfRooms, int numberOfGuestsPerRoom, LocalDate checkInDate, LocalDate checkOutDate, double price, int rewardPoints, String email, String phone, LocalDateTime localDateTime) {
+    this.bookingId = bookingId;
     this.username = username;
-    this.customerName = customerName;
-    this.hotelID = hotelID;
-    this.roomType = roomType;
+    this.hotelId = hotelId;
+    this.roomId = roomId;
     this.numberOfRooms = numberOfRooms;
     this.numberOfGuestsPerRoom = numberOfGuestsPerRoom;
     this.checkInDate = checkInDate;
@@ -58,4 +36,16 @@ public class BookingJournal {
     this.phone = phone;
     this.localDateTime = localDateTime;
   }
+
+  @Column private Integer hotelId;
+  @Column private Integer roomId;
+  @Column private int numberOfRooms;
+  @Column private int numberOfGuestsPerRoom;
+  @Column private LocalDate checkInDate;
+  @Column private LocalDate checkOutDate;
+  @Column private double price;
+  @Column private int rewardPoints;
+  @Column private String email;
+  @Column private String phone;
+  @Column private LocalDateTime localDateTime;
 }

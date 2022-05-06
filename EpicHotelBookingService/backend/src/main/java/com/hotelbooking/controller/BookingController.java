@@ -2,6 +2,7 @@ package com.hotelbooking.controller;
 
 import com.hotelbooking.models.BookingJournal;
 import com.hotelbooking.models.request.BookingRequest;
+import com.hotelbooking.models.response.BookingResponse;
 import com.hotelbooking.service.BookingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,9 +23,9 @@ public class BookingController {
   }
 
   @PostMapping("/bookings")   // admin and customer
-  public void createbooking(@Valid @RequestBody BookingRequest bookingRequest) {
+  public BookingResponse createBooking(@Valid @RequestBody BookingRequest bookingRequest) {
     String username = SecurityContextHolder.getContext().getAuthentication().getName();
-    bookingService.createBooking(bookingRequest, username);
+    return bookingService.createBooking(bookingRequest, username);
   }
 
   @GetMapping("/bookings") // admin

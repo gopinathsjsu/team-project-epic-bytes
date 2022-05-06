@@ -13,11 +13,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class HotelExceptionHandler extends ResponseEntityExceptionHandler {
 
   @ExceptionHandler(value = {HotelExceptions.class})
-  public ResponseEntity<Object> handleBusinessException(HotelExceptions ex) {
+  public ResponseEntity<Object> handleBusinessException(HotelExceptions e) {
 
-    log.error("Business Exception: ", ex.getReason());
+    log.error("Business Exception: ", e.getReason());
 
-    return new ResponseEntity<Object>(ex.getReason(), HttpStatus.BAD_REQUEST);
+    return new ResponseEntity<Object>(e.getReason(), HttpStatus.BAD_REQUEST);
   }
 
   //    @ExceptionHandler(value

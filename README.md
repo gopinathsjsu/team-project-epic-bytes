@@ -2,7 +2,7 @@
 ## Team Members
 1.  Kanupriya Sanjay Agrawal (016099057)
 2.  Kusuma Padma Kavya Bandi (016021785)
-3.  Nikhil Konduru
+3.  Nikhil Konduru 
 4.  Rishab Reddy Karakala
     
 ## Technology Stack
