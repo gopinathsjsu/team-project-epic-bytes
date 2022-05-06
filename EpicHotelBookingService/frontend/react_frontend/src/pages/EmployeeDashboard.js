@@ -1,24 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
-import { useToken } from "../auth/useToken";
-import { useUser } from "../auth/useUser";
 import { DashboardHeader } from "../components/Header/Header";
 import HotelCard from "../components/Card/Card";
+import { AppContext } from "../store/appContext";
+import { getPayloadFromToken } from "../util/useQueryParams";
 import "../styles/EmployeeDashboard.css";
 
 export const EmployeeDashboard = () => {
-  const user = useUser();
-  const [token, setToken] = useToken();
   // We'll use the history to navigate the user
   // programmatically later on (we're not using it yet)
   const history = useHistory();
 
-  // These states are bound to the values of the text inputs
-  // on the page (see JSX below).
-  const [favoriteFood, setFavoriteFood] = useState("");
-  const [hairColor, setHairColor] = useState("");
-  const [bio, setBio] = useState("");
+  const { hoteldata, getHotels } = useContext(AppContext);
 
   // These state variables control whether or not we show
   // the success and error message sections after making
@@ -30,6 +23,9 @@ export const EmployeeDashboard = () => {
   // success and error messages after 3 seconds when they're shown.
   // Just a little user interface improvement.
   useEffect(() => {
+    getHotels();
+  }, []);
+  useEffect(() => {
     if (showSuccessMessage || showErrorMessage) {
       setTimeout(() => {
         setShowSuccessMessage(false);
@@ -37,18 +33,23 @@ export const EmployeeDashboard = () => {
       }, 3000);
     }
   }, [showSuccessMessage, showErrorMessage]);
-
+  console.log(hoteldata.data);
   return (
     <>
-      <DashboardHeader history={history} user={user} />
+      <DashboardHeader history={history} />
       <div className="hotel-body">
-        <HotelCard
-          image={require("../images/motel6.webp")}
-          name="Motel6"
-          loc="SanJose"
-          rooms={10}
-          type="Deluxe"
-        />
+        {hoteldata &&
+          hoteldata.data.map((item) => {
+            return (
+              <HotelCard
+                image={require("../images/motel6.webp")}
+                name={item.hotelName}
+                loc={item.location}
+                rooms={10}
+                type="Deluxe"
+              />
+            );
+          })}
       </div>
     </>
   );

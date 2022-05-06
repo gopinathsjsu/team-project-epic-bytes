@@ -14,12 +14,12 @@ import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { Tooltip } from "@mui/material";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import Button from "@material-ui/core/Button";
 import "./SearchBar.css";
 
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 export const SearchBar = (props) => {
   const [anchorEl, setAnchorEl] = useState();
@@ -38,12 +38,10 @@ export const SearchBar = (props) => {
     setCheckout(newValue);
   };
 
-
-  
   const { history, user } = props;
 
   const logOut = () => {
-    sessionStorage.removeItem("token");
+    localStorage.removeItem("token");
     history.push("/login");
   };
 
@@ -125,24 +123,26 @@ export const SearchBar = (props) => {
               />
             </Search>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DesktopDatePicker className="datepicker"
-          label="checkin"
-          inputFormat="MM/dd/yyyy"
-          value={value}
-          onChange={handleChange}
-          renderInput={(params) => <TextField {...params} />}
-        />
-        </LocalizationProvider>
+              <DesktopDatePicker
+                className="datepicker"
+                label="checkin"
+                inputFormat="MM/dd/yyyy"
+                value={value}
+                onChange={handleChange}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
 
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DesktopDatePicker className="datepicker"
-          label="checkout"
-          inputFormat="MM/dd/yyyy"
-          value={checkout}
-          onChange={handleCheckout}
-          renderInput={(params) => <TextField {...params} />}
-        />
-        </LocalizationProvider>
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DesktopDatePicker
+                className="datepicker"
+                label="checkout"
+                inputFormat="MM/dd/yyyy"
+                value={checkout}
+                onChange={handleCheckout}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
 
             <Button variant="contained" className="primary-text-btn-search">
               Search

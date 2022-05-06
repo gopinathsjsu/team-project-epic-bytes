@@ -9,10 +9,10 @@ export const Routes = () => {
   return (
     <Router>
       <Switch>
-        <PrivateRoute path="/" exact>
+        <Route path="/" exact>
           <UserInfoDashboard />
-        </PrivateRoute>
-        <PrivateRoute path="/employee" exact>
+        </Route>
+        <PrivateRoute path="/admin" exact>
           <EmployeeDashboard />
         </PrivateRoute>
         <Route path="/login">
