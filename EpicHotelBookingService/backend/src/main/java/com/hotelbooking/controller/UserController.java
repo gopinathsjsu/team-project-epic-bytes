@@ -1,5 +1,6 @@
 package com.hotelbooking.controller;
 
+import com.hotelbooking.exception.HotelExceptions;
 import com.hotelbooking.models.User;
 import com.hotelbooking.models.request.LoginRequest;
 import com.hotelbooking.models.request.SignUpRequest;
@@ -22,7 +23,6 @@ import java.util.Optional;
 
 import static com.hotelbooking.constants.Constants.LOGIN_ENDPOINT;
 import static com.hotelbooking.constants.Constants.SIGNUP_ENDPOINT;
-
 @RestController
 public class UserController {
   private final JwtUtil jwtUtil;
@@ -65,8 +65,8 @@ public class UserController {
       authenticationManager.authenticate(
           new UsernamePasswordAuthenticationToken(
               loginRequest.getUsername(), loginRequest.getPassword()));
-    } catch (BadCredentialsException e) {
-      throw new Exception("Incorrect Username or Password", e);
+    } catch (HotelExceptions e) {
+      throw new HotelExceptions("Incorrect Username or Password");
     }
 
     final UserDetails userDetails =
@@ -92,7 +92,7 @@ public class UserController {
       final String jwt = jwtUtil.generateToken(signUpRequest.getUsername());
       return new LoginResponse(jwt);
     } else {
-      throw new Exception("Username already exists");
+      throw new HotelExceptions("Username already exists");
     }
   }
 }

@@ -1,10 +1,15 @@
 package com.hotelbooking.pricing;
 
+import lombok.Getter;
+import org.springframework.stereotype.Component;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Component
 public class WeekendPricing implements Pricing {
 
   private final List<DayOfWeek> days = new ArrayList<DayOfWeek>();

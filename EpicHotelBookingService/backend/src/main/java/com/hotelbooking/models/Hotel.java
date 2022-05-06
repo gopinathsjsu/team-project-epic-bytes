@@ -1,8 +1,6 @@
 package com.hotelbooking.models;
 
 import lombok.*;
-import org.hibernate.annotations.GeneratorType;
-
 import javax.persistence.*;
 
 @Entity
@@ -17,24 +15,17 @@ public class Hotel {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
 
-  @Column
-  private String hotelName;
+  @Column private String hotelName;
 
-  @Column
-  private String description;
+  @Column private String description;
 
-  @Column
-  private String location;
+  @Column private String location;
 
-  @Column
-  private String hotelAddress;
+  @Column private String hotelAddress;
 
-  @Column
-  private String hotelEmail;
+  @Column private String hotelEmail;
 
-  @Column
-  private String hotelPhone;
+  @Column private String hotelPhone;
 
-  @Column
-  private double hotelBasePrice;
+  @Column private double hotelBasePrice;
 }

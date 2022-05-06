@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class LoginRequest {
+public class  LoginRequest {
 
   @NotBlank
   @Size(min = 8, max = 15)

@@ -12,5 +12,4 @@ import java.util.Optional;
 public interface RoomRepository extends CrudRepository<Room, Integer> {
     @Query(value = "SELECT * FROM room WHERE beds =:noOfGuests", nativeQuery = true)
     Optional<List<Room>> getRooms(@Param("noOfGuests") int noOfGuests);
-
 }

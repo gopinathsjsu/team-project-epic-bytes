@@ -10,9 +10,8 @@ import java.time.temporal.ChronoUnit;
 @Component
 public class DateValidator {
 
-  public void validateDate(BookingRequest bookingRequest) {
-    LocalDate checkInDate = bookingRequest.getCheckInDate();
-    LocalDate checkOutDate = bookingRequest.getCheckOutDate();
+  public void validateDate(LocalDate checkInDate, LocalDate checkOutDate) {
+    System.out.println("inside validateDate function ===================");
     long totalNights = ChronoUnit.DAYS.between(checkInDate, checkOutDate);
 
     if (checkInDate == null) {

@@ -11,7 +11,7 @@ import java.io.Serializable;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Amenity implements Serializable {
+public class Amenity {
 
   /**
    * Options may be selected for each room for one or more amenities:
@@ -21,13 +21,14 @@ public class Amenity implements Serializable {
    * Daily Parking
    * All meals included (Breakfast, Lunch, Dinner)
    */
+
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Integer id;
-  @Column
+  @Column(length = 15)
   private String name;
+
   @Column
   private String description;
+
   @Column
   private double price;
 

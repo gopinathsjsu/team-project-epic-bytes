@@ -1,8 +1,6 @@
 package com.hotelbooking.service;
 
-import com.hotelbooking.models.Hotel;
 import com.hotelbooking.models.Room;
-import com.hotelbooking.repository.HotelRepository;
 import com.hotelbooking.repository.RoomRepository;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;

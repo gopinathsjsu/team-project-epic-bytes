@@ -23,10 +23,9 @@ public class PublicHolidayPricing implements Pricing {
         dates.add(LocalDate.of(2023, 1, 1)); //New Year's Eve
     }
 
-    //price hike in terms of percentage: 10%
-
+    //price hike in terms of percentage: 15%
     @Override
     public double getPriceMultiplier() {
-        return 0.1;
+        return 0.15;
     }
 }

@@ -18,7 +18,8 @@ public class Room implements Serializable {
 
   @Column private Integer roomNumber;
 
-  @Column private String roomType;
+  @Column (length = 15, unique = true)
+  private String roomType;
 
   @Column private double perNightPrice;
 

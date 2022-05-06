@@ -5,6 +5,7 @@ import com.hotelbooking.repository.AmenityRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AmenityService {
@@ -20,5 +21,9 @@ public class AmenityService {
 
   public List<Amenity> getAllAmenities() {
     return (List<Amenity>) amenityRepository.findAll();
+  }
+
+  public Optional<Amenity> getAmenityById(String name) {
+    return amenityRepository.findById(name);
   }
 }
