@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @Slf4j
 @RestController
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 40000)
 public class BookingController {
 
   private BookingService bookingService;

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 40000)
 public class AmenityController {
 
     private final AmenityService amenityService;

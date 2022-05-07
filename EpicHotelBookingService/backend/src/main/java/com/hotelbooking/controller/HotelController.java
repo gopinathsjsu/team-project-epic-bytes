@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 40000)
 public class HotelController {
 
     private final HotelService hotelService;
