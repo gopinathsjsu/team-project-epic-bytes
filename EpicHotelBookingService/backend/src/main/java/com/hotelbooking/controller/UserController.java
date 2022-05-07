@@ -67,8 +67,6 @@ public class UserController {
       throw new HotelExceptions("Incorrect Username or Password");
     }
 
-//    final UserDetails userDetails =
-//        myUserDetailsService.loadUserByUsername(loginRequest.getUsername());
     User loggedInUser = myUserDetailsService.getUserByUsername(loginRequest.getUsername()).get();
 
     final String jwt = jwtUtil.generateToken(loggedInUser);
