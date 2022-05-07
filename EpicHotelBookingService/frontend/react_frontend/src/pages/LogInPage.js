@@ -10,7 +10,7 @@ export const LogInPage = () => {
 
   const history = useHistory();
 
-  const { LoginUser, isErrorLoading, userdata } = useContext(AppContext);
+  const { LoginUser, isErrorLoading, userData } = useContext(AppContext);
 
   useEffect(() => {
     if (isErrorLoading) {
@@ -23,12 +23,12 @@ export const LogInPage = () => {
   };
 
   useEffect(() => {
-    if (userdata?.usertype === "user" && isErrorLoading === false) {
+    if (userData?.userType === "user" && isErrorLoading === false) {
       history.push("/");
-    } else if (userdata?.usertype === "admin" && isErrorLoading === false) {
+    } else if (userData?.userType === "admin" && isErrorLoading === false) {
       history.push("/admin");
     }
-  }, [userdata]);
+  }, [userData]);
 
   return (
     <div className="page-container">

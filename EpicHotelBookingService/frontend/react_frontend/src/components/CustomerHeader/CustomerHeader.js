@@ -27,8 +27,8 @@ export const CustomerHeader = (props) => {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const { history } = props;
-  const { userdata, clearLoginUser } = useContext(AppContext);
-  let user = userdata.token !== "" ? getPayloadFromToken(userdata.token) : {};
+  const { userData, clearLoginUser } = useContext(AppContext);
+  let user = userData.token !== "" ? getPayloadFromToken(userData.token) : {};
 
   const logOut = () => {
     localStorage.removeItem("token");
@@ -127,7 +127,7 @@ export const CustomerHeader = (props) => {
   const onRewardsClick = () => {};
 
   const userProfileRenderer = () => {
-    return userdata.username === "" ? (
+    return userData.username === "" ? (
       <IconButton
         size="large"
         edge="end"

@@ -8,7 +8,7 @@ import Hero from "../components/hero/Hero";
 import { AppContext } from "../store/appContext";
 
 export const UserInfoDashboard = (props) => {
-  const { userdata } = useContext(AppContext);
+  const { userData } = useContext(AppContext);
   // We'll use the history to navigate the user
   // programmatically later on (we're not using it yet)
   const history = useHistory();

@@ -11,7 +11,7 @@ export const EmployeeDashboard = () => {
   // programmatically later on (we're not using it yet)
   const history = useHistory();
 
-  const { hoteldata, getHotels } = useContext(AppContext);
+  const { hotelData, getHotels } = useContext(AppContext);
 
   // These state variables control whether or not we show
   // the success and error message sections after making
@@ -33,13 +33,13 @@ export const EmployeeDashboard = () => {
       }, 3000);
     }
   }, [showSuccessMessage, showErrorMessage]);
-  console.log(hoteldata.data);
+  console.log(hotelData.data);
   return (
     <>
       <DashboardHeader history={history} />
       <div className="hotel-body">
-        {hoteldata &&
-          hoteldata.data.map((item) => {
+        {hotelData &&
+          hotelData.data.map((item) => {
             return (
               <HotelCard
                 image={require("../images/motel6.webp")}
