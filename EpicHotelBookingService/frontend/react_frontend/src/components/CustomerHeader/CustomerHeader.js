@@ -1,15 +1,12 @@
 import { useState, useContext } from "react";
-import { styled, alpha } from "@mui/material/styles";
 import { styles } from "./CustomerHeaderStyle";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import InputBase from "@mui/material/InputBase";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import RedeemIcon from "@mui/icons-material/Redeem";
-import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { Tooltip } from "@mui/material";
 import MoreIcon from "@mui/icons-material/MoreVert";
@@ -22,7 +19,6 @@ import "./CustomerHeader.css";
 export const CustomerHeader = (props) => {
   const [anchorEl, setAnchorEl] = useState();
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState();
-  const [isOpen, setOpen] = useState(false);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -52,11 +48,6 @@ export const CustomerHeader = (props) => {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
-  };
-
-  const onSearchInputChange = (event) => {
-    let value = event.target.value;
-    return value;
   };
 
   const menuId = "primary-search-account-menu";

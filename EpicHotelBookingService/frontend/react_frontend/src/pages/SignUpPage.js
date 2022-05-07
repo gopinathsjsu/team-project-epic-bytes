@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
 import { AppContext } from "../store/appContext";
 
 export const SignUpPage = () => {
@@ -32,7 +31,6 @@ export const SignUpPage = () => {
       password: passwordValue,
       firstName: firstName,
       lastName: lastName,
-      email: emailValue,
       phone: phoneNumber,
     });
     history.push("/");

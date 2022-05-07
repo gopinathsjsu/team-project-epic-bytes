@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { LogInPage } from "./pages/LogInPage";
-import { SignUpPage } from "./pages/SignUpPage";
+import { SignUpPageV2 } from "./pages/SignUpPageV2";
 import { UserInfoDashboard } from "./pages/UserInfoDashboard";
 import { PrivateRoute } from "./auth/PrivateRoute";
 import { EmployeeDashboard } from "./pages/EmployeeDashboard";
@@ -19,7 +19,7 @@ export const Routes = () => {
           <LogInPage />
         </Route>
         <Route path="/signup">
-          <SignUpPage />
+          <SignUpPageV2 />
         </Route>
       </Switch>
     </Router>
