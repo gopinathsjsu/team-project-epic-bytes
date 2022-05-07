@@ -5,6 +5,7 @@ import com.hotelbooking.repository.RoomRepository;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,7 +45,7 @@ public class RoomService {
   public List<Room> getRoomByBeds(int noOfGuests) {
     Optional<List<Room>> roomList = roomRepository.getRooms(noOfGuests);
     roomList.orElseThrow(
-        () -> new UsernameNotFoundException("No rooms found for: " + noOfGuests + " guests."));
+        () -> new EntityNotFoundException("No rooms found for: " + noOfGuests + " guests."));
     return roomList.get();
   }
 }

@@ -11,8 +11,9 @@ import java.util.List;
 public class BookingResponse {
     private int numberOfRooms;
     private long totalNights;
-    private double perNightPrice;
+    private double perRoomPerNightPrice;
     private double totalRoomPrice;
+    private List<AmenityResponse> amenitiesResponse;// amenity description and count and price
     private double totalAmenityPrice;
     private double taxableAmount;
     private double tax;
@@ -29,7 +30,6 @@ public class BookingResponse {
     private String roomType;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
-    private List<AmenityResponse> amenitiesResponse;// amenity description and count and price
 
     }
 
