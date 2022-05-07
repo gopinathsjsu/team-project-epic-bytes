@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @Slf4j
 @RestController
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 40000)
 public class BookingController {
 
   private BookingService bookingService;
@@ -53,8 +54,8 @@ public class BookingController {
 
   @PutMapping("/bookings/{bookingID}")  // admin and customer
   public void updateBookingDetails(
-      @RequestBody BookingJournal bookingJournal, @PathVariable Integer bookingID) {
-    bookingService.updateBookingDetails(bookingJournal, bookingID);
+      @RequestBody BookingRequest bookingRequest, @PathVariable Integer bookingID) {
+    bookingService.updateBookingDetails(bookingRequest, bookingID);
   }
 
   @DeleteMapping("/bookings/{bookingID}") // admin and customer

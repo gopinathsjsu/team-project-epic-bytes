@@ -62,13 +62,12 @@ public class BookingService {
             bookingRequest, room.get(), user.get(), checkInDate, checkOutDate);
     if (bookingRequest.isPayment()) {
       int rewardPoints = (int) br.getTotalPrice();
-     responseBuilder.completeBooking(br, bookingRequest, room.get(), user.get(), checkInDate, checkOutDate);
       bookingRepository.save(
           new BookingJournal(
               UUID.randomUUID(),
               username,
               bookingRequest.getHotelId(),
-              bookingRequest.getRoomId(),
+              room.get().getRoomType(),
               bookingRequest.getNumberOfRooms(),
               bookingRequest.getNumberOfGuestsPerRoom(),
               checkInDate,
@@ -78,13 +77,10 @@ public class BookingService {
               bookingRequest.getEmail(),
               bookingRequest.getPhone(),
               LocalDateTime.now()));
-      // reward and tier update after booking
-      System.out.println("============user reward point before booking" + user.get().getRewardPoints());
-      System.out.println("user tier point before booking" + user.get().getTier());
+
+      //update reward and tier after booking
       user.get().setRewardPoints(user.get().getRewardPoints() + rewardPoints);
-      System.out.println("user reward point after booking" + user.get().getRewardPoints());
       user.get().setTier(user.get().getRewardPoints());
-      System.out.println("user tier  after booking==========" + user.get().getTier());
 
     }
 
@@ -99,17 +95,42 @@ public class BookingService {
     return bookingRepository.findById(bookingID);
   }
 
-  public void updateBookingDetails(BookingJournal bookingJournal, Integer bookingID) {
+  public void updateBookingDetails(BookingRequest bookingRequest, Integer bookingID) {
+    Optional<BookingJournal> previousBookingDetails = getBookingById(bookingID);
+    previousBookingDetails.orElseThrow((() -> new HotelExceptions("No booking found")));
+    BookingJournal bookingDetails = previousBookingDetails.get();
 
-    dateValidator.validateDate(bookingJournal.getCheckInDate(), bookingJournal.getCheckOutDate());
+    String username = bookingDetails.getUsername();
+    User user = myUserDetailsService.getUserByUsername(username).get();
+    user.setRewardPoints(user.getRewardPoints() - bookingDetails.getRewardPoints());
 
-    Optional<BookingJournal> updateBooking = getBookingById(bookingID);
-    updateBooking.orElseThrow((() -> new HotelExceptions("No booking found")));
-    //updateRequestBuilder(updatedetails, bookingDetails);
-    //return new ResponseEntity<BookingDetails>(bookingRepository.save(updatedetails), HttpStatus.OK);
+    bookingRequest.setPayment(false);
+    BookingResponse br = createBooking(bookingRequest, username);
+
+    bookingDetails.setRoomType(br.getRoomType());
+    bookingDetails.setNumberOfRooms(br.getNumberOfRooms());
+    bookingDetails.setNumberOfGuestsPerRoom(br.getNumberOfGuestsPerRoom());
+    bookingDetails.setCheckInDate(br.getCheckInDate());
+    bookingDetails.setCheckOutDate(br.getCheckOutDate());
+    bookingDetails.setEmail(br.getEmail());
+    bookingDetails.setPrice(br.getTotalPrice());
+    bookingDetails.setRewardPoints((int) br.getTotalPrice());
+    bookingDetails.setPhone(br.getPhone());
+    bookingDetails.setLocalDateTime(LocalDateTime.now());
+    bookingRepository.save(bookingDetails);
+
+    user.setRewardPoints(user.getRewardPoints() + bookingDetails.getRewardPoints());
+    user.setTier(user.getRewardPoints());
+
     }
 
   public void cancelBooking(Integer bookingID) {
+    Optional<BookingJournal> bookingDetails = getBookingById(bookingID);
+    bookingDetails.orElseThrow((() -> new HotelExceptions("No booking found")));
+    String username = bookingDetails.get().getUsername();
+    User user = myUserDetailsService.getUserByUsername(username).get();
+    user.setRewardPoints(user.getRewardPoints() - bookingDetails.get().getRewardPoints());
+    user.setTier(user.getRewardPoints());
     bookingRepository.deleteById(bookingID);
   }
 

@@ -64,7 +64,7 @@ public class User implements Serializable {
 
   @Column(length = 32, columnDefinition = "varchar(32) default 'REGULAR'")
   @Enumerated(value = EnumType.STRING)
-  private Tier tier;
+  private Tier tier = Tier.REGULAR;
 
   public void setTier(int rewardPoints) {
     if (rewardPoints > 5000) {

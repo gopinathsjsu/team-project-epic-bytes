@@ -1,7 +1,4 @@
 package com.hotelbooking.models.response;
-import com.hotelbooking.models.Amenity;
-import com.hotelbooking.models.Hotel;
-import com.hotelbooking.models.Room;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
