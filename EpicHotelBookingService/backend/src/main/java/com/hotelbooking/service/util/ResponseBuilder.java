@@ -70,7 +70,7 @@ public class ResponseBuilder {
     bookingResponse.setTotalNights(totalNights);
 
     // perNightPrice
-    bookingResponse.setPerNightPrice(perNightPrice);
+    bookingResponse.setPerRoomPerNightPrice(perNightPrice);
 
     // amenityPrice
 
@@ -152,6 +152,7 @@ public class ResponseBuilder {
     bookingResponse.setCustomerName(bookingRequest.getCustomerName());
     bookingResponse.setEmail(bookingRequest.getEmail());
     bookingResponse.setRoomType(room.getRoomType());
+    bookingResponse.setPhone(bookingRequest.getPhone());
     bookingResponse.setHotelName(hotelService.getHotelById(bookingRequest.getHotelId()).get().getHotelName());
 
     return bookingResponse;

@@ -1,11 +1,10 @@
 package com.hotelbooking.service;
 
-import com.hotelbooking.exception.HotelExceptions;
 import com.hotelbooking.models.Hotel;
 import com.hotelbooking.repository.HotelRepository;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +21,7 @@ public class HotelService {
     Optional<List<Hotel>> hotelList = hotelRepository.getHotels(location);
     hotelList.orElseThrow(
         () ->
-            new HotelExceptions(
+            new EntityNotFoundException(
                 "No hotels found for " + location + ". Let's try something else."));
     return hotelList.get();
   }

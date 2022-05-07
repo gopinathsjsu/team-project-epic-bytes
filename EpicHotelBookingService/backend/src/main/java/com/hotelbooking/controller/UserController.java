@@ -1,6 +1,5 @@
 package com.hotelbooking.controller;
 
-import com.hotelbooking.exception.HotelExceptions;
 import com.hotelbooking.models.User;
 import com.hotelbooking.models.request.LoginRequest;
 import com.hotelbooking.models.request.SignUpRequest;
@@ -8,14 +7,12 @@ import com.hotelbooking.models.response.LoginResponse;
 import com.hotelbooking.security.JwtUtil;
 import com.hotelbooking.service.MyUserDetailsService;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
-import java.util.Locale;
 import java.util.Optional;
 
 import static com.hotelbooking.constants.Constants.LOGIN_ENDPOINT;
@@ -63,8 +60,8 @@ public class UserController {
       authenticationManager.authenticate(
           new UsernamePasswordAuthenticationToken(
               loginRequest.getUsername(), loginRequest.getPassword()));
-    } catch (HotelExceptions e) {
-      throw new HotelExceptions("Incorrect Username or Password");
+    } catch (EntityNotFoundException e) {
+      throw new EntityNotFoundException("Incorrect Username or Password");
     }
 
     User loggedInUser = myUserDetailsService.getUserByUsername(loginRequest.getUsername()).get();
@@ -91,7 +88,7 @@ public class UserController {
       final String jwt = jwtUtil.generateToken(addedUser);
       return new LoginResponse(jwt);
     } else {
-      throw new HotelExceptions("Username already exists");
+      throw new EntityNotFoundException("Username already exists");
     }
   }
 }

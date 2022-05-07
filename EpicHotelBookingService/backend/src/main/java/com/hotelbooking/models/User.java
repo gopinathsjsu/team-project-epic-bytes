@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -45,9 +46,13 @@ public class User implements Serializable {
   private String password;
 
   @Column(name = "first_name")
+  @NotBlank(message = "firstname is mandatory")
+  @Size(min = 1, max = 15)
   private String firstName;
 
   @Column(name = "last_name")
+  @NotBlank(message = "lastname is mandatory")
+  @Size(min = 1, max = 15)
   private String lastName;
 
   @Column
@@ -55,6 +60,7 @@ public class User implements Serializable {
   private String phone;
 
   @Column(length = 32)
+  @NotBlank(message = "Email is mandatory")
   @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}", flags = Pattern.Flag.CASE_INSENSITIVE, message = "Email should be of type someone@example.com")
   private String email;
 

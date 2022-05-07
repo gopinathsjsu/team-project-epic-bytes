@@ -1,6 +1,5 @@
 package com.hotelbooking.service;
 
-import com.hotelbooking.exception.HotelExceptions;
 import com.hotelbooking.models.BookingJournal;
 import com.hotelbooking.models.Room;
 import com.hotelbooking.models.User;
@@ -9,9 +8,9 @@ import com.hotelbooking.models.response.BookingResponse;
 import com.hotelbooking.repository.BookingRepository;
 import com.hotelbooking.service.util.ResponseBuilder;
 import com.hotelbooking.validators.DateValidator;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -53,9 +52,9 @@ public class BookingService {
             .toLocalDate();
     dateValidator.validateDate(checkInDate, checkOutDate);
     Optional<User> user = myUserDetailsService.getUserByUsername(username);
-    user.orElseThrow(() -> new UsernameNotFoundException("No user found"));
+    user.orElseThrow(() -> new EntityNotFoundException("No user found"));
     Optional<Room> room = roomService.getRoomById(bookingRequest.getRoomId());
-    room.orElseThrow(() -> new UsernameNotFoundException("No room found"));
+    room.orElseThrow(() -> new EntityNotFoundException("No room found"));
 
     BookingResponse br =
         responseBuilder.getBookingResponse(
@@ -76,12 +75,14 @@ public class BookingService {
               rewardPoints,
               bookingRequest.getEmail(),
               bookingRequest.getPhone(),
-              LocalDateTime.now()));
+              LocalDateTime.now(),
+              bookingRequest.getRoomId(),
+              br.getHotelName()));
 
-      //update reward and tier after booking
+      // update reward and tier after booking
       user.get().setRewardPoints(user.get().getRewardPoints() + rewardPoints);
       user.get().setTier(user.get().getRewardPoints());
-
+      myUserDetailsService.save(user.get());
     }
 
     return br;
@@ -97,7 +98,7 @@ public class BookingService {
 
   public void updateBookingDetails(BookingRequest bookingRequest, Integer bookingID) {
     Optional<BookingJournal> previousBookingDetails = getBookingById(bookingID);
-    previousBookingDetails.orElseThrow((() -> new HotelExceptions("No booking found")));
+    previousBookingDetails.orElseThrow((() -> new EntityNotFoundException("No booking found")));
     BookingJournal bookingDetails = previousBookingDetails.get();
 
     String username = bookingDetails.getUsername();
@@ -117,16 +118,17 @@ public class BookingService {
     bookingDetails.setRewardPoints((int) br.getTotalPrice());
     bookingDetails.setPhone(br.getPhone());
     bookingDetails.setLocalDateTime(LocalDateTime.now());
+    bookingDetails.setRoomId(bookingRequest.getRoomId());
     bookingRepository.save(bookingDetails);
 
     user.setRewardPoints(user.getRewardPoints() + bookingDetails.getRewardPoints());
     user.setTier(user.getRewardPoints());
-
-    }
+    myUserDetailsService.save(user);
+  }
 
   public void cancelBooking(Integer bookingID) {
     Optional<BookingJournal> bookingDetails = getBookingById(bookingID);
-    bookingDetails.orElseThrow((() -> new HotelExceptions("No booking found")));
+    bookingDetails.orElseThrow((() -> new EntityNotFoundException("No booking found")));
     String username = bookingDetails.get().getUsername();
     User user = myUserDetailsService.getUserByUsername(username).get();
     user.setRewardPoints(user.getRewardPoints() - bookingDetails.get().getRewardPoints());

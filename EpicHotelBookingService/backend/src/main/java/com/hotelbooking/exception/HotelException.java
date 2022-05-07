@@ -5,6 +5,6 @@ import lombok.*;
 @Getter
 @Setter
 @AllArgsConstructor
-public class HotelExceptions extends RuntimeException {
-  private String reason;
+public class HotelException extends RuntimeException {
+    private String reason;
 }
