@@ -1,7 +1,6 @@
 package com.hotelbooking.models.request;
 import lombok.*;
 import javax.validation.constraints.*;
-import java.time.LocalDate;
 import java.util.Map;
 
 
@@ -11,14 +10,15 @@ import java.util.Map;
 @AllArgsConstructor
 public class BookingRequest {
 
-  @NotBlank(message = "Name cannot be empty")
   private String customerName;
   private Integer hotelId;
   @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}", flags = Pattern.Flag.CASE_INSENSITIVE)
   private String email;
   private String phone;
+  @NotBlank(message = "Number of guests is mandatory")
   @Size(min=1,max =6)
   private int numberOfGuestsPerRoom;
+  @NotBlank(message = "Number of rooms is mandatory")
   @Size(min=1,max =10)
   private int numberOfRooms;
   private Integer roomId;

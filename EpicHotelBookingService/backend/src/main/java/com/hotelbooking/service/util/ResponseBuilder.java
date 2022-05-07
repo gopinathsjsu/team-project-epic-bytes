@@ -1,6 +1,7 @@
 package com.hotelbooking.service.util;
 
 import com.hotelbooking.models.Amenity;
+import com.hotelbooking.models.BookingJournal;
 import com.hotelbooking.models.Room;
 import com.hotelbooking.models.User;
 import com.hotelbooking.models.request.BookingRequest;
@@ -146,16 +147,14 @@ public class ResponseBuilder {
     // totalPrice
     double totalPrice = (taxableAmount + tax + bookingResponse.getSurcharge()) - (loyaltyDiscount);
     bookingResponse.setTotalPrice(totalPrice);
+    bookingResponse.setCheckInDate(checkInDate);
+    bookingResponse.setCheckOutDate(checkOutDate);
+    bookingResponse.setCustomerName(bookingRequest.getCustomerName());
+    bookingResponse.setEmail(bookingRequest.getEmail());
+    bookingResponse.setRoomType(room.getRoomType());
+    bookingResponse.setHotelName(hotelService.getHotelById(bookingRequest.getHotelId()).get().getHotelName());
+
     return bookingResponse;
   }
 
-  public void completeBooking(BookingResponse br, BookingRequest bookingRequest, Room room, User user, LocalDate checkInDate, LocalDate checkOutDate) {
-    br.setNumberOfGuestsPerRoom(bookingRequest.getNumberOfGuestsPerRoom());
-    br.setCheckInDate(checkInDate);
-    br.setCheckOutDate(checkOutDate);
-    br.setCustomerName(bookingRequest.getCustomerName());
-    br.setEmail(bookingRequest.getEmail());
-    br.setRoomType(room.getRoomType());
-    br.setHotelName(hotelService.getHotelById(bookingRequest.getHotelId()).get().getHotelName());
-  }
 }
