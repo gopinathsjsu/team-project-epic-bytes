@@ -4,10 +4,10 @@ import { useContext } from "react";
 import { getPayloadFromToken } from "../util/useQueryParams";
 
 export const PrivateRoute = (props) => {
-  const { userdata, clearLoginUser } = useContext(AppContext);
+  const { userData, clearLoginUser } = useContext(AppContext);
 
   let user =
-    userdata.token !== "" ? getPayloadFromToken(userdata.token) : undefined;
+    userData.token !== "" ? getPayloadFromToken(userData.token) : undefined;
   console.log(user);
   if (!user) return <Redirect to="/login" />;
 

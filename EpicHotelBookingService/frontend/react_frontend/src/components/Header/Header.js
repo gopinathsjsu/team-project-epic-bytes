@@ -25,9 +25,9 @@ export const DashboardHeader = (props) => {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const { history } = props;
-  const { userdata, clearLoginUser } = useContext(AppContext);
+  const { userData, clearLoginUser } = useContext(AppContext);
 
-  let user = userdata.token !== "" ? getPayloadFromToken(userdata.token) : {};
+  let user = userData.token !== "" ? getPayloadFromToken(userData.token) : {};
 
   const logOut = () => {
     localStorage.removeItem("token");
