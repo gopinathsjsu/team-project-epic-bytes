@@ -66,6 +66,7 @@ export const AppContextComponent = () => {
   const RegisterUser = useCallback(
     (data) => {
       setIsDataLoading(true);
+      setIsErrorLoading(false);
       ApiInstance.post("users", data)
         .then((response) => {
           if (response.status === 200) {
@@ -76,6 +77,7 @@ export const AppContextComponent = () => {
             });
           }
           setIsDataLoading(false);
+          setIsErrorLoading(false);
         })
         .catch((error) => {
           console.error(error);

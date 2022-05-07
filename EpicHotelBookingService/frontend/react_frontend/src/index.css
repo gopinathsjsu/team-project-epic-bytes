@@ -91,6 +91,11 @@ button {
   text-align: center;
 }
 
+.field-error {
+  color: red;
+  padding-left: 8px;
+}
+
 .container {
   max-width: 1240px;
   margin: auto;

@@ -1,14 +1,10 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { CustomerHeader } from "../components/CustomerHeader/CustomerHeader";
-import { SearchBar } from "../components/SearchBar/SearchBar";
-import HotelDisplayCard from "../components/HotelDisplayCard/HotelDisplayCard";
 import "../styles/UserInfoDashboard.css";
 import Hero from "../components/hero/Hero";
-import { AppContext } from "../store/appContext";
 
 export const UserInfoDashboard = (props) => {
-  const { userData } = useContext(AppContext);
   // We'll use the history to navigate the user
   // programmatically later on (we're not using it yet)
   const history = useHistory();
