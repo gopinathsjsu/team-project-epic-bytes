@@ -67,9 +67,9 @@ public class UserController {
       throw new HotelExceptions("Incorrect Username or Password");
     }
 
-    final UserDetails userDetails =
-        myUserDetailsService.loadUserByUsername(loginRequest.getUsername());
-    final String jwt = jwtUtil.generateToken(userDetails.getUsername());
+    User loggedInUser = myUserDetailsService.getUserByUsername(loginRequest.getUsername()).get();
+
+    final String jwt = jwtUtil.generateToken(loggedInUser);
     return new LoginResponse(jwt);
   }
 
@@ -86,8 +86,9 @@ public class UserController {
               signUpRequest.getLastName(),
               signUpRequest.getPhone(),
               signUpRequest.getEmail().toLowerCase(),
-              "USER"));
-      final String jwt = jwtUtil.generateToken(signUpRequest.getUsername());
+                  "USER"));
+      User addedUser = myUserDetailsService.getUserByUsername(signUpRequest.getUsername()).get();
+      final String jwt = jwtUtil.generateToken(addedUser);
       return new LoginResponse(jwt);
     } else {
       throw new HotelExceptions("Username already exists");

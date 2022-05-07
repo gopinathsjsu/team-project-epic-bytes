@@ -7,7 +7,7 @@ public enum Tier {
         PLATINUM ("Platinum");
 
 
-        Tier(String silver) {
+        Tier(String tier) {
 
         }
 }

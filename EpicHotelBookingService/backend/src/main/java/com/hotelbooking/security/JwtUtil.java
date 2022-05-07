@@ -5,12 +5,9 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 // Jwt Token Generator
 @Service
@@ -21,9 +18,10 @@ public class JwtUtil {
 
   private final long EXPIRATION = 1000 * 60 * 60L;
 
-  public String generateToken(final String username) {
+  public String generateToken(User user) {
     final Map<String, Object> claims = new HashMap<>();
-    return createToken(claims, username);
+    claims.put("role", user.getRole());
+    return createToken(claims, user.getUsername());
   }
 
   public String validateTokenAndReturnUsername(final String token) {
