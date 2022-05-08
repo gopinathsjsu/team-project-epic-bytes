@@ -1,6 +1,4 @@
 import "./list.css";
-// import Navbar from "../../components/navbar/Navbar";
-// import Header from "../../components/header/Header";
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { format } from "date-fns";
@@ -9,10 +7,13 @@ import SearchItem from "../searchItem/SearchItem";
 
 const List = () => {
   const location = useLocation();
-  const [destination, setDestination] = useState(location.state.destination);
-  const [date, setDate] = useState(location.state.date);
+  console.log('state :: ', location.state);
+  const [destination, setDestination] = useState(location?.state?.destination);
+  const [date, setDate] = useState(location?.state?.date);
+  console.log('data from state :: ', location?.state?.date);
+  console.log('date :: ', date);
   const [openDate, setOpenDate] = useState(false);
-  const [options, setOptions] = useState(location.state.options);
+  const [options, setOptions] = useState(location?.state?.options);
 
   return (
     <div>
@@ -87,14 +88,6 @@ const List = () => {
             <button>Search</button>
           </div>
           <div className="listResult">
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
             <SearchItem />
           </div>
         </div>
