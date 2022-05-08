@@ -1,15 +1,14 @@
 import { createContext, useCallback, useState } from "react";
 import { ApiInstance } from "../api/axiosInstance";
-import { admin_username } from "../api/constants";
 
 const initialContext = {
-  userData: { username: "", token: "", userType: "" },
   isDataLoading: false,
   isErrorLoading: false,
   LoginUser: (username, password) => {},
   RegisterUser: (data) => {},
   clearLoginUser: () => {},
   getHotels: (location) => {},
+  getToken: () => {},
   hotelData: {
     data: [],
     isDataLoading: false,
@@ -27,11 +26,6 @@ export const AppContextComponent = () => {
     isDataLoading: false,
     isErrorLoading: false,
   });
-  const [userData, setUserData] = useState({
-    username: "",
-    token: "",
-    userType: "",
-  });
 
   const LoginUser = useCallback(
     (username, password) => {
@@ -41,15 +35,6 @@ export const AppContextComponent = () => {
         .then((response) => {
           if (response.status === 200) {
             localStorage.setItem("token", response.data?.jwt);
-            let data = {
-              username: username,
-              token: response.data?.jwt,
-              userType: "user",
-            };
-            if (username === admin_username) {
-              data.userType = "admin";
-            }
-            setUserData(data);
           }
           setIsErrorLoading(false);
           setIsDataLoading(false);
@@ -60,7 +45,7 @@ export const AppContextComponent = () => {
           setIsErrorLoading(true);
         });
     },
-    [setUserData]
+    []
   );
 
   const RegisterUser = useCallback(
@@ -71,10 +56,6 @@ export const AppContextComponent = () => {
         .then((response) => {
           if (response.status === 200) {
             localStorage.setItem("token", response.data?.jwt);
-            setUserData({
-              username: data.username,
-              token: response.data?.jwt,
-            });
           }
           setIsDataLoading(false);
           setIsErrorLoading(false);
@@ -88,13 +69,12 @@ export const AppContextComponent = () => {
     []
   );
 
+  const getToken = () => {
+    return localStorage.getItem("token");
+  };
+
   const clearLoginUser = () => {
     localStorage.removeItem("token");
-    setUserData({
-      username: "",
-      token: "",
-      userType: "",
-    });
   };
 
   const getHotels = useCallback(
@@ -128,10 +108,10 @@ export const AppContextComponent = () => {
     LoginUser,
     isDataLoading,
     isErrorLoading,
-    userData,
     RegisterUser,
     clearLoginUser,
     getHotels,
+    getToken,
     hotelData,
   };
 };
