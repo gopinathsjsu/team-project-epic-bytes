@@ -12,20 +12,41 @@ import "./Card.css";
 export default function HotelCard(props) {
   const [hotelName, setHotelName] = useState(props.name);
   const [location, setLocation] = useState(props.loc);
-  const [roomsCount, setRoomsCount] = useState(props.rooms);
-  const [roomtype, setRoomtype] = useState(props.type);
+  //const [roomsCount, setRoomsCount] = useState(props.rooms);
+  //const [roomtype, setRoomtype] = useState(props.type);
+  const [hotelId, setHotelId] = useState(props.id);
+
+
+  const [hotelDescription, setHotelDescription] = useState(props.desc);
+  const [hotelAddress, setHotelAddress] = useState(props.address);
+  const [hotelEmail, setHotelEmail] = useState(props.email);
+  const [hotelPhone, setHotelPhone] = useState(props.phone);
+  const [hotelBasePrice, setHotelBasePrice] = useState(props.price);
+  console.log(props)
+
 
   const { removeHotel } = props;
 
+  //added now
+  const { updateHotel} = props;
+
+
+//added now
   const onHotelUpdate = () => {
-    //call api here
+     alert("call api here to update  the hotel from db");
+       SecureAPIInstance.put("/hotels/"+hotelId, {hotelName,hotelDescription, location,hotelAddress, hotelEmail, hotelPhone,hotelBasePrice,})
+         .then((response) => [updateHotel(response.id)])
+         .catch((err) => {});
+
   };
+
 
   const onHotelDelete = () => {
     alert("call api here to remove  the hotel from db");
-    SecureAPIInstance.post("/remove", {})
+    SecureAPIInstance.delete("/hotels/"+hotelId, {})
       .then((response) => [removeHotel(response.id)])
       .catch((err) => {});
+
   };
 
   const { image } = props;
@@ -51,6 +72,8 @@ export default function HotelCard(props) {
             }}
           />
         </Typography>
+
+
         <Typography
           className="typography-spacing"
           variant="body2"
@@ -65,6 +88,7 @@ export default function HotelCard(props) {
             }}
           />
         </Typography>
+         {/*
         <Typography
           className="typography-spacing"
           variant="body2"
@@ -93,6 +117,82 @@ export default function HotelCard(props) {
             }}
           />
         </Typography>
+
+      */}
+
+     <Typography
+              className="typography-spacing"
+              variant="body2"
+              color="text.secondary"
+            >
+              <TextField
+                id="outlined-rooms"
+                label="Hotel Description"
+                value={hotelDescription}
+                onChange={(e) => {
+                  setHotelDescription(e.target.value);
+                }}
+              />
+            </Typography>
+            <Typography
+              className="typography-spacing"
+              variant="body2"
+              color="text.secondary"
+            >
+              <TextField
+                id="outlined-roomtype"
+                label="Hotel Address"
+                value={hotelAddress}
+                onChange={(e) => {
+                  setHotelAddress(e.target.value);
+                }}
+              />
+            </Typography>
+
+      <Typography
+               className="typography-spacing"
+               variant="body2"
+               color="text.secondary"
+             >
+               <TextField
+                 id="outlined-rooms"
+                 label="Hotel Email"
+                 value={hotelEmail}
+                 onChange={(e) => {
+                   setHotelEmail(e.target.value);
+                 }}
+               />
+             </Typography>
+             <Typography
+               className="typography-spacing"
+               variant="body2"
+               color="text.secondary"
+             >
+               <TextField
+                 id="outlined-roomtype"
+                 label="Hotel Phone"
+                 value={hotelPhone}
+                 onChange={(e) => {
+                   setHotelPhone(e.target.value);
+                 }}
+               />
+             </Typography>
+
+     <Typography
+                    className="typography-spacing"
+                    variant="body2"
+                    color="text.secondary"
+                  >
+                    <TextField
+                      id="outlined-roomtype"
+                      label="Hotel Base Price"
+                      value={hotelBasePrice}
+                      onChange={(e) => {
+                        setHotelBasePrice(e.target.value);
+                      }}
+                    />
+      </Typography>
+
       </CardContent>
       <CardActions>
         <Button variant="contained" size="small" onClick={onHotelUpdate}>

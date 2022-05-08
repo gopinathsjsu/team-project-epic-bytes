@@ -65,17 +65,32 @@ export const EmployeeDashboard = () => {
     setAddRoomOpen(true);
   };
 
+function refreshPage() {
+    window.location.reload(false);
+  }
+
   const removeBookings = (bookingId) => {
     let data = [...bookings];
     data.filter((item) => item.bookingId !== bookingId);
     setBookings(data);
   };
 
+//added now
+const updateHotel = (hotelId) => {
+    let data = [...hotels];
+    data.filter((item) => item.id !== hotelId);
+    setHotels(data);
+    refreshPage();
+  };
+
+
   const removeHotel = (hotelId) => {
     let data = [...hotels];
     data.filter((item) => item.id !== hotelId);
     setHotels(data);
+    refreshPage();
   };
+
 
   const closeModal = () => {
     setOpen(false);
@@ -146,6 +161,14 @@ export const EmployeeDashboard = () => {
                         rooms={10}
                         type="Deluxe"
                         key={hotel.id}
+                        id={hotel.id}
+                        desc={hotel.description}
+                        price = {hotel.hotelBasePrice}
+                        phone = {hotel.hotelPhone}
+                        email = {hotel.hotelEmail}
+                        address = {hotel.hotelAddress}
+
+
                         removeHotel={removeHotel}
                       />
                     ))}
