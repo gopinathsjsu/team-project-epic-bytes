@@ -3,6 +3,7 @@ package com.hotelbooking.models;
 import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -40,6 +41,6 @@ public class Hotel {
   private String hotelPhone;
 
   @Column
-  @NotBlank(message = "Hotel base price is mandatory")
+  @NotNull(message = "Hotel base price is mandatory")
   private double hotelBasePrice;
 }

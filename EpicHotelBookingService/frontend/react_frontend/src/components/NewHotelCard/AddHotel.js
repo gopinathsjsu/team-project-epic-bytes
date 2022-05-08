@@ -9,7 +9,6 @@ import TextField from "@mui/material/TextField";
 import "./AddHotel.css";
 import { ApiInstance } from "../../api/axiosInstance";
 
-
 export default function AddNewHotelCard(props) {
   const { onClose, open } = props;
 
@@ -19,13 +18,11 @@ export default function AddNewHotelCard(props) {
   const [hotelEmail, setemail] = useState("");
   const [hotelPhone, setphone] = useState("");
   const [hotelBasePrice, setprice]  = useState("");
-  const [hoteldesc, setdesc] = useState("");
-
-
+  const [description, setdesc] = useState("");
 
   const onHotelAdd = () => {
     //call api here
-    ApiInstance.post("hotels", { hotelName,hoteldesc, location,hotelAddress, hotelEmail, hotelPhone,hotelBasePrice,})
+    ApiInstance.post("hotels", { hotelName,description, location,hotelAddress, hotelEmail, hotelPhone,hotelBasePrice,})
   };
 
   return (
@@ -59,8 +56,8 @@ export default function AddNewHotelCard(props) {
                   <TextField
                     fullWidth
                     id="outlined-roomtype"
-                    label="Hotel Desc"
-                    value={hoteldesc}
+                    label="Description"
+                    value={description}
                     onChange={(e) => {
                       setdesc(e.target.value);
                     }}
@@ -90,7 +87,7 @@ export default function AddNewHotelCard(props) {
           <TextField
             fullWidth
             id="outlined-rooms"
-            label="Hotel Address"
+            label="Address"
             value={hotelAddress}
             onChange={(e) => {
               setaddress(e.target.value);
@@ -105,7 +102,7 @@ export default function AddNewHotelCard(props) {
           <TextField
             fullWidth
             id="outlined-roomtype"
-            label="Enter Email"
+            label="Email"
             value={hotelEmail}
             onChange={(e) => {
               setemail(e.target.value);
@@ -121,7 +118,7 @@ export default function AddNewHotelCard(props) {
           <TextField
             fullWidth
             id="outlined-roomtype"
-            label="hotelPhone"
+            label="Phone"
             value={hotelPhone}
             onChange={(e) => {
               setphone(e.target.value);
@@ -145,8 +142,6 @@ export default function AddNewHotelCard(props) {
             }}
           />
         </Typography>
-
-
 
       </DialogContent>
       <DialogActions>
