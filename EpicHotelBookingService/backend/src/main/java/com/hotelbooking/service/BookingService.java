@@ -119,6 +119,8 @@ public class BookingService {
     bookingDetails.setPhone(br.getPhone());
     bookingDetails.setLocalDateTime(LocalDateTime.now());
     bookingDetails.setRoomId(bookingRequest.getRoomId());
+    bookingDetails.setHotelName(br.getHotelName());
+    bookingDetails.setHotelId(bookingRequest.getHotelId());
     bookingRepository.save(bookingDetails);
 
     user.setRewardPoints(user.getRewardPoints() + bookingDetails.getRewardPoints());

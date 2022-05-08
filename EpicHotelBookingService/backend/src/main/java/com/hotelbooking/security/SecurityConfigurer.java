@@ -2,6 +2,7 @@ package com.hotelbooking.security;
 
 import com.hotelbooking.service.MyUserDetailsService;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -42,7 +43,11 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     http.csrf()
         .disable()
         .authorizeRequests()
-        .antMatchers(LOGIN_ENDPOINT, SIGNUP_ENDPOINT, "/hotels/**", "/rooms/**")
+            .antMatchers(HttpMethod.POST, "/hotels", "/rooms", "/amenities").hasAuthority("ADMIN")
+            .antMatchers(HttpMethod.GET, "/bookings").hasAuthority("ADMIN")
+            .antMatchers(HttpMethod.DELETE, "/hotels", "/rooms", "/amenities").hasAuthority("ADMIN")
+            .antMatchers(HttpMethod.PUT, "/hotels", "/rooms", "/amenities").hasAuthority("ADMIN")
+        .antMatchers(LOGIN_ENDPOINT, SIGNUP_ENDPOINT, "/amenities/**", "/hotels/**", "/rooms/**", "/", "/static/**", "/css/**")
         .permitAll()
         .anyRequest()
         .authenticated()
@@ -50,11 +55,6 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         .sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-    //        http.authorizeRequests()
-    //                .antMatchers("/admin").hasAuthority("ADMIN")
-    //                .antMatchers("/user").hasAnyAuthority("USER", "ADMIN")
-    //                .antMatchers("/", "static/css", "static/js").permitAll()
-    //                .and().formLogin();
   }
 
   @Override

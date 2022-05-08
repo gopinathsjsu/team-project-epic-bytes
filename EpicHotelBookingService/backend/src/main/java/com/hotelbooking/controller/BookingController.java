@@ -44,6 +44,7 @@ public class BookingController {
     log.info("Entering getBookingsForUser Api");
     try {
       String username = SecurityContextHolder.getContext().getAuthentication().getName();
+      System.out.println("===============username is==========" + username);
       return bookingService.getBookingsForUser(username);
     } catch (Exception e) {
       log.error("Error occured in getBookingsForUser :{}", e);
