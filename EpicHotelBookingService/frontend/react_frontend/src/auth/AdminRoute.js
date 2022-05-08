@@ -3,12 +3,12 @@ import { AppContext } from "../store/appContext";
 import { useContext } from "react";
 import { getPayloadFromToken } from "../util/useQueryParams";
 
-export const PrivateRoute = (props) => {
+export const AdminRoute = (props) => {
   const { getToken } = useContext(AppContext);
   const token = getToken();
   let user = token ? getPayloadFromToken(token) : null;
 
-  if (!user) return <Redirect to="/login" />;
+  if (!user || user?.role !== "ADMIN") return <Redirect to="/" />;
 
   return <Route {...props} />;
 };

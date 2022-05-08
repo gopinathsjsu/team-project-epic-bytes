@@ -16,6 +16,11 @@
 
 .nav-menu {
     display: flex;
+    cursor: pointer;
+}
+
+.nav-icons {
+    cursor: pointer;
 }
 
 li {
@@ -34,6 +39,10 @@ li {
 .icon {
     font-size: 1.5rem;
     cursor: pointer;
+}
+
+.login {
+    margin-right: 16px;
 }
 
 

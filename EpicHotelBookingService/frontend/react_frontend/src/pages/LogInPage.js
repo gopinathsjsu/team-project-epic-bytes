@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { AppContext } from "../store/appContext";
+import { getPayloadFromToken } from "../util/useQueryParams";
 
 export const LogInPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -10,7 +11,7 @@ export const LogInPage = () => {
 
   const history = useHistory();
 
-  const { LoginUser, isErrorLoading, userData } = useContext(AppContext);
+  const { LoginUser, isErrorLoading, getToken } = useContext(AppContext);
 
   useEffect(() => {
     if (isErrorLoading) {
@@ -22,13 +23,15 @@ export const LogInPage = () => {
     LoginUser(username, passwordValue);
   };
 
-  useEffect(() => {
-    if (userData?.userType === "user" && isErrorLoading === false) {
+  useEffect(() => { 
+    const token = getToken();
+    let user = token ? getPayloadFromToken(token) : null;
+    if (user?.role === "USER" && isErrorLoading === false) {
       history.push("/");
-    } else if (userData?.userType === "admin" && isErrorLoading === false) {
+    } else if (user?.role === "ADMIN" && isErrorLoading === false) {
       history.push("/admin");
     }
-  }, [userData]);
+  }, [getToken, isErrorLoading, history]);
 
   return (
     <div className="page-container">

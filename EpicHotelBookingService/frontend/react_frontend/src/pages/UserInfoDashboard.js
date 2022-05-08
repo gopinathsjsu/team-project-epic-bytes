@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { CustomerHeader } from "../components/CustomerHeader/CustomerHeader";
 import "../styles/UserInfoDashboard.css";
 import Hero from "../components/hero/Hero";
+import Navbar from "../components/navbar/Navbar";
 
 export const UserInfoDashboard = (props) => {
   // We'll use the history to navigate the user
@@ -32,7 +32,7 @@ export const UserInfoDashboard = (props) => {
 
   return (
     <>
-      <CustomerHeader history={history} />
+      <Navbar history={history} />
       <Hero />
     </>
   );
