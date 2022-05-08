@@ -6,6 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
+import { SecureAPIInstance } from "../../api/axiosInstance";
 import "./Card.css";
 
 export default function HotelCard(props) {
@@ -14,8 +15,17 @@ export default function HotelCard(props) {
   const [roomsCount, setRoomsCount] = useState(props.rooms);
   const [roomtype, setRoomtype] = useState(props.type);
 
+  const { removeHotel } = props;
+
   const onHotelUpdate = () => {
     //call api here
+  };
+
+  const onHotelDelete = () => {
+    alert("call api here to remove  the hotel from db");
+    SecureAPIInstance.post("/remove", {})
+      .then((response) => [removeHotel(response.id)])
+      .catch((err) => {});
   };
 
   const { image } = props;
@@ -87,6 +97,10 @@ export default function HotelCard(props) {
       <CardActions>
         <Button variant="contained" size="small" onClick={onHotelUpdate}>
           Update
+        </Button>
+
+        <Button variant="contained" size="small" onClick={onHotelDelete}>
+          Delete
         </Button>
       </CardActions>
     </Card>
