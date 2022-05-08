@@ -1,9 +1,11 @@
 package com.hotelbooking.models;
 
+import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
@@ -32,7 +34,6 @@ public class Amenity {
   private String description;
 
   @Column
-  @NotBlank(message = "Price is mandatory")
+  @NotNull
   private double price;
-
 }

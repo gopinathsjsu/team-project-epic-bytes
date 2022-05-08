@@ -9,6 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BookingRepository extends CrudRepository<BookingJournal, Integer> {
-  @Query(value = "SELECT * FROM BookingJournal WHERE username = :username", nativeQuery = true)
+  @Query(value = "SELECT * FROM booking_journal WHERE username = :username", nativeQuery = true)
   Optional<List<BookingJournal>> getBookingsForUser(@Param("username") String username);
 }
