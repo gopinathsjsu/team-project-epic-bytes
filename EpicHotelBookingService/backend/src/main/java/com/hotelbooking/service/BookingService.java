@@ -77,7 +77,8 @@ public class BookingService {
               bookingRequest.getPhone(),
               LocalDateTime.now(),
               bookingRequest.getRoomId(),
-              br.getHotelName()));
+              br.getHotelName(),
+              br.getHotelImage()));
 
       // update reward and tier after booking
       user.get().setRewardPoints(user.get().getRewardPoints() + rewardPoints);
@@ -121,6 +122,7 @@ public class BookingService {
     bookingDetails.setRoomId(bookingRequest.getRoomId());
     bookingDetails.setHotelName(br.getHotelName());
     bookingDetails.setHotelId(bookingRequest.getHotelId());
+    bookingDetails.setHotelImage(br.getHotelImage());
     bookingRepository.save(bookingDetails);
 
     user.setRewardPoints(user.getRewardPoints() + bookingDetails.getRewardPoints());

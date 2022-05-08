@@ -1,22 +1,25 @@
 import "./searchItem.css";
 
-const SearchItem = () => {
+const SearchItem = ({ hotel }) => {
   return (
     <div className="searchItem">
       <img
-        src="https://cf.bstatic.com/xdata/images/hotel/square600/261707778.webp?k=fa6b6128468ec15e81f7d076b6f2473fa3a80c255582f155cae35f9edbffdd78&o=&s=1"
-        alt=""
+        src = {hotel.imageURL}
+        alt="hotel image"
         className="siImg"
       />
       <div className="siDesc">
-        <h1 className="siTitle">Tower Street Apartments</h1>
-        <span className="siDistance">500m from center</span>
+        <h1 className="siTitle">{hotel.hotelName}</h1>
+        <span className="siDistance">{hotel.location}</span>
         <span className="siTaxiOp">Free airport taxi</span>
         <span className="siSubtitle">
-          Studio Apartment with Air conditioning
+          {hotel.description}
         </span>
         <span className="siFeatures">
-          Entire studio • 1 bathroom • 21m² 1 full bed
+         Front desk: {hotel.hotelPhone}
+        </span>
+        <span className="siFeatures">
+         Email: {hotel.hotelEmail}
         </span>
         <span className="siCancelOp">Free cancellation </span>
         <span className="siCancelOpSubtitle">
@@ -29,9 +32,9 @@ const SearchItem = () => {
           <button>8.9</button>
         </div>
         <div className="siDetailTexts">
-          <span className="siPrice">$112</span>
-          <span className="siTaxOp">Includes taxes and fees</span>
-          <button className="siCheckButton">See availability</button>
+          <span className="siPrice">From ${hotel.hotelBasePrice}</span>
+          <span className="siTaxOp">Excludes taxes and fees</span>
+          <button className="siCheckButton">View Rates</button>
         </div>
       </div>
     </div>

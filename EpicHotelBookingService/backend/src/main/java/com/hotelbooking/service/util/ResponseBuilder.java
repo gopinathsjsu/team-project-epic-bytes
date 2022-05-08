@@ -1,9 +1,6 @@
 package com.hotelbooking.service.util;
 
-import com.hotelbooking.models.Amenity;
-import com.hotelbooking.models.BookingJournal;
-import com.hotelbooking.models.Room;
-import com.hotelbooking.models.User;
+import com.hotelbooking.models.*;
 import com.hotelbooking.models.request.BookingRequest;
 import com.hotelbooking.models.response.AmenityResponse;
 import com.hotelbooking.models.response.BookingResponse;
@@ -153,7 +150,9 @@ public class ResponseBuilder {
     bookingResponse.setEmail(bookingRequest.getEmail());
     bookingResponse.setRoomType(room.getRoomType());
     bookingResponse.setPhone(bookingRequest.getPhone());
-    bookingResponse.setHotelName(hotelService.getHotelById(bookingRequest.getHotelId()).get().getHotelName());
+    Hotel hotel = hotelService.getHotelById(bookingRequest.getHotelId()).get();
+    bookingResponse.setHotelName(hotel.getHotelName());
+    bookingResponse.setHotelImage(hotel.getImageURL());
 
     return bookingResponse;
   }

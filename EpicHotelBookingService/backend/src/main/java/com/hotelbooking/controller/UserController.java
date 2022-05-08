@@ -1,5 +1,6 @@
 package com.hotelbooking.controller;
 
+import com.hotelbooking.models.BookingJournal;
 import com.hotelbooking.models.User;
 import com.hotelbooking.models.request.LoginRequest;
 import com.hotelbooking.models.request.SignUpRequest;
@@ -8,15 +9,18 @@ import com.hotelbooking.security.JwtUtil;
 import com.hotelbooking.service.MyUserDetailsService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 import static com.hotelbooking.constants.Constants.LOGIN_ENDPOINT;
 import static com.hotelbooking.constants.Constants.SIGNUP_ENDPOINT;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 40000)
 public class UserController {
@@ -37,21 +41,6 @@ public class UserController {
     this.myUserDetailsService = myUserDetailsService;
     this.authenticationManager = authenticationManager;
     this.bcryptEncoder = bcryptEncoder;
-  }
-
-  @GetMapping("/")
-  public String home() {
-    return "Hi";
-  }
-
-  @GetMapping("/admin")
-  public String admin() {
-    return "Hi admin";
-  }
-
-  @GetMapping("/user")
-  public String user() {
-    return "Hi user";
   }
 
   @PostMapping(LOGIN_ENDPOINT)
@@ -83,12 +72,22 @@ public class UserController {
               signUpRequest.getLastName(),
               signUpRequest.getPhone(),
               signUpRequest.getEmail().toLowerCase(),
-                  "USER"));
+              "USER"));
       User addedUser = myUserDetailsService.getUserByUsername(signUpRequest.getUsername()).get();
       final String jwt = jwtUtil.generateToken(addedUser);
       return new LoginResponse(jwt);
     } else {
       throw new EntityNotFoundException("Username already exists");
+    }
+  }
+
+  @GetMapping("/users")
+  public User getUserDetails() throws Exception {
+    try {
+      String username = SecurityContextHolder.getContext().getAuthentication().getName();
+      return myUserDetailsService.getUserByUsername(username).get();
+    } catch (Exception e) {
+      throw new EntityNotFoundException("User not found");
     }
   }
 }

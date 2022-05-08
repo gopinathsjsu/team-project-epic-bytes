@@ -8,6 +8,8 @@ import { ApiInstance, SecureAPIInstance } from "../api/axiosInstance";
 import Button from "@mui/material/Button";
 import HotelCard from "../components/Card/Card";
 import BookingCard from "../components/BookingCard/BookingCard";
+import SearchItem from "../components/searchItem/SearchItem";
+import BookingItem from "../components/BookingItem/BookingItem";
 
 export const EmployeeDashboard = () => {
   const history = useHistory();
@@ -140,6 +142,7 @@ const updateHotel = (hotelId) => {
                 {display === "bookings" ? (
                   <>
                     {bookings.map((book) => (
+                      <>
                       <BookingCard
                         image={require("../images/motel6.webp")}
                         hotelName={book.hotelName}
@@ -149,13 +152,16 @@ const updateHotel = (hotelId) => {
                         bookingId={book.bookingId}
                         bookingsRemove={removeBookings}
                       />
+                      <BookingItem booking={book} />
+                      </>
                     ))}
                   </>
                 ) : (
                   <>
                     {hotels.map((hotel) => (
+                      <>
                       <HotelCard
-                        image={require("../images/motel6.webp")}
+                        image={hotel.imageURL}
                         name={hotel.hotelName}
                         loc={hotel.location}
                         rooms={10}
@@ -171,7 +177,10 @@ const updateHotel = (hotelId) => {
 
                         removeHotel={removeHotel}
                       />
+                      {/* <SearchItem hotel={hotel} /> */}
+                      </>
                     ))}
+                    
                   </>
                 )}
               </>

@@ -5,6 +5,7 @@ import com.hotelbooking.service.HotelService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @RestController
@@ -19,7 +20,7 @@ public class HotelController {
 
     @PostMapping("/hotels")
     public void addHotel(@RequestBody Hotel hotel) {
-
+        hotel.setHotelName(hotel.getHotelName().toLowerCase());
         hotelService.addHotel(hotel);
     }
 
