@@ -8,6 +8,7 @@
     z-index: 2;
     position: absolute;
     color: #fff;
+    background-color: black;
 }
 
 .navbar-bg {
