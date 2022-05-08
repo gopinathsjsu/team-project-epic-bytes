@@ -35,6 +35,5 @@ export const useQueryParams = () => {
 };
 
 export const getPayloadFromToken = (token) => {
-  console.log("token ", token);
   return JSON.parse(atob(token.split(".")[1]));
 };

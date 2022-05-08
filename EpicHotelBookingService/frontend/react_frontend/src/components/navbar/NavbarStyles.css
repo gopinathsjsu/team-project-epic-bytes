@@ -6,7 +6,7 @@
     align-items: center;
     padding: 0 1rem;
     z-index: 2;
-    position: absolute;
+    /* position: absolute; */
     color: #fff;
     background-color: black;
 }
@@ -62,6 +62,7 @@ li {
         background-color: #f5f5f5;
         transition: 0.3s;
         color: #000;
+        z-index: 1;
     }
 
     .dark {

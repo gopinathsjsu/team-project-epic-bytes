@@ -145,10 +145,10 @@ export default function AddNewHotelCard(props) {
 
       </DialogContent>
       <DialogActions>
-        <Button size="small" onClick={onHotelAdd}>
+        <Button variant="contained" size="small" onClick={onHotelAdd}>
           Add
         </Button>
-        <Button size="small" onClick={onClose}>
+        <Button variant="contained" size="small" onClick={onClose}>
           Cancel
         </Button>
       </DialogActions>

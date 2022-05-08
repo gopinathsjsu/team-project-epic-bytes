@@ -24,7 +24,6 @@ export const SignUpPageV2 = () => {
   }, [isErrorLoading]);
 
   const onSubmit = useCallback(async ({ username, email, password, firstName, lastName, phoneNumber }) => {
-    console.log('Submitted')
     RegisterUser({
       username,
       email,
@@ -35,8 +34,6 @@ export const SignUpPageV2 = () => {
     });
     history.push("/");
   }, [RegisterUser, history]);
-
-  console.log('errors ', errors);
 
   return (
     <div className="page-container">

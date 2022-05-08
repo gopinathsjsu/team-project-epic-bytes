@@ -7,13 +7,7 @@ const initialContext = {
   LoginUser: (username, password) => {},
   RegisterUser: (data) => {},
   clearLoginUser: () => {},
-  getHotels: (location) => {},
   getToken: () => {},
-  hotelData: {
-    data: [],
-    isDataLoading: false,
-    isErrorLoading: false,
-  },
 };
 
 export const AppContext = createContext(initialContext);
@@ -21,11 +15,6 @@ export const AppContext = createContext(initialContext);
 export const AppContextComponent = () => {
   const [isDataLoading, setIsDataLoading] = useState(false);
   const [isErrorLoading, setIsErrorLoading] = useState(false);
-  const [hotelData, setHotelData] = useState({
-    data: [],
-    isDataLoading: false,
-    isErrorLoading: false,
-  });
 
   const LoginUser = useCallback(
     (username, password) => {
@@ -77,41 +66,12 @@ export const AppContextComponent = () => {
     localStorage.removeItem("token");
   };
 
-  const getHotels = useCallback(
-    (data) => {
-      setHotelData({ ...hotelData, isDataLoading: true });
-      let url = data === undefined ? "hotels" : `hotels?location=${data}`;
-      ApiInstance.get(url)
-        .then((response) => {
-          if (response.status === 200) {
-            setHotelData({ ...hotelData, data: response.data });
-          }
-          setHotelData({
-            ...hotelData,
-            isDataLoading: false,
-            isErrorLoading: false,
-          });
-        })
-        .catch((error) => {
-          console.error(error);
-          setHotelData({
-            ...hotelData,
-            isDataLoading: false,
-            isErrorLoading: true,
-          });
-        });
-    },
-    [hotelData]
-  );
-
   return {
     LoginUser,
     isDataLoading,
     isErrorLoading,
     RegisterUser,
     clearLoginUser,
-    getHotels,
     getToken,
-    hotelData,
   };
 };
