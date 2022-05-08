@@ -20,7 +20,7 @@ public class BookingJournal {
   private UUID bookingId;
   @Column private String username;
 
-  public BookingJournal(UUID bookingId, String username, Integer hotelId, String roomType, int numberOfRooms, int numberOfGuestsPerRoom, LocalDate checkInDate, LocalDate checkOutDate, double price, int rewardPoints, String email, String phone, LocalDateTime localDateTime, Integer roomId, String hotelName) {
+  public BookingJournal(UUID bookingId, String username, Integer hotelId, String roomType, int numberOfRooms, int numberOfGuestsPerRoom, LocalDate checkInDate, LocalDate checkOutDate, double price, int rewardPoints, String email, String phone, LocalDateTime localDateTime, Integer roomId, String hotelName, String hotelImage) {
     this.bookingId = bookingId;
     this.username = username;
     this.hotelId = hotelId;
@@ -36,6 +36,8 @@ public class BookingJournal {
     this.localDateTime = localDateTime;
     this.roomId = roomId;
     this.hotelName = hotelName;
+    this.hotelImage = hotelImage;
+
   }
 
   @Column private Integer hotelId;
@@ -51,4 +53,5 @@ public class BookingJournal {
   @Column private LocalDateTime localDateTime;
   @Column private Integer roomId;
   @Column private String hotelName;
+  @Column private String hotelImage;
 }

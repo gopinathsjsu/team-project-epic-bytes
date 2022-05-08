@@ -42,6 +42,8 @@ public class Hotel {
 
   @Column
   @NotNull(message = "Hotel base price is mandatory")
-
   private double hotelBasePrice;
+
+  @Column
+  private String imageURL;
 }

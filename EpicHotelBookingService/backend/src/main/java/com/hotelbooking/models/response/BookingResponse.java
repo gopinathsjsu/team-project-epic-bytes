@@ -30,6 +30,7 @@ public class BookingResponse {
     private String roomType;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
+    private String hotelImage;
 
     }
 
