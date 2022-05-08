@@ -95,10 +95,10 @@ export default function AddNewRoomCard(props) {
 
       </DialogContent>
       <DialogActions>
-        <Button size="small" onClick={onRoomAdd}>
+        <Button variant="contained" size="small" onClick={onRoomAdd}>
           Add
         </Button>
-        <Button size="small" onClick={onClose}>
+        <Button variant="contained" size="small" onClick={onClose}>
           Cancel
         </Button>
       </DialogActions>

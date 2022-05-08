@@ -85,7 +85,7 @@ export default function HotelCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={onHotelUpdate}>
+        <Button variant="contained" size="small" onClick={onHotelUpdate}>
           Update
         </Button>
       </CardActions>
