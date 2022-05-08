@@ -8,6 +8,7 @@
     z-index: 2;
     position: absolute;
     color: #fff;
+    background-color: black;
 }
 
 .navbar-bg {
@@ -16,6 +17,11 @@
 
 .nav-menu {
     display: flex;
+    cursor: pointer;
+}
+
+.nav-icons {
+    cursor: pointer;
 }
 
 li {
@@ -34,6 +40,10 @@ li {
 .icon {
     font-size: 1.5rem;
     cursor: pointer;
+}
+
+.login {
+    margin-right: 16px;
 }
 
 

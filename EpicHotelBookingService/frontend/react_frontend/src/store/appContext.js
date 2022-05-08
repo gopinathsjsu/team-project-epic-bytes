@@ -2,93 +2,116 @@ import { createContext, useCallback, useState } from "react";
 import { ApiInstance } from "../api/axiosInstance";
 
 const initialContext = {
-  userdata: { username: "", password: "", token: "" },
   isDataLoading: false,
   isErrorLoading: false,
   LoginUser: (username, password) => {},
-  regdata: {
-    username: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-  },
   RegisterUser: (data) => {},
+  clearLoginUser: () => {},
+  getHotels: (location) => {},
+  getToken: () => {},
+  hotelData: {
+    data: [],
+    isDataLoading: false,
+    isErrorLoading: false,
+  },
 };
 
 export const AppContext = createContext(initialContext);
 
 export const AppContextComponent = () => {
   const [isDataLoading, setIsDataLoading] = useState(false);
-  const [isErrorLoading, setisErrorLoading] = useState(false);
-  const [userdata, setUserData] = useState({
-    username: "",
-    password: "",
-    token: "",
-  });
-
-  const [regdata, setRegData] = useState({
-    username: "",
-    password: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
+  const [isErrorLoading, setIsErrorLoading] = useState(false);
+  const [hotelData, setHotelData] = useState({
+    data: [],
+    isDataLoading: false,
+    isErrorLoading: false,
   });
 
   const LoginUser = useCallback(
     (username, password) => {
       setIsDataLoading(true);
-      setUserData({ username, password });
+      setIsErrorLoading(false);
       ApiInstance.post("login", { username, password })
         .then((response) => {
           if (response.status === 200) {
-            sessionStorage.setItem("token", response.data?.jwt);
-            setUserData({ ...userdata, token: response.data?.jwt });
+            localStorage.setItem("token", response.data?.jwt);
           }
+          setIsErrorLoading(false);
           setIsDataLoading(false);
         })
         .catch((error) => {
           console.error(error);
           setIsDataLoading(false);
-          setisErrorLoading(true);
+          setIsErrorLoading(true);
         });
     },
-    [userdata, setUserData]
+    []
   );
 
   const RegisterUser = useCallback(
     (data) => {
       setIsDataLoading(true);
-      setRegData(data);
+      setIsErrorLoading(false);
       ApiInstance.post("users", data)
         .then((response) => {
           if (response.status === 200) {
-            sessionStorage.setItem("token", response.data?.jwt);
-            setUserData({
-              username: data.username,
-              password: data.password,
-              token: response.data?.jwt,
-            });
+            localStorage.setItem("token", response.data?.jwt);
           }
           setIsDataLoading(false);
+          setIsErrorLoading(false);
         })
         .catch((error) => {
           console.error(error);
           setIsDataLoading(false);
-          setisErrorLoading(true);
+          setIsErrorLoading(true);
         });
     },
-    [setRegData]
+    []
+  );
+
+  const getToken = () => {
+    return localStorage.getItem("token");
+  };
+
+  const clearLoginUser = () => {
+    localStorage.removeItem("token");
+  };
+
+  const getHotels = useCallback(
+    (data) => {
+      setHotelData({ ...hotelData, isDataLoading: true });
+      let url = data === undefined ? "hotels" : `hotels?location=${data}`;
+      ApiInstance.get(url)
+        .then((response) => {
+          if (response.status === 200) {
+            setHotelData({ ...hotelData, data: response.data });
+          }
+          setHotelData({
+            ...hotelData,
+            isDataLoading: false,
+            isErrorLoading: false,
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+          setHotelData({
+            ...hotelData,
+            isDataLoading: false,
+            isErrorLoading: true,
+          });
+        });
+    },
+    [hotelData]
   );
 
   return {
     LoginUser,
     isDataLoading,
     isErrorLoading,
-    userdata,
-    regdata,
     RegisterUser,
+    clearLoginUser,
+    getHotels,
+    getToken,
+    hotelData,
   };
 };

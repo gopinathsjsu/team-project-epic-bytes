@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import { styles } from "./HeaderStyles";
 import AppBar from "@mui/material/AppBar";
@@ -14,6 +14,8 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import { Tooltip } from "@mui/material";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import AddNewHotelCard from "../NewHotelCard/AddHotel";
+import { getPayloadFromToken } from "../../util/useQueryParams";
+import { AppContext } from "../../store/appContext";
 
 export const DashboardHeader = (props) => {
   const [anchorEl, setAnchorEl] = useState();
@@ -22,11 +24,14 @@ export const DashboardHeader = (props) => {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const { history, user } = props;
+  const { history } = props;
+  const { clearLoginUser, getToken } = useContext(AppContext);
+  const token = getToken();
+  let user = token ? getPayloadFromToken(token) : {};
 
   const logOut = () => {
-    sessionStorage.removeItem("token");
-    history.push("/login");
+    clearLoginUser();
+    history.push("/");
   };
 
   const Search = styled("div")(({ theme }) => ({

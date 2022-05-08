@@ -1,22 +1,18 @@
 import { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
 import { AppContext } from "../store/appContext";
-import { useToken } from "../auth/useToken";
 
 export const SignUpPage = () => {
-  const [token, setToken] = useToken();
-
   const [errorMessage, setErrorMessage] = useState("");
 
   const [username, setUserName] = useState("");
   const [emailValue, setEmailValue] = useState("");
-  const [firstname, setFirstName] = useState("");
-  const [lastname, setLastName] = useState("");
-  const [phonenumber, setPhoneNumber] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const [passwordValue, setPasswordValue] = useState("");
-  const [confirmpasswordValue, setConfirmPasswordValue] = useState("");
+  const [confirmPasswordValue, setConfirmPasswordValue] = useState("");
 
   const { RegisterUser, isErrorLoading } = useContext(AppContext);
 
@@ -33,10 +29,9 @@ export const SignUpPage = () => {
       username: username,
       email: emailValue,
       password: passwordValue,
-      firstname: firstname,
-      lastname: lastname,
-      email: emailValue,
-      phone: phonenumber,
+      firstName: firstName,
+      lastName: lastName,
+      phone: phoneNumber,
     });
     history.push("/");
   };
@@ -60,19 +55,19 @@ export const SignUpPage = () => {
         />
         <input
           className="button-input"
-          value={firstname}
+          value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
           placeholder="first name"
         />
         <input
           className="button-input"
-          value={lastname}
+          value={lastName}
           onChange={(e) => setLastName(e.target.value)}
           placeholder="last name"
         />
         <input
           className="button-input"
-          value={phonenumber}
+          value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
           placeholder="phone number"
         />
@@ -86,7 +81,7 @@ export const SignUpPage = () => {
         <input
           className="button-input"
           type="password"
-          value={confirmpasswordValue}
+          value={confirmPasswordValue}
           onChange={(e) => setConfirmPasswordValue(e.target.value)}
           placeholder="confirm password"
         />
@@ -96,7 +91,7 @@ export const SignUpPage = () => {
           disabled={
             !username ||
             !passwordValue ||
-            passwordValue !== confirmpasswordValue
+            passwordValue !== confirmPasswordValue
           }
           onClick={onSignUpClicked}
         >

@@ -1,25 +1,34 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { LogInPage } from "./pages/LogInPage";
-import { SignUpPage } from "./pages/SignUpPage";
+import { SignUpPageV2 } from "./pages/SignUpPageV2";
 import { UserInfoDashboard } from "./pages/UserInfoDashboard";
+import { RewardsPage } from "./pages/RewardsPage";
 import { PrivateRoute } from "./auth/PrivateRoute";
+import { AdminRoute } from "./auth/AdminRoute";
 import { EmployeeDashboard } from "./pages/EmployeeDashboard";
+import List from "./components/list/List";
 
 export const Routes = () => {
   return (
     <Router>
       <Switch>
-        <PrivateRoute path="/" exact>
+        <Route path="/" exact>
           <UserInfoDashboard />
-        </PrivateRoute>
-        <PrivateRoute path="/employee" exact>
+        </Route>
+        <AdminRoute path="/admin" exact>
           <EmployeeDashboard />
-        </PrivateRoute>
+        </AdminRoute>
         <Route path="/login">
           <LogInPage />
         </Route>
+        <PrivateRoute path="/rewards">
+          <RewardsPage />
+        </PrivateRoute>
         <Route path="/signup">
-          <SignUpPage />
+          <SignUpPageV2 />
+        </Route>
+        <Route path="/hotels">
+           <List />
         </Route>
       </Switch>
     </Router>

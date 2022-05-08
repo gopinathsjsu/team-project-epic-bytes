@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+.java-version
+.DS_Store
+package-lock.json

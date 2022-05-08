@@ -41,6 +41,7 @@ public class Hotel {
   private String hotelPhone;
 
   @Column
-  @NotNull(message = "Hotel price is mandatory")
+  @NotNull(message = "Hotel base price is mandatory")
+
   private double hotelBasePrice;
 }

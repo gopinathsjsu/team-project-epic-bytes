@@ -7,18 +7,22 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import "./AddHotel.css";
+import { ApiInstance } from "../../api/axiosInstance";
 
 export default function AddNewHotelCard(props) {
   const { onClose, open } = props;
 
   const [hotelName, setHotelName] = useState("");
   const [location, setLocation] = useState("");
-  const [roomsCount, setRoomsCount] = useState("");
-  const [roomtype, setRoomtype] = useState("");
-  const [price, setPrice] = useState("");
+  const [hotelAddress, setaddress] = useState("");
+  const [hotelEmail, setemail] = useState("");
+  const [hotelPhone, setphone] = useState("");
+  const [hotelBasePrice, setprice]  = useState("");
+  const [description, setdesc] = useState("");
 
   const onHotelAdd = () => {
     //call api here
+    ApiInstance.post("hotels", { hotelName,description, location,hotelAddress, hotelEmail, hotelPhone,hotelBasePrice,})
   };
 
   return (
@@ -45,6 +49,21 @@ export default function AddNewHotelCard(props) {
           />
         </Typography>
         <Typography
+                  className="typography-spacing-add"
+                  variant="body2"
+                  color="text.secondary"
+                >
+                  <TextField
+                    fullWidth
+                    id="outlined-roomtype"
+                    label="Description"
+                    value={description}
+                    onChange={(e) => {
+                      setdesc(e.target.value);
+                    }}
+                  />
+                </Typography>
+        <Typography
           fullWidth
           className="typography-spacing-add"
           variant="body2"
@@ -68,10 +87,10 @@ export default function AddNewHotelCard(props) {
           <TextField
             fullWidth
             id="outlined-rooms"
-            label="No.of Rooms"
-            value={roomsCount}
+            label="Address"
+            value={hotelAddress}
             onChange={(e) => {
-              setRoomsCount(e.target.value);
+              setaddress(e.target.value);
             }}
           />
         </Typography>
@@ -83,10 +102,10 @@ export default function AddNewHotelCard(props) {
           <TextField
             fullWidth
             id="outlined-roomtype"
-            label="Type of Rooms"
-            value={roomtype}
+            label="Email"
+            value={hotelEmail}
             onChange={(e) => {
-              setRoomtype(e.target.value);
+              setemail(e.target.value);
             }}
           />
         </Typography>
@@ -99,13 +118,31 @@ export default function AddNewHotelCard(props) {
           <TextField
             fullWidth
             id="outlined-roomtype"
-            label="Price"
-            value={price}
+            label="Phone"
+            value={hotelPhone}
             onChange={(e) => {
-              setPrice(e.target.value);
+              setphone(e.target.value);
             }}
           />
         </Typography>
+
+
+        <Typography
+          className="typography-spacing-add"
+          variant="body2"
+          color="text.secondary"
+        >
+          <TextField
+            fullWidth
+            id="outlined-roomtype"
+            label="Price"
+            value={hotelBasePrice}
+            onChange={(e) => {
+              setprice(e.target.value);
+            }}
+          />
+        </Typography>
+
       </DialogContent>
       <DialogActions>
         <Button size="small" onClick={onHotelAdd}>
