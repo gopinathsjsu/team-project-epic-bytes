@@ -15,7 +15,7 @@ export const LogInPage = () => {
 
   useEffect(() => {
     if (isErrorLoading) {
-      setErrorMessage("Error Occurred while trying to login");
+      setErrorMessage("Incorrect Username or Password");
     }
   }, [isErrorLoading]);
 

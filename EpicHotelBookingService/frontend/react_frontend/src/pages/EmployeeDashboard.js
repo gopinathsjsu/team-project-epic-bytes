@@ -5,6 +5,7 @@ import HotelCard from "../components/Card/Card";
 import { AppContext } from "../store/appContext";
 import { getPayloadFromToken } from "../util/useQueryParams";
 import "../styles/EmployeeDashboard.css";
+import Button from "@mui/material/Button";
 
 export const EmployeeDashboard = () => {
   // We'll use the history to navigate the user
@@ -37,6 +38,7 @@ export const EmployeeDashboard = () => {
   return (
     <>
       <DashboardHeader history={history} />
+      <button>Add Room</button>
       <div className="hotel-body">
         {hotelData &&
           hotelData.data.map((item) => {
