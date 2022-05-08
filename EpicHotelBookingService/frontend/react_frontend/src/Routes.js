@@ -6,6 +6,7 @@ import { RewardsPage } from "./pages/RewardsPage";
 import { PrivateRoute } from "./auth/PrivateRoute";
 import { AdminRoute } from "./auth/AdminRoute";
 import { EmployeeDashboard } from "./pages/EmployeeDashboard";
+import List from "./components/list/List";
 
 export const Routes = () => {
   return (
@@ -25,6 +26,9 @@ export const Routes = () => {
         </PrivateRoute>
         <Route path="/signup">
           <SignUpPageV2 />
+        </Route>
+        <Route path="/hotels">
+           <List />
         </Route>
       </Switch>
     </Router>
