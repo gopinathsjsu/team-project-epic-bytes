@@ -42,12 +42,28 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
   protected void configure(final HttpSecurity http) throws Exception {
     http.csrf()
         .disable()
+        .cors()
+        .and()
         .authorizeRequests()
-            .antMatchers(HttpMethod.POST, "/hotels", "/rooms", "/amenities").hasAuthority("ADMIN")
-            .antMatchers(HttpMethod.GET, "/bookings").hasAuthority("ADMIN")
-            .antMatchers(HttpMethod.DELETE, "/hotels", "/rooms", "/amenities").hasAuthority("ADMIN")
-            .antMatchers(HttpMethod.PUT, "/hotels", "/rooms", "/amenities").hasAuthority("ADMIN")
-        .antMatchers(LOGIN_ENDPOINT, SIGNUP_ENDPOINT, "/amenities/**", "/hotels/**", "/rooms/**", "/", "/static/**", "/css/**")
+        .antMatchers(HttpMethod.OPTIONS, "/**")
+        .permitAll()
+        .antMatchers(HttpMethod.POST, "/hotels", "/rooms", "/amenities")
+        .hasAuthority("ADMIN")
+        .antMatchers(HttpMethod.GET, "/bookings")
+        .hasAuthority("ADMIN")
+        .antMatchers(HttpMethod.DELETE, "/hotels", "/rooms", "/amenities")
+        .hasAuthority("ADMIN")
+        .antMatchers(HttpMethod.PUT, "/hotels", "/rooms", "/amenities")
+        .hasAuthority("ADMIN")
+        .antMatchers(
+            LOGIN_ENDPOINT,
+            SIGNUP_ENDPOINT,
+            "/amenities/**",
+            "/hotels/**",
+            "/rooms/**",
+            "/",
+            "/static/**",
+            "/css/**")
         .permitAll()
         .anyRequest()
         .authenticated()
