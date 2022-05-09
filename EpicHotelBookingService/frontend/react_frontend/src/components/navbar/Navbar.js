@@ -36,20 +36,17 @@ function Navbar(props) {
         <h2>Epic Hotel Booking</h2>
       </div>
       <ul className="nav-menu">
-        <Link to="home">
-          <li>Home</li>
+        <Link to="/">
+          <li className="nav-item">Home</li>
         </Link>
-        <Link to="destinations">
-          <li>Destinations</li>
-        </Link>
-        <Link to="carousel">
-          <li>Travel</li>
+        <Link to="/hotels">
+          <li className="nav-item">Hotels</li>
         </Link>
         <Link to="/bookings">
-          <li>Book</li>
+          <li className="nav-item">My Bookings</li>
         </Link>
-        <Link to="views">
-          <li>Views</li>
+        <Link to="/rewards">
+          <li className="nav-item">My Rewards</li>
         </Link>
       </ul>
       <div className="nav-icons">
@@ -83,11 +80,11 @@ function Navbar(props) {
           <Link to="carousel" smooth={true} duration={500}>
             <li>Travel</li>
           </Link>
-          <Link to="search" smooth={true} duration={500}>
-            <li>Book</li>
+          <Link to="/bookings" smooth={true} duration={500}>
+            <li>My Bookings</li>
           </Link>
-          <Link to="views" smooth={true} duration={500}>
-            <li>Views</li>
+          <Link to="/rewards" smooth={true} duration={500}>
+            <li>My Rewards</li>
           </Link>
         </ul>
         <div className="mobile-menu-bottom"></div>

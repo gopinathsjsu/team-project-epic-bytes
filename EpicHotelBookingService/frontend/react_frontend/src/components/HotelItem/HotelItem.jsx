@@ -1,6 +1,6 @@
-import "./searchItem.css";
+import "./HotelItem.css";
 
-const SearchItem = ({ hotel }) => {
+const HotelItem = ({ hotel }) => {
   return (
     <div className="searchItem">
       <img
@@ -41,4 +41,4 @@ const SearchItem = ({ hotel }) => {
   );
 };
 
-export default SearchItem;
+export default HotelItem;
