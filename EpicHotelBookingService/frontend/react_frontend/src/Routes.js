@@ -2,12 +2,12 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { LogInPage } from "./pages/LogInPage";
 import { SignUpPageV2 } from "./pages/SignUpPageV2";
 import { UserInfoDashboard } from "./pages/UserInfoDashboard";
-import { RewardsPage } from "./pages/RewardsPage";
+import { MyRewardsPage } from "./pages/MyRewardsPage";
 import { PrivateRoute } from "./auth/PrivateRoute";
 import { AdminRoute } from "./auth/AdminRoute";
 import { EmployeeDashboard } from "./pages/EmployeeDashboard";
-import { Bookings } from "./pages/Bookings";
-import List from "./components/list/List";
+import { MyBookingsPage } from "./pages/MyBookingsPage";
+import HotelListPage from "./pages/HotelListPage";
 
 export const Routes = () => {
   return (
@@ -23,16 +23,16 @@ export const Routes = () => {
           <LogInPage />
         </Route>
         <PrivateRoute path="/rewards">
-          <RewardsPage />
+          <MyRewardsPage />
         </PrivateRoute>
         <PrivateRoute path="/bookings">
-          <Bookings />
+          <MyBookingsPage />
         </PrivateRoute>
         <Route path="/signup">
           <SignUpPageV2 />
         </Route>
         <Route path="/hotels">
-          <List />
+          <HotelListPage />
         </Route>
       </Switch>
     </Router>

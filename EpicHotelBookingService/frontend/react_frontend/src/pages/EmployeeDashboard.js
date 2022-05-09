@@ -7,8 +7,6 @@ import AddNewRoomCard from "../components/NewRoomCard/AddRoom";
 import { ApiInstance, SecureAPIInstance } from "../api/axiosInstance";
 import Button from "@mui/material/Button";
 import HotelCard from "../components/Card/Card";
-import BookingCard from "../components/BookingCard/BookingCard";
-import SearchItem from "../components/searchItem/SearchItem";
 import BookingItem from "../components/BookingItem/BookingItem";
 
 export const EmployeeDashboard = () => {
@@ -70,12 +68,6 @@ export const EmployeeDashboard = () => {
 function refreshPage() {
     window.location.reload(false);
   }
-
-  const removeBookings = (bookingId) => {
-    let data = [...bookings];
-    data.filter((item) => item.bookingId !== bookingId);
-    setBookings(data);
-  };
 
 //added now
 const updateHotel = (hotelId) => {
@@ -141,19 +133,8 @@ const updateHotel = (hotelId) => {
               <>
                 {display === "bookings" ? (
                   <>
-                    {bookings.map((book) => (
-                      <>
-                      <BookingCard
-                        image={require("../images/motel6.webp")}
-                        hotelName={book.hotelName}
-                        checkInDate={book.checkInDate}
-                        rooms={book.numberOfRooms}
-                        roomType={book.roomType}
-                        bookingId={book.bookingId}
-                        bookingsRemove={removeBookings}
-                      />
-                      <BookingItem booking={book} />
-                      </>
+                    {bookings.map((booking) => (
+                      <BookingItem {...booking} key={booking.id} />
                     ))}
                   </>
                 ) : (
@@ -173,11 +154,8 @@ const updateHotel = (hotelId) => {
                         phone = {hotel.hotelPhone}
                         email = {hotel.hotelEmail}
                         address = {hotel.hotelAddress}
-
-
                         removeHotel={removeHotel}
                       />
-                      {/* <SearchItem hotel={hotel} /> */}
                       </>
                     ))}
                     

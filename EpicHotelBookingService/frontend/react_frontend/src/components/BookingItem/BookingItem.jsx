@@ -1,5 +1,7 @@
 import "./bookingItem.css";
-import { ApiInstance, SecureAPIInstance } from "../../api/axiosInstance";
+import { useState } from "react";
+import { SecureAPIInstance } from "../../api/axiosInstance";
+import ConfirmDeleteCard from "../ConfirmDeleteCard/ConfirmDeleteCard";
 
 // Array(6)
 // 0:
@@ -20,48 +22,73 @@ import { ApiInstance, SecureAPIInstance } from "../../api/axiosInstance";
 // roomId: 2
 // roomType: "Single Room"
 // username: "teethi123"
-const BookingItem = ({ hotelImage, hotelName, bookingId, roomType,  rewardPoints, checkOutDate, checkInDate, phone,
-    email, price}) => {
-  return (
-    <div className="searchItem">
-      <img
-        src = {hotelImage}
-        alt="hotel image"
-        className="siImg"
-      />
-      <div className="siDesc">
-        <h1 className="siTitle">{hotelName}</h1>
-        <span className="siDistance">Booking Id: {bookingId}</span>
-        <span className="siDistance">{roomType}</span>
-        <span className="siTaxiOp">Reward points: {rewardPoints}</span>
-        <span className="siSubtitle">
-          Check-in-date: {checkInDate}, Check-out-date: {checkOutDate}
-        </span>
-        <span className="siFeatures">
-         Contact: {phone}
-        </span>
-        <span className="siFeatures">
-         Email: {email}
-        </span>
-        <span className="siCancelOp">Free cancellation </span>
-        <span className="siCancelOpSubtitle">
-          You can cancel later, so lock in this great price today!
-        </span>
-      </div>
-      <div className="siDetails">
-        <div className="siRating">
-          <span>Excellent</span>
-          <button>8.9</button>
-        </div>
-        <div className="siDetailTexts">
-          <span className="siPrice">{price}</span>
-          <span className="siTaxOp">Total booking amount</span>
-          <button className="siCheckButton">Edit booking</button>
-          <button className="siCheckButton">Cancel booking</button>
 
+const BookingItem = ({ hotelImage, hotelName, bookingId, roomType, rewardPoints, checkOutDate, checkInDate, phone, email, price }) => {
+  const [isOpen, setOpen] = useState(false);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+
+  const closeModal = () => {
+    setOpen(false);
+    setEditModalOpen(false);
+    setDeleteModalOpen(false);
+  };
+
+  const openDeleteModal = () => {
+    setOpen(true);
+    setDeleteModalOpen(true);
+  };
+
+  const openEditModal = () => {
+    setOpen(true);
+    setEditModalOpen(true);
+  };
+
+  const deleteBooking = () => {
+    console.log(`Delete the booking :: ${bookingId}`);
+    // TODO Call Backend API to delete the booking
+  };
+
+  return (
+    <>
+      <div className="searchItem">
+        <img
+          src = {hotelImage}
+          alt="hotel image"
+          className="siImg"
+        />
+        <div className="siDesc">
+          <h1 className="siTitle">{hotelName}</h1>
+          <span className="siDistance">Booking Id: {bookingId}</span>
+          <span className="siDistance">{roomType}</span>
+          <span className="siTaxiOp">Reward points: {rewardPoints}</span>
+          <span className="siSubtitle">
+            Check-in-date: {checkInDate}, Check-out-date: {checkOutDate}
+          </span>
+          <span className="siFeatures">
+          Contact: {phone}
+          </span>
+          <span className="siFeatures">
+          Email: {email}
+          </span>
+          <span className="siCancelOp">Free cancellation </span>
+          <span className="siCancelOpSubtitle">
+            You can cancel later, so lock in this great price today!
+          </span>
+        </div>
+        <div className="siDetails">
+          <div className="siRating">
+          </div>
+          <div className="siDetailTexts">
+            <span className="siPrice">${price}</span>
+            <span className="siTaxOp">Total booking amount</span>
+            <button className="siCheckButton" onClick={() => openEditModal()}>Edit booking</button>
+            <button className="siCheckButton" onClick={() => openDeleteModal()}>Cancel booking</button>
+          </div>
         </div>
       </div>
-    </div>
+      <ConfirmDeleteCard open={isOpen && deleteModalOpen} onClose={closeModal} onConfirm={deleteBooking} />
+    </>
   );
 };
 

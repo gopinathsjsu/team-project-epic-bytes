@@ -71,13 +71,9 @@ const Hero = ({ type }) => {
                 </div>
                 <div className="headerSearchItem">
                     <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
-                    <span
-                    onClick={() => setOpenDate(!openDate)}
-                    className="headerSearchText"
-                    >{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
-                    date[0].endDate,
-                    "MM/dd/yyyy"
-                    )}`}</span>
+                    <span onClick={() => setOpenDate(!openDate)} className="headerSearchText">
+                        {`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(date[0].endDate,"MM/dd/yyyy")}`}
+                    </span>
                     {openDate && (
                     <DateRange
                         editableDateInputs={true}

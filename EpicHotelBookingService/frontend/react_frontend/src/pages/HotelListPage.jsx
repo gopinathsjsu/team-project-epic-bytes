@@ -1,24 +1,42 @@
-import "./list.css";
-import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation, useHistory } from "react-router-dom";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
-import SearchItem from "../searchItem/SearchItem";
+import HotelItem from "../components/HotelItem/HotelItem";
+import Navbar from "../components/navbar/Navbar";
+import { ApiInstance } from "../api/axiosInstance";
 
-const List = () => {
+const HotelListPage = () => {
+  const history = useHistory();
   const location = useLocation();
-  console.log('state :: ', location.state);
   const [destination, setDestination] = useState(location?.state?.destination);
-  const [date, setDate] = useState(location?.state?.date);
-  console.log('data from state :: ', location?.state?.date);
-  console.log('date :: ', date);
+  const initDateData = location?.state?.date ? location?.state?.date : [{ startDate: new Date(), endDate: new Date(), key: "selection",}];
+  const [date, setDate] = useState(initDateData);
   const [openDate, setOpenDate] = useState(false);
-  const [options, setOptions] = useState(location?.state?.options);
+
+  const initOptionsData = location?.state?.options? location?.state?.options : { adult: 1, children: 0, room: 1, };
+  const [options, setOptions] = useState(initOptionsData);
+  const [hotels, setHotels] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    ApiInstance.get("hotels")
+      .then((response) => {
+        if (response.status === 200) {
+          setHotels(response.data);
+        }
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setIsLoading(false);
+      });
+  }, []);
 
   return (
     <div>
-      {/* <Navbar />
-      <Header type="list" /> */}
+      <Navbar history={history} />
       <div className="listContainer">
         <div className="listWrapper">
           <div className="listSearch">
@@ -29,10 +47,9 @@ const List = () => {
             </div>
             <div className="lsItem">
               <label>Check-in Date</label>
-              <span onClick={() => setOpenDate(!openDate)}>{`${format(
-                date[0].startDate,
-                "MM/dd/yyyy"
-              )} to ${format(date[0].endDate, "MM/dd/yyyy")}`}</span>
+              <span onClick={() => setOpenDate(!openDate)}>
+                {`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(date[0].endDate, "MM/dd/yyyy")}`}
+              </span>
               {openDate && (
                 <DateRange
                   onChange={(item) => setDate([item.selection])}
@@ -48,18 +65,17 @@ const List = () => {
                   <span className="lsOptionText">
                     Min price <small>per night</small>
                   </span>
-                  <input type="number" className="lsOptionInput" />
+                  <input className="lsOptionInput" />
                 </div>
                 <div className="lsOptionItem">
                   <span className="lsOptionText">
                     Max price <small>per night</small>
                   </span>
-                  <input type="number" className="lsOptionInput" />
+                  <input className="lsOptionInput" />
                 </div>
                 <div className="lsOptionItem">
                   <span className="lsOptionText">Adult</span>
                   <input
-                    type="number"
                     min={1}
                     className="lsOptionInput"
                     placeholder={options.adult}
@@ -68,7 +84,6 @@ const List = () => {
                 <div className="lsOptionItem">
                   <span className="lsOptionText">Children</span>
                   <input
-                    type="number"
                     min={0}
                     className="lsOptionInput"
                     placeholder={options.children}
@@ -77,7 +92,6 @@ const List = () => {
                 <div className="lsOptionItem">
                   <span className="lsOptionText">Room</span>
                   <input
-                    type="number"
                     min={1}
                     className="lsOptionInput"
                     placeholder={options.room}
@@ -88,7 +102,15 @@ const List = () => {
             <button>Search</button>
           </div>
           <div className="listResult">
-            <SearchItem />
+            {isLoading ? (
+              "Loading..."
+            ) : (
+              <>
+                {hotels.map((hotel) => (
+                  <HotelItem hotel={hotel} key={hotel.id} />
+                ))}
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -96,4 +118,4 @@ const List = () => {
   );
 };
 
-export default List;
+export default HotelListPage;
