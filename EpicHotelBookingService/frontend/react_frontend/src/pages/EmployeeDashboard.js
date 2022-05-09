@@ -4,6 +4,7 @@ import "../styles/EmployeeDashboard.css";
 import Navbar from "../components/navbar/Navbar";
 import AddNewHotelCard from "../components/NewHotelCard/AddHotel";
 import AddNewRoomCard from "../components/NewRoomCard/AddRoom";
+import AddAmenities from "../components/Amenities/AddAmenities";
 import { ApiInstance, SecureAPIInstance } from "../api/axiosInstance";
 import Button from "@mui/material/Button";
 import HotelCard from "../components/Card/Card";
@@ -20,6 +21,7 @@ export const EmployeeDashboard = () => {
   const [isOpen, setOpen] = useState(false);
   const [addHotelOpen, setAddHotelOpen] = useState(false);
   const [addRoomOpen, setAddRoomOpen] = useState(false);
+  const [AddAmenitiesOpen, setAddAmenitiesOpen] = useState(false);
 
   useEffect(() => {
     if (display === "hotels") {
@@ -65,6 +67,11 @@ export const EmployeeDashboard = () => {
   const onAddNewRoom = () => {
     setOpen(true);
     setAddRoomOpen(true);
+  };
+
+  const onAddAmenities = () => {
+    setOpen(true);
+    setAddAmenitiesOpen(true);
   };
 
 function refreshPage() {
@@ -118,7 +125,9 @@ const updateHotel = (hotelId) => {
               </Button>
             </div>
             <div className="lsItem">
-              <Button variant="contained">Add Amenity</Button>
+              <Button variant="contained" onClick={onAddAmenities}>
+                Add Amenity
+                </Button>
             </div>
             <div className="lsItem">
               <Button
@@ -190,6 +199,7 @@ const updateHotel = (hotelId) => {
       </div>
       <AddNewHotelCard open={isOpen && addHotelOpen} onClose={closeModal} />
       <AddNewRoomCard open={isOpen && addRoomOpen} onClose={closeModal} />
+      <AddAmenities open={isOpen && AddAmenitiesOpen} onClose={closeModal} />
     </>
   );
 };
