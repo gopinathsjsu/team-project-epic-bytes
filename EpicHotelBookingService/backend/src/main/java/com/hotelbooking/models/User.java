@@ -74,11 +74,11 @@ public class User implements Serializable {
   private Tier tier = Tier.REGULAR;
 
   public void setTier(int rewardPoints) {
-    if (rewardPoints > 5000) {
+    if (rewardPoints > 20000) {
       this.tier = Tier.PLATINUM;
-    } else if (rewardPoints > 3000) {
+    } else if (rewardPoints > 10000) {
       this.tier = Tier.GOLD;
-    } else if (rewardPoints > 1000) {
+    } else if (rewardPoints > 5000) {
       this.tier = Tier.SILVER;
     } else this.tier = Tier.REGULAR;
   }

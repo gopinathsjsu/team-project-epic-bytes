@@ -8,6 +8,7 @@ import { AdminRoute } from "./auth/AdminRoute";
 import { EmployeeDashboard } from "./pages/EmployeeDashboard";
 import { MyBookingsPage } from "./pages/MyBookingsPage";
 import HotelListPage from "./pages/HotelListPage";
+import RoomListPage from "./pages/RoomListPage";
 
 export const Routes = () => {
   return (
@@ -33,6 +34,9 @@ export const Routes = () => {
         </Route>
         <Route path="/hotels">
           <HotelListPage />
+        </Route>
+        <Route path="/rooms">
+          <RoomListPage />
         </Route>
       </Switch>
     </Router>

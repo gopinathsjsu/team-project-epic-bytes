@@ -42,7 +42,7 @@ public class HotelService {
     currentHotel.setHotelEmail(hotel.getHotelEmail());
     currentHotel.setHotelPhone(hotel.getHotelPhone());
     currentHotel.setHotelBasePrice(hotel.getHotelBasePrice());
-    currentHotel = hotelRepository.save(hotel);
+    hotelRepository.save(currentHotel);
   }
 
   public void deleteHotel(Integer id) {

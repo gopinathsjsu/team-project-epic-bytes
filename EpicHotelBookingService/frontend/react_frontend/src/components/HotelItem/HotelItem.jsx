@@ -1,6 +1,21 @@
 import "./HotelItem.css";
+import { useHistory } from "react-router-dom";
+
 
 const HotelItem = ({ hotel }) => {
+  const history = useHistory();
+  const hotelId = hotel.id
+
+  const handleViewRates = () => {
+    history.push({
+        pathname: '/rooms',
+        state: {  // location state
+          hotelId
+        },
+    });
+  };
+
+
   return (
     <div className="searchItem">
       <img
@@ -34,11 +49,13 @@ const HotelItem = ({ hotel }) => {
         <div className="siDetailTexts">
           <span className="siPrice">From ${hotel.hotelBasePrice}</span>
           <span className="siTaxOp">Excludes taxes and fees</span>
-          <button className="siCheckButton">View Rates</button>
+          <button className="siCheckButton" onClick={handleViewRates}>View Rates</button>
         </div>
       </div>
     </div>
   );
 };
+
+
 
 export default HotelItem;

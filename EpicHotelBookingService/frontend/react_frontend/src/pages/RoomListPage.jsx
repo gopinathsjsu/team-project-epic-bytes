@@ -2,30 +2,40 @@ import { useState, useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
-import HotelItem from "../components/HotelItem/HotelItem";
+import RoomItem from "../components/RoomItem/RoomItem";
 import Navbar from "../components/navbar/Navbar";
 import { ApiInstance } from "../api/axiosInstance";
 
 
-const HotelListPage = () => {
+const RoomListPage = () => {
   const history = useHistory();
   const location = useLocation();
-  const [destination, setDestination] = useState(location?.state?.destination);
+  const hotelId = location?.state?.hotelId;
   const initDateData = location?.state?.date ? location?.state?.date : [{ startDate: new Date(), endDate: new Date(), key: "selection",}];
   const [date, setDate] = useState(initDateData);
   const [openDate, setOpenDate] = useState(false);
 
   const initOptionsData = location?.state?.options? location?.state?.options : { adult: 1, children: 0, room: 1, };
   const [options, setOptions] = useState(initOptionsData);
-  const [hotels, setHotels] = useState([]);
+  const [rooms, setRooms] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+
+  const photos = [
+    "https://image.insider.com/585029a0dd0895bc548b4b8b?width=750&format=jpeg&auto=webp",
+    "https://www.gannett-cdn.com/-mm-/05b227ad5b8ad4e9dcb53af4f31d7fbdb7fa901b/c=0-64-2119-1259/local/-/media/USATODAY/USATODAY/2014/08/13/1407953244000-177513283.jpg?width=660&height=373&fit=crop&format=pjpg&auto=webp",
+    "https://media.istockphoto.com/photos/interior-of-a-modern-luxury-hotel-double-bed-bedroom-picture-id1163498940?k=20&m=1163498940&s=612x612&w=0&h=tUPidNW2ny095sCR97dur7cbrCnYpcjHbevUTJyB8Jc=",
+    "https://techcrunch.com/wp-content/uploads/2016/12/dream-presidential-suite-terrace.jpg",
+    "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aG90ZWwlMjByb29tfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
+    "https://bluebiz-media.azureedge.net/48da09/contentassets/cc4c46c0c048442683523c7f9253b1b6/hotel-room-624x364.jpg"
+  ];
 
   useEffect(() => {
     setIsLoading(true);
-    ApiInstance.get("hotels")
+    ApiInstance.get("rooms")
       .then((response) => {
         if (response.status === 200) {
-          setHotels(response.data);
+          setRooms(response.data);
         }
         setIsLoading(false);
       })
@@ -44,8 +54,6 @@ const HotelListPage = () => {
           <div className="listSearch">
             <h1 className="lsTitle">Search</h1>
             <div className="lsItem">
-              <label>Destination</label>
-              <input placeholder={destination} type="text" />
             </div>
             <div className="lsItem">
               <label>Check-in Date</label>
@@ -64,31 +72,11 @@ const HotelListPage = () => {
               <label>Options</label>
               <div className="lsOptions">
                 <div className="lsOptionItem">
-                  <span className="lsOptionText">
-                    Min price <small>per night</small>
-                  </span>
-                  <input className="lsOptionInput" />
-                </div>
-                <div className="lsOptionItem">
-                  <span className="lsOptionText">
-                    Max price <small>per night</small>
-                  </span>
-                  <input className="lsOptionInput" />
-                </div>
-                <div className="lsOptionItem">
                   <span className="lsOptionText">Adult</span>
                   <input
                     min={1}
                     className="lsOptionInput"
                     placeholder={options.adult}
-                  />
-                </div>
-                <div className="lsOptionItem">
-                  <span className="lsOptionText">Children</span>
-                  <input
-                    min={0}
-                    className="lsOptionInput"
-                    placeholder={options.children}
                   />
                 </div>
                 <div className="lsOptionItem">
@@ -108,8 +96,8 @@ const HotelListPage = () => {
               "Loading..."
             ) : (
               <>
-                {hotels.map((hotel) => (
-                  <HotelItem hotel={hotel} key={hotel.id} />
+                {rooms.map((room, index) => (
+                  <RoomItem room={room} key={room.id} imageUrl={photos[index]} />
                 ))}
               </>
             )}
@@ -120,4 +108,4 @@ const HotelListPage = () => {
   );
 };
 
-export default HotelListPage;
+export default RoomListPage;
