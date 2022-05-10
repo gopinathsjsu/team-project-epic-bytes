@@ -12,14 +12,14 @@
 4. Deployment: AWS Elastic Beanstalk, AWS RDS (For DB)
 
 ## Areas of Contributions 
-Frontend: 
-Backend: 
-WireFrame UI: 
-Architecture Diagram: 
-Class Diagram: 
-Use Case Diagram: 
-Activity Diagram: 
-Deployment: 
+1. Frontend: Nikhil, Rishab, Kavya  
+2. Backend: Kanupriya
+3. WireFrame UI: Kavya, Nikhil
+4. Architecture Diagram: Kavya
+5. Class Diagram: 
+6. Use Case Diagram: 
+7. Activity Diagram: 
+8. Deployment: 
 
 ## Scrum Artifacts and Diagrams
 1. [Github Repository](https://github.com/gopinathsjsu/team-project-epic-bytes)
