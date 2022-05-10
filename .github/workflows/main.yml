@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - EpicHotelBookingService/frontend/react_frontend/**
   workflow_dispatch: {}
   
 env:
