@@ -1,6 +1,6 @@
 # Team 'The Epic Bytes'
-## Team Members
-1.  Kanupriya Sanjay Agrawal (016099057)
+## Team Members 
+1.  Kanupriya Sanjay Agrawal (016099057) 
 2.  Kusuma Padma Kavya Bandi (016021785)
 3.  Nikhil Konduru 
 4.  Rishab Reddy Karakala
@@ -10,6 +10,16 @@
 2. Back-end: SpringBoot Java MVC.
 3. Database: MySQL
 4. Deployment: AWS Elastic Beanstalk, AWS RDS (For DB)
+
+## Areas of Contributions 
+Frontend: 
+Backend: 
+WireFrame UI: 
+Architecture Diagram: 
+Class Diagram: 
+Use Case Diagram: 
+Activity Diagram: 
+Deployment: 
 
 ## Scrum Artifacts and Diagrams
 1. [Github Repository](https://github.com/gopinathsjsu/team-project-epic-bytes)
