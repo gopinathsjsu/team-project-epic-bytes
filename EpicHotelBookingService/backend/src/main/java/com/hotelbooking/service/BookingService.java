@@ -4,6 +4,7 @@ import com.hotelbooking.models.BookingJournal;
 import com.hotelbooking.models.Room;
 import com.hotelbooking.models.User;
 import com.hotelbooking.models.request.BookingRequest;
+import com.hotelbooking.models.response.AmenityResponse;
 import com.hotelbooking.models.response.BookingResponse;
 import com.hotelbooking.repository.BookingRepository;
 import com.hotelbooking.service.util.ResponseBuilder;
@@ -61,6 +62,12 @@ public class BookingService {
             bookingRequest, room.get(), user.get(), checkInDate, checkOutDate);
     if (bookingRequest.isPayment()) {
       int rewardPoints = (int) br.getTotalPrice();
+
+      StringBuilder k = new StringBuilder();
+      for (AmenityResponse amenity : br.getAmenitiesResponse()) {
+        k.append(amenity.getDescription() + " : " + amenity.getCount() + " * " + amenity.getPrice() + ",");
+      }
+      String amenityResponse = String.valueOf(k);
       bookingRepository.save(
           new BookingJournal(
               UUID.randomUUID(),
@@ -68,17 +75,29 @@ public class BookingService {
               bookingRequest.getHotelId(),
               room.get().getRoomType(),
               bookingRequest.getNumberOfRooms(),
+              br.getTotalNights(),
               bookingRequest.getNumberOfGuestsPerRoom(),
               checkInDate,
               checkOutDate,
-              br.getTotalPrice(),
+              br.getPerRoomPerNightPrice(),
+              br.getTotalRoomPrice(),
+              amenityResponse,
+              br.getTotalAmenityPrice(),
+              br.getTaxableAmount(),
+              br.getTax(),
+              br.getSurchargeType(),
+              br.getSurcharge(),
+              br.getLoyaltyType(),
+              br.getLoyaltyDiscount(),
+                  br.getTotalPrice(),
               rewardPoints,
               bookingRequest.getEmail(),
               bookingRequest.getPhone(),
               LocalDateTime.now(),
               bookingRequest.getRoomId(),
               br.getHotelName(),
-              br.getHotelImage()));
+              br.getHotelImage()
+                  ));
 
       // update reward and tier after booking
       user.get().setRewardPoints(user.get().getRewardPoints() + rewardPoints);
@@ -107,7 +126,13 @@ public class BookingService {
     user.setRewardPoints(user.getRewardPoints() - bookingDetails.getRewardPoints());
 
     bookingRequest.setPayment(false);
+
     BookingResponse br = createBooking(bookingRequest, username);
+    StringBuilder k = new StringBuilder();
+    for (AmenityResponse amenity : br.getAmenitiesResponse()) {
+      k.append(amenity.getDescription() + " : " + amenity.getCount() + " * " + amenity.getPrice() + ",");
+    }
+    String amenityResponse = String.valueOf(k);
 
     bookingDetails.setRoomType(br.getRoomType());
     bookingDetails.setNumberOfRooms(br.getNumberOfRooms());
@@ -123,6 +148,15 @@ public class BookingService {
     bookingDetails.setHotelName(br.getHotelName());
     bookingDetails.setHotelId(bookingRequest.getHotelId());
     bookingDetails.setHotelImage(br.getHotelImage());
+    bookingDetails.setAmenitiesResponse(amenityResponse);
+    bookingDetails.setTotalAmenityPrice(br.getTotalAmenityPrice());
+    bookingDetails.setPerRoomPerNightPrice(br.getPerRoomPerNightPrice());
+    bookingDetails.setLoyaltyDiscount(br.getLoyaltyDiscount());
+    bookingDetails.setLoyaltyType(br.getLoyaltyType());
+    bookingDetails.setSurcharge(br.getSurcharge());
+    bookingDetails.setSurchargeType(br.getSurchargeType());
+    bookingDetails.setTax(br.getTax());
+    bookingDetails.setTaxableAmount(br.getTaxableAmount());
     bookingRepository.save(bookingDetails);
 
     user.setRewardPoints(user.getRewardPoints() + bookingDetails.getRewardPoints());

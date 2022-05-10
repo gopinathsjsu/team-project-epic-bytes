@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 import "../styles/UserInfoDashboard.css";
 import Hero from "../components/hero/Hero";
 import Navbar from "../components/navbar/Navbar";
+import Footer from "../components/Footer/Footer";
+
 
 export const UserInfoDashboard = (props) => {
   // We'll use the history to navigate the user
@@ -34,6 +36,7 @@ export const UserInfoDashboard = (props) => {
     <>
       <Navbar history={history} />
       <Hero />
+      <Footer />
     </>
   );
 };
