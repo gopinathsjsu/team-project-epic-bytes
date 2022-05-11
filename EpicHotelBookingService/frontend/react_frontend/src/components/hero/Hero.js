@@ -16,12 +16,14 @@ import { useHistory } from "react-router-dom";
 
   
 const Hero = ({ type }) => {
-    const [destination, setDestination] = useState("");
+  const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate()+1);
   const [date, setDate] = useState([
     {
       startDate: new Date(),
-      endDate: new Date(),
+      endDate: tomorrow,
       key: "selection",
     },
   ]);
@@ -42,7 +44,6 @@ const Hero = ({ type }) => {
   const handleSearch = () => {
     history.push({
         pathname: '/hotels',
-        search: '?update=true',  // query string
         state: {  // location state
             destination, date, options
         },

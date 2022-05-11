@@ -2,7 +2,7 @@ import "./HotelItem.css";
 import { useHistory } from "react-router-dom";
 
 
-const HotelItem = ({ hotel }) => {
+const HotelItem = ({ hotel, date, options}) => {
   const history = useHistory();
   const hotelId = hotel.id
 
@@ -10,7 +10,9 @@ const HotelItem = ({ hotel }) => {
     history.push({
         pathname: '/rooms',
         state: {  // location state
-          hotelId
+          hotelId,
+          date,
+          options
         },
     });
   };
@@ -20,7 +22,7 @@ const HotelItem = ({ hotel }) => {
     <div className="searchItem">
       <img
         src = {hotel.imageURL}
-        alt="hotel image"
+        alt="hotel"
         className="siImg"
       />
       <div className="siDesc">
