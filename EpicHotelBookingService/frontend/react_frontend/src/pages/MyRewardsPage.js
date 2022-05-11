@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Navbar from "../components/navbar/Navbar";
 import { SecureAPIInstance } from "../api/axiosInstance";
+// import UserProfileView from "../components/UserCard/UserProfileView";
+import Footer from "../components/Footer/Footer";
 
 export const MyRewardsPage = () => {
   const history = useHistory();
@@ -34,7 +36,10 @@ export const MyRewardsPage = () => {
               "Loading..."
             ) : (
               <>
+                {/* <UserCard user = {user} /> */}
+                {/* <UserProfileView /> */}
                 <div><pre>{JSON.stringify(user, null, 2) }</pre></div>
+                <Footer />
               </>
             )}
           </div>

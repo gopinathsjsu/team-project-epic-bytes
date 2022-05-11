@@ -125,6 +125,9 @@ const HotelListPage = () => {
                 {hotels.map((hotel) => (
                   <HotelItem hotel={hotel} key={hotel.id} date={date} options={options}/>
                 ))}
+                {
+                  hotels.length === 0 ? "We don't have hotels at this location yet. Let's try something else." : null
+                }
               </>
             )}
           </div>
