@@ -9,6 +9,7 @@ import { EmployeeDashboard } from "./pages/EmployeeDashboard";
 import { MyBookingsPage } from "./pages/MyBookingsPage";
 import HotelListPage from "./pages/HotelListPage";
 import RoomListPage from "./pages/RoomListPage";
+import CheckOutPage from "./pages/CheckOutPage";
 
 export const Routes = () => {
   return (
@@ -37,6 +38,9 @@ export const Routes = () => {
         </Route>
         <Route path="/rooms">
           <RoomListPage />
+        </Route>
+        <Route path="/checkout">
+          <CheckOutPage />
         </Route>
       </Switch>
     </Router>

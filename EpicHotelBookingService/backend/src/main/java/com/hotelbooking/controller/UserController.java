@@ -15,14 +15,13 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Optional;
 
 import static com.hotelbooking.constants.Constants.LOGIN_ENDPOINT;
 import static com.hotelbooking.constants.Constants.SIGNUP_ENDPOINT;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 40000)
+@CrossOrigin(origins = {"http://localhost:3000", "http://team-project-epic-bytes-202.s3-website-us-west-2.amazonaws.com"}, maxAge = 40000)
 public class UserController {
   private final JwtUtil jwtUtil;
 
