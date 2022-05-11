@@ -1,14 +1,28 @@
 import "./roomItem.css";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
+const RoomItem = ({ hotelId, room , imageUrl, date, options}) => {
 
+  const history = useHistory();
 
-const RoomItem = ({ room , imageUrl}) => {
+  const handleSelect = () => {
+    history.push({
+        pathname: '/checkout',
+        state: { 
+          hotelId, // location state
+          room,
+          imageUrl,
+          date,
+          options
+        },
+    });
+  };
+
   return (
     <div className="searchItem">
       <img
         src = {imageUrl}
-        alt="room image"
+        alt="room"
         className="siImg"
       />
       <div className="siDesc">
@@ -29,7 +43,7 @@ const RoomItem = ({ room , imageUrl}) => {
           <span className="siPrice">${room.perNightPrice}/night</span>
           <span className="siTaxOp">Excludes taxes and fees</span>
   
-          <button className="siCheckButton">Select</button>
+          <button className="siCheckButton" onClick={handleSelect}>Select</button>
         </div>
       </div>
     </div>
