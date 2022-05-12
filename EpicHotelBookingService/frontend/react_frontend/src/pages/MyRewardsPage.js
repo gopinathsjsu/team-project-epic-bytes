@@ -39,12 +39,13 @@ export const MyRewardsPage = () => {
                 {/* <UserCard user = {user} /> */}
                 {/* <UserProfileView /> */}
                 <div><pre>{JSON.stringify(user, null, 2) }</pre></div>
-                <Footer />
+                
               </>
             )}
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

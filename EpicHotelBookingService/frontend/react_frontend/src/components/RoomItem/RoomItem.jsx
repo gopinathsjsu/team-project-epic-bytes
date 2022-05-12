@@ -1,16 +1,14 @@
 import "./roomItem.css";
 import { useHistory } from "react-router-dom";
 
-const RoomItem = ({ hotelId, room , imageUrl, date, options}) => {
-
+const RoomItem = ({ room , imageUrl, hotelId, date, options}) => {
   const history = useHistory();
-
   const handleSelect = () => {
     history.push({
         pathname: '/checkout',
-        state: { 
-          hotelId, // location state
+        state: {  // location state
           room,
+          hotelId,
           imageUrl,
           date,
           options
@@ -18,11 +16,12 @@ const RoomItem = ({ hotelId, room , imageUrl, date, options}) => {
     });
   };
 
+
   return (
     <div className="searchItem">
       <img
         src = {imageUrl}
-        alt="room"
+        alt="room image"
         className="siImg"
       />
       <div className="siDesc">

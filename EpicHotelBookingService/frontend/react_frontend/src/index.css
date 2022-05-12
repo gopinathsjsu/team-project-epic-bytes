@@ -6,8 +6,8 @@ body {
 }
 
 :root {
-  --primary-dark: #5651e5;
-  --primary-light: #709dff;
+  --primary-dark: #444054;
+  --primary-light: #444054;
 }
 
 ul {
@@ -102,7 +102,8 @@ input {
 button {
   background-image: linear-gradient(45deg,var(--primary-dark) 0%, var(--primary-light) 100%);
   border: 1px solid var(--primary-dark);
-  color: #fff;
+  /* color: #444054; */
+  color: white;
   padding: .7rem 1.5rem;
   border-radius: 8px;
   cursor: pointer;
@@ -193,7 +194,7 @@ button {
 
 .listSearch>button{
   padding: 10px;
-  background-color: #0071c2;
+  background-color: #444054;
   color: white;
   border: none;
   width: 100%;
@@ -208,5 +209,5 @@ button {
 
 .pageHeading {
   margin-bottom: 16px;
-  color: #0071c2;
+  color: #444054;
 }

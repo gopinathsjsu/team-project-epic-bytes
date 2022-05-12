@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
-import RoomItem from "../components/RoomItem/RoomItem";
+import CheckOutItem from "../components/CheckOutItem/CheckOutItem";
 import Navbar from "../components/navbar/Navbar";
 import { ApiInstance } from "../api/axiosInstance";
+import Footer from "../components/Footer/Footer";
 
 
 const CheckOutPage = () => {
@@ -42,60 +43,21 @@ const CheckOutPage = () => {
       <Navbar history={history} />
       <div className="listContainer">
         <div className="listWrapper">
-          <div className="listSearch">
-            <h1 className="lsTitle">Search</h1>
-            <div className="lsItem">
-            </div>
-            <div className="lsItem">
-              <label>Check-in Date</label>
-              <span onClick={() => setOpenDate(!openDate)}>
-                {`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(date[0].endDate, "MM/dd/yyyy")}`}
-              </span>
-              {openDate && (
-                <DateRange
-                  onChange={(item) => setDate([item.selection])}
-                  minDate={new Date()}
-                  ranges={date}
-                />
-              )}
-            </div>
-            <div className="lsItem">
-              <label>Options</label>
-              <div className="lsOptions">
-                <div className="lsOptionItem">
-                  <span className="lsOptionText">Adult</span>
-                  <input
-                    min={1}
-                    className="lsOptionInput"
-                    placeholder={options.adult}
-                  />
-                </div>
-                <div className="lsOptionItem">
-                  <span className="lsOptionText">Room</span>
-                  <input
-                    min={1}
-                    className="lsOptionInput"
-                    placeholder={options.room}
-                  />
-                </div>
-              </div>
-            </div>
-            <button>Search</button>
-          </div>
           <div className="listResult">
             {isLoading ? (
               "Loading..."
             ) : (
               <>
-                {/* {rooms.map((room, index) => (
-                  <RoomItem room={room} key={room.id} imageUrl={photos[index]} date={date} options={options} />
-                ))} */}
+                  <CheckOutItem room={room} imageUrl={imageUrl} date={date} options={options} hotelId ={hotelId} amenities={amenities}/>
               </>
             )}
+           
           </div>
         </div>
       </div>
+      <Footer />
     </div>
+
   );
 };
 
