@@ -31,7 +31,7 @@ export default function HotelCard(props) {
 
 //added now
   const onHotelUpdate = () => {
-     alert("call api here to update  the hotel from db");
+     alert("Hotel successfully updated");
        SecureAPIInstance.put("/hotels/"+hotelId, {hotelName,hotelDescription, location,hotelAddress, hotelEmail, hotelPhone,hotelBasePrice,})
          .then((response) => [updateHotel(response.id)])
          .catch((err) => {});
@@ -40,7 +40,7 @@ export default function HotelCard(props) {
 
 
   const onHotelDelete = () => {
-    alert("call api here to remove  the hotel from db");
+    alert("Hotel removed successfully");
     SecureAPIInstance.delete("/hotels/"+hotelId, {})
       .then((response) => [removeHotel(response.id)])
       .catch((err) => {});

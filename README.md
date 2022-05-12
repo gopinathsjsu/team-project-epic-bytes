@@ -10,12 +10,12 @@
 2. Frontend: React JS 
 3. Database: MySQL
 4. REST API: Postman (to test developed APIs)
-5. Deployment: AWS Elastic Beanstalk, AWS RDS (For DB)
+5. Deployment: AWS Elastic Beanstalk(Backend), AWS RDS (For DB)
 
 ## Areas of Contributions
 1. Backend: 
-2. Frontend:
-3. Deployment:
+2. Frontend: 
+3. Deployment : 
 4. UI Wireframes:
 5. Diagrams:
 6. Scrum Master:
@@ -38,7 +38,7 @@ Every Monday, Wednesday and Friday.
 
 ### User Features
 ,,,
-1. Sign-up / Sign-in
+1. Sign-up / Sign-in (JWT based authentication)
 2. Search hotel based on location
 3. Create bookings (filters: location, number of guests, number of rooms)
 4. Select amenities for each room

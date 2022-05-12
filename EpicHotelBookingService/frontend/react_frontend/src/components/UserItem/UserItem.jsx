@@ -5,44 +5,43 @@ import './userItem.css';
 const UserItem = ()  => {
 
   return (
-    // <div>
-    // <div className='reward'>
-    //     <div className='card_class'>
-    //     <h2>Thank you</h2>
-    //     <span>
-    //          rewards
-    //     </span>
-    //     </div>
-    //     {/* <button onClick = {()=>{balance()}} ></button> */}
         <div className='home__section'>
             <div className='card'>
-                <img src= "https://brandslogos.com/wp-content/uploads/images/large/uber-logo-2.png" alt="" />
+                <img src= "https://www.marriott.com/content/dam/marriott-homepage/destinations/chijw-attraction-beach-9561-hor-clsc.jpg.transform/mcom-hp-transform-190x285/image.jpg" alt="" />
                 <div className="card__info">
-                    <h2>"UBER"</h2>
-                    <h4>"Claim Reward here"</h4>
-                    <h3>5000</h3>
+                    <h2>CHICAGO</h2>
+                    <h4>"View Offer"</h4>
+                    <h3>The Second City</h3>
                 </div>
             </div>
             <div className='card'>
-                <img src= "https://brandslogos.com/wp-content/uploads/images/large/uber-logo-2.png" alt="" />
+                <img src= "https://www.marriott.com/content/dam/marriott-homepage/destinations/emea/png-images/emea_destinations_Paris.png.transform/mcom-hp-transform-190x285/image.png" alt="" />
                 <div className="card__info">
-                    <h2>"UBER"</h2>
-                    <h4>"Claim Reward here"</h4>
-                    <h3>5000</h3>
+                    <h2>"PARIS"</h2>
+                    <h4>"View Offer"</h4>
+                    <h3>City of Light</h3>
                 </div>
             </div>
             <div className='card'>
-                <img src= "https://brandslogos.com/wp-content/uploads/images/large/uber-logo-2.png" alt="" />
+                <img src= "https://www.marriott.com/content/dam/marriott-homepage/destinations/us-png/ritzNYCCPwn.823893-2x3.png.transform/mcom-hp-transform-190x285/image.png" alt="" />
                 <div className="card__info">
-                    <h2>"UBER"</h2>
-                    <h4>"Claim Reward here"</h4>
-                    <h3>5000</h3>
+                    <h2>NEW YORK</h2>
+                    <h4>"View Offer"</h4>
+                    <h3>The Big Apple</h3>
+                </div>
+            </div>
+            <div className='card'>
+                <img src= "https://www.marriott.com/content/dam/marriott-homepage/destinations/us-png/sandiego-2x3.png.transform/mcom-hp-transform-190x285/image.png" alt="" />
+                <div className="card__info">
+                    <h2>SAN DIEGO</h2>
+                    <h4>"View Offer"</h4>
+                    <h3>America's Finest City</h3>
                 </div>
             </div>
         </div>
-    // </div>
+    //  </div>
    
-    // </div> */}
+    //  </div> 
   )
 }
 

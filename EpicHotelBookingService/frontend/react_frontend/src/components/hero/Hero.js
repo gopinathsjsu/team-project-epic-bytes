@@ -54,7 +54,7 @@ const Hero = ({ type }) => {
         <div className='hero'>
 
             <div className="content">
-                <h1>First Class Travel</h1>
+                <h1>Where can we take you?</h1>
                 <h2>Top 1% Locations Worldwide</h2>
                 <div className="headerSearch">
                 <div className="headerSearchItem">

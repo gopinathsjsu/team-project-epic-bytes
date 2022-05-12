@@ -15,9 +15,5 @@ public class HotelBookingApplication {
     SpringApplication.run(HotelBookingApplication.class, args);
   }
 
-  @GetMapping("/health")
-  public String healthCheck() {
-    log.info("Health check being done");
-    return "Health is OK";
-  }
+
 }

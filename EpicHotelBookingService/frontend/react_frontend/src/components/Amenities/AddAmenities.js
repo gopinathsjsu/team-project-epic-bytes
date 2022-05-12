@@ -23,7 +23,7 @@ export default function AddAmenities(props) {
 
   return (
     <Dialog fullWidth maxWidth="md" onClose={onClose} open={open}>
-      <DialogTitle>Add Aminity</DialogTitle>
+      <DialogTitle>Add Amenity</DialogTitle>
       <DialogContent>
         <Typography gutterBottom variant="h5" component="div">
           {props.title}

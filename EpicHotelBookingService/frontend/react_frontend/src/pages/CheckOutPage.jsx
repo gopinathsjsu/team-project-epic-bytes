@@ -222,7 +222,7 @@ const CheckOutPage = () => {
                   </Accordion>
                   <br />
 
-                  <SummaryOfCharges disabled={disableSummary} isOpen={expandedSummary} />
+                  <SummaryOfCharges disabled={disableSummary} isOpen={expandedSummary} {...summary}/>
                   <br />
 
                   <div className="siDesc">

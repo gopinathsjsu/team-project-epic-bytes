@@ -5,7 +5,6 @@ import { AiOutlineClose } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { getPayloadFromToken } from "../../util/useQueryParams";
 import { AppContext } from "../../store/appContext";
-
 import "./NavbarStyles.css";
 
 function Navbar(props) {

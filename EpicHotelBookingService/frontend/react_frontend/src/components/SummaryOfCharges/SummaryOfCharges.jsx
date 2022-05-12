@@ -13,13 +13,62 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+// "id": 80,
+//         "bookingId": "d3e846ca-5866-480c-b257-ee2d56cc9ce0",
+//         "username": "teethi123",
+//         "hotelId": 8,
+//         "roomType": "Family Room",
+//         "numberOfRooms": 2,
+//         "numberOfGuestsPerRoom": 4,
+//         "checkInDate": "2022-05-27",
+//         "checkOutDate": "2022-05-31",
+//         "totalNights": 4,
+//         "perRoomPerNightPrice": 400.0,
+//         "totalRoomPrice": 800.0,
+//         "amenitiesResponse": "All meals included (Breakfast, Lunch, Dinner : 1 * 200.0,Access to fitness room : 2 * 50.0,",
+//         "totalAmenityPrice": 300.0,
+//         "taxableAmount": 4400.0,
+//         "tax": 440.0,
+//         "surchargeType": "Surcharge",
+//         "surcharge": 0.0,
+//         "loyaltyType": "PLATINUM - 20.0%",
+//         "loyaltyDiscount": 880.0,
+//         "price": 3960.0,
+//         "rewardPoints": 3960,
+//         "email": "teethi123@gmail.com",
+//         "phone": "1234567890",
+//         "localDateTime": "2022-05-09T00:37:58",
+//         "roomId": 3,
+//         "hotelName": "JW Marriott Mumbai Sahar",
+//         "hotelImage": "https://www.baglionihotels.com/wp-content/themes/baglioni-hotels-new/images/schema/baglioni-hotel-london.jpg"
+//     },
 
-
-export default function ControlledAccordions({ disabled, isOpen }) {
+export default function ControlledAccordions(props) {
+ const {
+    disabled,
+    isOpen,
+    totalRoomPrice,  
+    perRoomPerNightPrice, 
+    numberOfRooms,
+    totalNights,
+    totalAmenityPrice,
+    taxableAmount,
+    tax,
+    surchargeType,
+    surcharge,
+    loyaltyType,
+    loyaltyDiscount,
+    totalPrice,
+    price,
+    amenitiesResponse
+  } = props;
+  // const  i = Number({totalAmenityPrice}) * Number({totalNights});
+  console.log('props', props);
   console.log('isOpen', isOpen);
   const [expanded, setExpanded] = React.useState(isOpen ? "panel3" : false);
 
   useEffect(() => {
+    console.log('isOpen inside useeffect', isOpen);
     setExpanded(isOpen ? "panel3" : false);
   }, [isOpen]);
 
@@ -52,31 +101,31 @@ export default function ControlledAccordions({ disabled, isOpen }) {
               <TableBody>
                   <TableRow style={{height: 5}}>
                     <TableCell component="th" scope="row">Total Room price = Room Price * Room(s) * Night(s)</TableCell>
-                    <TableCell align="right">400 * 2 * 3 = 2400</TableCell>
+                    <TableCell align="right">{perRoomPerNightPrice} * {numberOfRooms} * {totalNights} = {totalRoomPrice * totalNights}</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell component="th" scope="row">Add-on charges * Night(s) </TableCell>
-                    <TableCell align="right">160 * 3 = 480</TableCell>
+                    <TableCell component="th" scope="row">Add-on charges * Night(s)</TableCell>
+                    <TableCell align="right">{totalAmenityPrice} * {totalNights} = {totalAmenityPrice * totalNights} </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell component="th" scope="row">Taxable Amount: </TableCell>
-                    <TableCell align="right">2880</TableCell>
+                    <TableCell align="right">{taxableAmount}</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell component="th" scope="row">Tax (10%): </TableCell>
-                    <TableCell align="right">+ 288</TableCell>
+                    <TableCell align="right">+ {tax}</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell component="th" scope="row">Surcharge: </TableCell>
-                    <TableCell align="right">+ 0</TableCell>
+                    <TableCell component="th" scope="row">{surchargeType}: </TableCell>
+                    <TableCell align="right">+ {surcharge}</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell component="th" scope="row">Member discount: PLATINUM - 20.0%: </TableCell>
-                    <TableCell align="right">- 576</TableCell>
+                    <TableCell component="th" scope="row">Member discount: {loyaltyType}: </TableCell>
+                    <TableCell align="right">- {loyaltyDiscount}</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell component="th" scope="row">TOTAL STAY </TableCell>
-                    <TableCell align="right">2592 USD</TableCell>
+                    <TableCell align="right">{totalPrice || price} USD</TableCell>
                   </TableRow>
               </TableBody>
             </Table>
