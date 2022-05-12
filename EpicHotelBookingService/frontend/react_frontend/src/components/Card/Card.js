@@ -7,6 +7,9 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import { SecureAPIInstance } from "../../api/axiosInstance";
+import Notification  from "../../components/Notification/Notification"
+    import ConfirmDialog  from "../../components/ConfirmDialog/ConfirmDialog"
+
 import "./Card.css";
 
 export default function HotelCard(props) {
@@ -22,6 +25,9 @@ export default function HotelCard(props) {
   const [hotelEmail, setHotelEmail] = useState(props.email);
   const [hotelPhone, setHotelPhone] = useState(props.phone);
   const [hotelBasePrice, setHotelBasePrice] = useState(props.price);
+  const [notify , setNotify] = useState({isOpen:false, message:'',type:''})
+  const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, title: '', subTitle: '' })
+
   console.log(props)
 
 
@@ -33,19 +39,36 @@ export default function HotelCard(props) {
 
 //added now
   const onHotelUpdate = () => {
-     alert("call api here to update  the hotel from db");
+  setConfirmDialog({
+                ...confirmDialog,
+                isOpen: false
+            })
        SecureAPIInstance.put("/hotels/"+hotelId, {hotelName,hotelDescription, location,hotelAddress, hotelEmail, hotelPhone,hotelBasePrice,})
          .then((response) => [updateHotel(response.id)])
          .catch((err) => {});
+
+          setNotify({
+             isOpen:true,
+             message:'updated Successfully',
+             type:'success'
+             })
 
   };
 
 
   const onHotelDelete = () => {
-    alert("call api here to remove  the hotel from db");
+   setConfirmDialog({
+              ...confirmDialog,
+              isOpen: false
+          })
     SecureAPIInstance.delete("/hotels/"+hotelId, {})
       .then((response) => [removeHotel(response.id)])
       .catch((err) => {});
+        setNotify({
+                  isOpen: true,
+                  message: 'Deleted Successfully',
+                  type: 'error'
+              })
 
   };
 
@@ -88,37 +111,7 @@ export default function HotelCard(props) {
             }}
           />
         </Typography>
-         {/*
-        <Typography
-          className="typography-spacing"
-          variant="body2"
-          color="text.secondary"
-        >
-          <TextField
-            id="outlined-rooms"
-            label="No.of Rooms"
-            value={roomsCount}
-            onChange={(e) => {
-              setRoomsCount(e.target.value);
-            }}
-          />
-        </Typography>
-        <Typography
-          className="typography-spacing"
-          variant="body2"
-          color="text.secondary"
-        >
-          <TextField
-            id="outlined-roomtype"
-            label="Type of Rooms"
-            value={roomtype}
-            onChange={(e) => {
-              setRoomtype(e.target.value);
-            }}
-          />
-        </Typography>
 
-      */}
 
      <Typography
               className="typography-spacing"
@@ -195,14 +188,38 @@ export default function HotelCard(props) {
 
       </CardContent>
       <CardActions>
-        <Button variant="contained" size="small" onClick={onHotelUpdate}>
+        <Button variant="contained" size="small" onClick={() => {   setConfirmDialog({
+                                                                                                                     isOpen: true,
+                                                                                                                     title: 'Are you sure to update this record?',
+                                                                                                                     subTitle: "You can't undo this operation",
+                                                                                                                 onConfirm: () => {onHotelUpdate()}
+                                                                                                                 })
+                                                                                                             }}>
           Update
         </Button>
 
-        <Button variant="contained" size="small" onClick={onHotelDelete}>
+        <Button variant="contained" size="small"   onClick={() => {
+                                                                                                 setConfirmDialog({
+                                                                                                     isOpen: true,
+                                                                                                     title: 'Are you sure to delete this record?',
+                                                                                                     subTitle: "You can't undo this operation",
+                                                                                                     onConfirm: () => { onHotelDelete() }
+                                                                                                 })
+                                                                                             }}>
           Delete
         </Button>
       </CardActions>
+
+          <Notification
+                        notify={notify}
+                        setNotify={setNotify}
+                    />
+                    <ConfirmDialog
+                        confirmDialog={confirmDialog}
+                        setConfirmDialog={setConfirmDialog}
+                    />
     </Card>
+
+
   );
 }

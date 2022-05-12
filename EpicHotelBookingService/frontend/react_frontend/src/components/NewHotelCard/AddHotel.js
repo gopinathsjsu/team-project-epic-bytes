@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import "./AddHotel.css";
 import { ApiInstance } from "../../api/axiosInstance";
+import Notification  from "../../components/Notification/Notification"
 
 export default function AddNewHotelCard(props) {
   const { onClose, open } = props;
@@ -19,10 +20,16 @@ export default function AddNewHotelCard(props) {
   const [hotelPhone, setphone] = useState("");
   const [hotelBasePrice, setprice]  = useState("");
   const [description, setdesc] = useState("");
+  const [notify , setNotify] = useState({isOpen:false, message:'',type:''})
 
   const onHotelAdd = () => {
     //call api here
     ApiInstance.post("hotels", { hotelName,description, location,hotelAddress, hotelEmail, hotelPhone,hotelBasePrice,})
+    setNotify({
+    isOpen:true,
+    message:'Submitted Successfully',
+    type:'success'
+    })
   };
 
   return (
@@ -152,6 +159,14 @@ export default function AddNewHotelCard(props) {
           Cancel
         </Button>
       </DialogActions>
+
+         <Notification
+          notify = {notify }
+          setNotify = {setNotify}
+          />
     </Dialog>
+
+
+
   );
 }
