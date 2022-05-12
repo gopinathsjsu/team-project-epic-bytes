@@ -32,16 +32,15 @@ export const MyRewardsPage = () => {
         <div className="listWrapper">
           <div className="listResult">
           <h2 className="pageHeading">My Account</h2>
-            {isLoading ? (
-              "Loading..."
-            ) : (
-              <>
-                {/* <UserCard user = {user} /> */}
-                {/* <UserProfileView /> */}
-                <div><pre>{JSON.stringify(user, null, 2) }</pre></div>
-                <Footer />
-              </>
-            )}
+          <div className="siDesc">
+          </div>
+          <h1 className="siTitle">Username: {user.username}</h1>
+          <h1 className="siTitle">Firstname: {user.firstName}</h1>
+          <h1 className="siTitle">Lastname: {user.lastName}</h1>
+          <h1 className="siTitle">Phone: {user.phone}</h1>
+          <h1 className="siTitle">Email: {user.email}</h1>
+          <h1 className="siTitle">RewardPoints: {user.rewardPoints}</h1>
+          <h1 className="siTitle">Tier: {user.tier}</h1>
           </div>
         </div>
       </div>
