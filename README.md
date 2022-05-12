@@ -2,8 +2,8 @@
 ## Team Members 
 1.  Kanupriya Sanjay Agrawal (016099057) 
 2.  Kusuma Padma Kavya Bandi (016021785)
-3.  Nikhil Konduru ()
-4.  Rishab Reddy Karakala ()
+3.  Nikhil Konduru (015998957)
+4.  Rishab Reddy Karakala (016011749)
     
 ## Technology Stack
 1. Backend: SpringBoot Java MVC.
