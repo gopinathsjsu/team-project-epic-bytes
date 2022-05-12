@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import "./AddAmenities.css";
-import { ApiInstance } from "../../api/axiosInstance";
+import { ApiInstance, SecureAPIInstance } from "../../api/axiosInstance";
 
 export default function AddAmenities(props) {
   const { onClose, open } = props;
@@ -18,7 +18,7 @@ export default function AddAmenities(props) {
 
   const onAddAmenities = () => {
     //call api here
-    ApiInstance.post("amenities", {name,description,price})
+    SecureAPIInstance.post("amenities", {name,description,price})
   };
 
   return (
