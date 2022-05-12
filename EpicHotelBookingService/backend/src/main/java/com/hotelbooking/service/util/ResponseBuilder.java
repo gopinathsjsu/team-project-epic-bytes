@@ -79,15 +79,17 @@ public class ResponseBuilder {
     for (Map.Entry<String, Integer> entry : amenitiesRequest.entrySet()) {
       String key = entry.getKey();
       Integer value = entry.getValue();
-      Optional<Amenity> amenity = amenityService.getAmenityById(key);
-      amenity.orElseThrow(() -> new RuntimeException("Amenity not found"));
-      amenityPrice = amenity.get().getPrice();
-      AmenityResponse am = new AmenityResponse();
-      am.setDescription(amenity.get().getDescription());
-      am.setCount(value);
-      am.setPrice(amenityPrice);
-      amenitiesResponse.add(am);
-      amenitiesTotalPrice += amenityPrice * value;
+      if (value > 0) {
+        Optional<Amenity> amenity = amenityService.getAmenityById(key);
+        amenity.orElseThrow(() -> new RuntimeException("Amenity not found"));
+        amenityPrice = amenity.get().getPrice();
+        AmenityResponse am = new AmenityResponse();
+        am.setDescription(amenity.get().getDescription());
+        am.setCount(value);
+        am.setPrice(amenityPrice);
+        amenitiesResponse.add(am);
+        amenitiesTotalPrice += amenityPrice * value;
+      }
     }
 
     bookingResponse.setTotalAmenityPrice(amenitiesTotalPrice);
@@ -153,6 +155,7 @@ public class ResponseBuilder {
     Hotel hotel = hotelService.getHotelById(bookingRequest.getHotelId()).get();
     bookingResponse.setHotelName(hotel.getHotelName());
     bookingResponse.setHotelImage(hotel.getImageURL());
+    bookingResponse.setHotelAddress(hotel.getHotelAddress());
 
     return bookingResponse;
   }

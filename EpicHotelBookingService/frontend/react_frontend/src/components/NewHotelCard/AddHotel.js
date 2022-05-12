@@ -19,10 +19,11 @@ export default function AddNewHotelCard(props) {
   const [hotelPhone, setphone] = useState("");
   const [hotelBasePrice, setprice]  = useState("");
   const [description, setdesc] = useState("");
+  const [imageURL, setImageURL] = useState("");
 
   const onHotelAdd = () => {
     //call api here
-    ApiInstance.post("hotels", { hotelName,description, location,hotelAddress, hotelEmail, hotelPhone,hotelBasePrice,})
+    ApiInstance.post("hotels", { hotelName,description, location,hotelAddress, hotelEmail, hotelPhone,hotelBasePrice, imageURL})
   };
 
   return (
@@ -139,6 +140,22 @@ export default function AddNewHotelCard(props) {
             value={hotelBasePrice}
             onChange={(e) => {
               setprice(e.target.value);
+            }}
+          />
+        </Typography>
+
+        <Typography
+          className="typography-spacing-add"
+          variant="body2"
+          color="text.secondary"
+        >
+          <TextField
+            fullWidth
+            id="outlined-roomtype"
+            label="imageURL"
+            value={imageURL}
+            onChange={(e) => {
+              setImageURL(e.target.value);
             }}
           />
         </Typography>

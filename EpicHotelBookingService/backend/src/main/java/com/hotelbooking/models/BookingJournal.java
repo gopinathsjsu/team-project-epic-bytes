@@ -23,9 +23,11 @@ public class BookingJournal {
   private UUID bookingId;
   @Column private String username;
 
-  public BookingJournal(UUID bookingId, String username, Integer hotelId, String roomType, int numberOfRooms, long totalNights, int numberOfGuestsPerRoom, LocalDate checkInDate, LocalDate checkOutDate, double perRoomPerNightPrice, double totalRoomPrice, String amenitiesResponse, double totalAmenityPrice, double taxableAmount, double tax, String surchargeType, double surcharge, String loyaltyType, double loyaltyDiscount, double price, int rewardPoints, String email, String phone, LocalDateTime localDateTime, Integer roomId, String hotelName, String hotelImage) {
+  public BookingJournal(UUID bookingId, String username, String customerName, String hotelAddress, Integer hotelId, String roomType, int numberOfRooms, long totalNights, int numberOfGuestsPerRoom, LocalDate checkInDate, LocalDate checkOutDate, double perRoomPerNightPrice, double totalRoomPrice, String amenitiesResponse, double totalAmenityPrice, double taxableAmount, double tax, String surchargeType, double surcharge, String loyaltyType, double loyaltyDiscount, double price, int rewardPoints, String email, String phone, LocalDateTime localDateTime, Integer roomId, String hotelName, String hotelImage) {
     this.bookingId = bookingId;
     this.username = username;
+    this.customerName = customerName;
+    this.hotelAddress = hotelAddress;
     this.hotelId = hotelId;
     this.roomType = roomType;
     this.numberOfRooms = numberOfRooms;
@@ -52,7 +54,8 @@ public class BookingJournal {
     this.hotelName = hotelName;
     this.hotelImage = hotelImage;
   }
-
+  @Column private String customerName;
+  @Column private String hotelAddress;
   @Column private Integer hotelId;
   @Column private String roomType;
   @Column private int numberOfRooms;

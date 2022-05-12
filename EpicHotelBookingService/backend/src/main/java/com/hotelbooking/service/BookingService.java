@@ -72,6 +72,8 @@ public class BookingService {
           new BookingJournal(
               UUID.randomUUID(),
               username,
+              bookingRequest.getCustomerName(),
+              br.getHotelAddress(),
               bookingRequest.getHotelId(),
               room.get().getRoomType(),
               bookingRequest.getNumberOfRooms(),
