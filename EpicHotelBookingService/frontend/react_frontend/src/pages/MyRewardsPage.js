@@ -32,6 +32,7 @@ export const MyRewardsPage = () => {
       <div className="listContainerRewards">
         <div className="listWrapperRewards">
           <div className="listResult">
+
           {/* <h2 className="pageHeading">My Account</h2> */}
             {isLoading ? (
               "Loading..."
@@ -94,6 +95,7 @@ export const MyRewardsPage = () => {
                 
               </>
             )}
+
           </div>
         
         </div>
