@@ -58,6 +58,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         .antMatchers(
             LOGIN_ENDPOINT,
             SIGNUP_ENDPOINT,
+            "/health",
             "/amenities/**",
             "/hotels/**",
             "/rooms/**",

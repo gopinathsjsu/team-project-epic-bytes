@@ -12,8 +12,6 @@ import "./Card.css";
 export default function HotelCard(props) {
   const [hotelName, setHotelName] = useState(props.name);
   const [location, setLocation] = useState(props.loc);
-  //const [roomsCount, setRoomsCount] = useState(props.rooms);
-  //const [roomtype, setRoomtype] = useState(props.type);
   const [hotelId, setHotelId] = useState(props.id);
 
 
@@ -33,7 +31,7 @@ export default function HotelCard(props) {
 
 //added now
   const onHotelUpdate = () => {
-     alert("call api here to update  the hotel from db");
+     alert("Hotel successfully updated");
        SecureAPIInstance.put("/hotels/"+hotelId, {hotelName,hotelDescription, location,hotelAddress, hotelEmail, hotelPhone,hotelBasePrice,})
          .then((response) => [updateHotel(response.id)])
          .catch((err) => {});
@@ -42,7 +40,7 @@ export default function HotelCard(props) {
 
 
   const onHotelDelete = () => {
-    alert("call api here to remove  the hotel from db");
+    alert("Hotel removed successfully");
     SecureAPIInstance.delete("/hotels/"+hotelId, {})
       .then((response) => [removeHotel(response.id)])
       .catch((err) => {});
@@ -88,38 +86,6 @@ export default function HotelCard(props) {
             }}
           />
         </Typography>
-         {/*
-        <Typography
-          className="typography-spacing"
-          variant="body2"
-          color="text.secondary"
-        >
-          <TextField
-            id="outlined-rooms"
-            label="No.of Rooms"
-            value={roomsCount}
-            onChange={(e) => {
-              setRoomsCount(e.target.value);
-            }}
-          />
-        </Typography>
-        <Typography
-          className="typography-spacing"
-          variant="body2"
-          color="text.secondary"
-        >
-          <TextField
-            id="outlined-roomtype"
-            label="Type of Rooms"
-            value={roomtype}
-            onChange={(e) => {
-              setRoomtype(e.target.value);
-            }}
-          />
-        </Typography>
-
-      */}
-
      <Typography
               className="typography-spacing"
               variant="body2"

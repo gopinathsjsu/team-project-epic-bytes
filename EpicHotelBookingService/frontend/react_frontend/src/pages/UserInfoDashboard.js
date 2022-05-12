@@ -4,6 +4,7 @@ import "../styles/UserInfoDashboard.css";
 import Hero from "../components/hero/Hero";
 import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/Footer/Footer";
+import UserItem from "../components/UserItem/UserItem";
 
 
 export const UserInfoDashboard = (props) => {
@@ -36,6 +37,7 @@ export const UserInfoDashboard = (props) => {
     <>
       <Navbar history={history} />
       <Hero />
+      <UserItem/>
       <Footer />
     </>
   );
