@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect } from "react";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
@@ -14,19 +15,21 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 
-export default function ControlledAccordions() {
-  const [expanded, setExpanded] = React.useState(false);
+export default function ControlledAccordions({ disabled, isOpen }) {
+  console.log('isOpen', isOpen);
+  const [expanded, setExpanded] = React.useState(isOpen ? "panel3" : false);
+
+  useEffect(() => {
+    setExpanded(isOpen ? "panel3" : false);
+  }, [isOpen]);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
   return (
-    <div>
-      <Accordion
-        expanded={expanded === "panel1"}
-        onChange={handleChange("panel1")}
-      >
+    <>
+      <Accordion expanded={expanded === "panel3"} onChange={handleChange("panel3")} disabled={disabled}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1bh-content"
@@ -78,28 +81,8 @@ export default function ControlledAccordions() {
               </TableBody>
             </Table>
           </TableContainer>
-
         </AccordionDetails>
       </Accordion>
-    </div>
+    </>
   );
 }
-
-
-
-
-
-
-// function createData(name, calories, fat, carbs, protein) {
-//   return { name, calories, fat, carbs, protein };
-// }
-
-// const rows = [
-//   createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-//   createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-//   createData('Eclair', 262, 16.0, 24, 6.0),
-//   createData('Cupcake', 305, 3.7, 67, 4.3),
-//   createData('Gingerbread', 356, 16.0, 49, 3.9),
-// ];
-
-

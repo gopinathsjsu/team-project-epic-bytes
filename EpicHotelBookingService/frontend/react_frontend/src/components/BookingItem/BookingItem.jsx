@@ -103,11 +103,10 @@ const BookingItem = ({ hotelImage, hotelName, bookingId, roomType, rewardPoints,
           </div>
          
         </div>
-        
-        
       </div>
       <SummaryOfCharges />
-
+      <br />
+      <hr />
       <ConfirmDeleteCard open={isOpen && deleteModalOpen} onClose={closeModal} onConfirm={deleteBooking} />
     </>
   );

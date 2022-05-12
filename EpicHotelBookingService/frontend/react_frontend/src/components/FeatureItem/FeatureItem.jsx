@@ -5,7 +5,6 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import RoomServiceIcon from '@mui/icons-material/RoomService';
-import BedroomParentIcon from '@mui/icons-material/BedroomParent';
 
 export default function ControlledAccordions({noOfRooms, amenities}) {
   const [expanded, setExpanded] = React.useState(false);
@@ -16,11 +15,8 @@ export default function ControlledAccordions({noOfRooms, amenities}) {
   };
 
   return (
-    <div>
-      <Accordion
-        expanded={expanded === "panel1"}
-        onChange={handleChange("panel1")}
-      >
+    <>
+      <Accordion expanded={expanded === "panel1"} onChange={handleChange("panel1")}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1bh-content"
@@ -31,28 +27,22 @@ export default function ControlledAccordions({noOfRooms, amenities}) {
           </Typography>
         </AccordionSummary>
         <AccordionDetails>
-        <Typography>
-         
-          {amenities.map((amenity) => (
-                <>
-
-                    <label for="amenity"> {amenity.description} : ${amenity.price}      </label> 
-                    
-                      <select name={amenity.name} id={amenity.name}>
-                        {Array.from(Array(noOfRooms+1), (e, i) => {
-                            return <option value={i}>{i}</option>
-                        })}
-                      </select> 
-                      <br></br><br></br>
-
-                    
-                 </>   
-               
-            )) }
-            <button className="siCheckButton">Submit</button>
-        </Typography>
+          <Typography>
+            {amenities.map((amenity) => (
+              <>
+                <label for="amenity"> {amenity.description} : ${amenity.price}</label> 
+                <select name={amenity.name} id={amenity.name}>
+                  {Array.from(Array(noOfRooms+1), (e, i) => {
+                      return <option value={i}>{i}</option>
+                  })}
+                </select> 
+                <br></br><br></br>
+              </>
+            ))}
+              <button className="siCheckButton">Submit</button>
+          </Typography>
         </AccordionDetails>
       </Accordion>
-    </div>
+    </>
   );
 }

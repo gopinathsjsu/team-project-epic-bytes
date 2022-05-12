@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import Navbar from "../components/navbar/Navbar";
 import BookingItem from "../components/BookingItem/BookingItem";
 import { SecureAPIInstance } from "../api/axiosInstance";
 
 export const MyBookingsPage = (props) => {
   const history = useHistory();
+  const location = useLocation();
+  const [success, setSuccess] = useState(location?.state?.success);
+
   const [bookings, setBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -35,9 +38,15 @@ export const MyBookingsPage = (props) => {
               "Loading..."
             ) : (
               <>
+                {
+                  success ? "Congratulations! Your booking has been confirmed." : null
+                }
                 {bookings.map((booking) => (
                   <BookingItem {...booking} key={booking.id} />
                 ))}
+                {
+                  bookings.length === 0 ? "You don't have any bookings yet. Let's book!" : null
+                }
               </>
             )}
           </div>

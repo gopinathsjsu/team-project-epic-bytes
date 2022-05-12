@@ -115,7 +115,6 @@ const HotelListPage = () => {
                 </div>
               </div>
               <button type="submit">Search</button>
-              siCheckButton
             </form>
           </div>
           <div className="listResult">
