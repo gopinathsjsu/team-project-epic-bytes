@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import "./AddRoom.css";
-import { ApiInstance } from "../../api/axiosInstance";
+import { ApiInstance, SecureAPIInstance} from "../../api/axiosInstance";
 
 
 export default function AddNewRoomCard(props) {
@@ -20,7 +20,7 @@ export default function AddNewRoomCard(props) {
 
   const onRoomAdd = () => {
     //call api here
-    ApiInstance.post("rooms", {roomNumber,roomType,perNightPrice,beds})
+    SecureAPIInstance.post("rooms", {roomNumber,roomType,perNightPrice,beds})
   };
 
   return (

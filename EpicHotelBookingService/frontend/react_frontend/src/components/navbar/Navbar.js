@@ -41,12 +41,20 @@ function Navbar(props) {
         <Link to="/hotels">
           <li className="nav-item">Hotels</li>
         </Link>
-        <Link to="/bookings">
-          <li className="nav-item">My Bookings</li>
-        </Link>
-        <Link to="/rewards">
-          <li className="nav-item">My Rewards</li>
-        </Link>
+        {user?.role !== "ADMIN" ? 
+          <>
+            <Link to="/bookings">
+              <li className="nav-item">My Bookings</li>
+            </Link>
+            <Link to="/rewards">
+              <li className="nav-item">My Rewards</li>
+            </Link>
+          </>
+         : 
+         <Link to="/admin">
+              <li className="nav-item">Admin Dashboard</li>
+            </Link> }
+
       </ul>
       <div className="nav-icons">
         {user?.sub ? (

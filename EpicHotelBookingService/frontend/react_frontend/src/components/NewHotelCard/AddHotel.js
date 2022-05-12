@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import "./AddHotel.css";
-import { ApiInstance } from "../../api/axiosInstance";
+import { ApiInstance, SecureAPIInstance } from "../../api/axiosInstance";
 
 export default function AddNewHotelCard(props) {
   const { onClose, open } = props;
@@ -23,7 +23,10 @@ export default function AddNewHotelCard(props) {
 
   const onHotelAdd = () => {
     //call api here
-    ApiInstance.post("hotels", { hotelName,description, location,hotelAddress, hotelEmail, hotelPhone,hotelBasePrice, imageURL})
+    SecureAPIInstance.post("hotels", { hotelName,description, location,hotelAddress, hotelEmail, hotelPhone,hotelBasePrice, imageURL})
+    .then((response) => {
+      window.location.reload(false);
+    })
   };
 
   return (

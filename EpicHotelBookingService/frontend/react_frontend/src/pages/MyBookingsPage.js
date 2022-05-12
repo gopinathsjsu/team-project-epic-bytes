@@ -43,7 +43,7 @@ export const MyBookingsPage = (props) => {
                   success ? "Congratulations! Your booking has been confirmed." : null
                 }
                 {bookings.map((booking) => (
-                    <BookingItem {...booking} key={booking.id} booking= {booking}/>
+                    <BookingItem {...booking} key={booking.id} booking={booking}/>
                 ))}
                 {
                   bookings.length === 0 ? "You don't have any bookings yet. Let's book!" : null
