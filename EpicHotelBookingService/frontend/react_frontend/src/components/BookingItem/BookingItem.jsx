@@ -5,7 +5,7 @@ import ConfirmDeleteCard from "../ConfirmDeleteCard/ConfirmDeleteCard";
 import SummaryOfCharges from "../SummaryOfCharges/SummaryOfCharges";
 
 
-const BookingItem = ({ booking, customerName, hotelAddress, hotelImage, hotelName, bookingId, roomType, rewardPoints, checkOutDate, checkInDate, phone, email, price, id ,
+const BookingItem = ({amenitiesResponse, booking, customerName, hotelAddress, hotelImage, hotelName, bookingId, roomType, rewardPoints, checkOutDate, checkInDate, phone, email, price, id ,
     perRoomPerNightPrice, totalNights, totalRoomPrice, numberOfRooms, surcharge, surchargeType, tax, taxableAmount, totalAmenityPrice, loyaltyDiscount, loyaltyType,  }) => {
   const [isOpen, setOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
@@ -28,9 +28,13 @@ const BookingItem = ({ booking, customerName, hotelAddress, hotelImage, hotelNam
   };
 
   const deleteBooking = () => {
-    console.log(`Delete the booking :: ${bookingId}`);
-    // TODO Call Backend API to delete the booking
+    console.log(`Delete the booking :: ${id}`);
+    SecureAPIInstance.delete("/bookings/"+id, {})
+      .then((response) => window.location.reload())
+      .catch((err) => {});
+
   };
+
 
   return (
     <>
@@ -50,7 +54,7 @@ const BookingItem = ({ booking, customerName, hotelAddress, hotelImage, hotelNam
           <span className="siFeatures">Customer name: {customerName}</span>
           <span className="siFeatures">Customer contact: {phone}</span>
           <span className="siFeatures">Customer email: {email}</span>
-          <span className="siTaxiOp">Reward points: {rewardPoints}</span>
+          <span className="siFeatures">Add-Ons: {amenitiesResponse}</span>
           {/* <button className="siCheckButton" onClick={() => openEditModal()}>Edit booking</button>
           <button className="siCheckButton" onClick={() => openDeleteModal()}>Cancel booking</button> */}
         </div>
@@ -58,26 +62,16 @@ const BookingItem = ({ booking, customerName, hotelAddress, hotelImage, hotelNam
           <div className="siRating">
           </div>
           <div className="siDetailTexts">
-            {/* <span className="siDistance">Room Price: {perRoomPerNightPrice}</span>
-            <span className="siDistance">No. of rooms: * {numberOfRooms}</span>
-            <span className="siDistance">-------------------</span>
-            <span className="siDistance">Total Room Price: {totalRoomPrice}</span>
-            <span className="siDistance">Amenities Price: + {totalAmenityPrice}</span>
-            <span className="siDistance">No. of nights: * {totalNights}</span>
-            <span className="siDistance">------------------</span>
-            <span className="siDistance">Taxable Amount: {taxableAmount}</span>
-            <span className="siDistance">Tax (10%): + {tax}</span>
-            <span className="siDistance">{surchargeType}:  + {surcharge}</span>
-            <span className="siDistance">{loyaltyType}: - {loyaltyDiscount}</span> */}
             <span className="siPrice">${price}</span>
             <span className="siTaxOp">Total booking amount</span>
+            <span className="siTaxiOp">Reward points: {rewardPoints}</span>
             <button className="siCheckButton" onClick={() => openEditModal()}>Edit booking</button>
             <button className="siCheckButton" onClick={() => openDeleteModal()}>Cancel booking</button>
           </div>
          
         </div>
       </div>
-      <SummaryOfCharges {...booking} key={booking.id}/>
+      <SummaryOfCharges {...booking} key={booking?.id}/>
       <br />
       <hr />
       <ConfirmDeleteCard open={isOpen && deleteModalOpen} onClose={closeModal} onConfirm={deleteBooking} />
