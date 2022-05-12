@@ -13,12 +13,12 @@
 5. Deployment: AWS Elastic Beanstalk(Backend), AWS RDS (For DB)
 
 ## Areas of Contributions
-1. Backend: 
-2. Frontend: 
-3. Deployment : 
-4. UI Wireframes:
-5. Diagrams:
-6. Scrum Master:
+1. Backend: Kanupriya
+2. Frontend: Nikhil, Kavya, Rishab
+3. Deployment: 
+4. UI Wireframes: Kavya, Nikhil
+5. Diagrams: Rishab, Kavya
+6. Scrum Master: Each week one of the team members acted as scrum master
 
 ## Scrum Meetings Schedule:
 Every Monday, Wednesday and Friday.
@@ -26,7 +26,6 @@ Every Monday, Wednesday and Friday.
 ## Feature Set
 
 ### Admin Features
-,,,
 1. Login
 2. Add hotels
 3. Update/Delete hotels
@@ -34,10 +33,8 @@ Every Monday, Wednesday and Friday.
 5. Add amenities
 6. View all bookings
 7. Edit/Delete bookings for the customer. 
-,,,
 
 ### User Features
-,,,
 1. Sign-up / Sign-in (JWT based authentication)
 2. Search hotel based on location
 3. Create bookings (filters: location, number of guests, number of rooms)
@@ -47,7 +44,6 @@ Every Monday, Wednesday and Friday.
 7. Update bookings
 8. Delete bookings
 9. Manage rewards
-,,,
 
 ## Scrum Artifacts and Diagrams
 1. [Github Repository](https://github.com/gopinathsjsu/team-project-epic-bytes)
