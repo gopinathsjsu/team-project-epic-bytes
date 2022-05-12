@@ -143,7 +143,7 @@ const updateHotel = (hotelId) => {
                 {display === "bookings" ? (
                   <>
                     {bookings.map((booking) => (
-                      <BookingItem {...booking} key={booking.id} />
+                      <BookingItem {...booking} key={booking.id} booking={booking} />
                     ))}
                   </>
                 ) : (

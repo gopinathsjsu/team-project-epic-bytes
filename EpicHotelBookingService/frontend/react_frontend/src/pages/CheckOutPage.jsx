@@ -1,8 +1,5 @@
 import * as React from "react";
 import { useState, useEffect, useCallback } from "react";
-import { useLocation, useHistory } from "react-router-dom";
-import { format } from "date-fns";
-import { DateRange } from "react-date-range";
 import CheckOutItem from "../components/CheckOutItem/CheckOutItem";
 import Navbar from "../components/navbar/Navbar";
 import { ApiInstance, SecureAPIInstance } from "../api/axiosInstance";
@@ -17,6 +14,7 @@ import RoomServiceIcon from '@mui/icons-material/RoomService';
 import Grid from '@mui/material/Grid';
 import { useForm } from 'react-hook-form';
 import TextField from '@mui/material/TextField';
+import { useLocation, useHistory } from "react-router-dom";
 
 
 const CheckOutPage = () => {

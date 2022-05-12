@@ -60,7 +60,6 @@ export default function ControlledAccordions(props) {
     loyaltyDiscount,
     totalPrice,
     price,
-    amenitiesResponse
   } = props;
   // const  i = Number({totalAmenityPrice}) * Number({totalNights});
   console.log('props', props);
