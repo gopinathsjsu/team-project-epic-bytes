@@ -43,7 +43,7 @@ const UserItem = ()  => {
                 <div className="card__info">
                     <h2>Beach Home</h2>
                     <h4>"View Offer"</h4>
-                    <h3>The Big Apple</h3>
+                    <h3>Night Life</h3>
                 </div>
             </div>
             <div className='card'>
@@ -51,7 +51,7 @@ const UserItem = ()  => {
                 <div className="card__info">
                     <h2>Austin</h2>
                     <h4>"View Offer"</h4>
-                    <h3>America's Finest City</h3>
+                    <h3>Everything is here</h3>
                 </div>
             </div>
         </div>
