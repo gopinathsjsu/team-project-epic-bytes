@@ -38,6 +38,22 @@ const UserItem = ()  => {
                     <h3>America's Finest City</h3>
                 </div>
             </div>
+            <div className='card'>
+                <img src= "https://www.marriott.com/content/dam/marriott-homepage/hvmi/1_1_Beach_Homes.png.transform/mcom-hp-transform-738x738/image.png" alt="" />
+                <div className="card__info">
+                    <h2>Beach Home</h2>
+                    <h4>"View Offer"</h4>
+                    <h3>The Big Apple</h3>
+                </div>
+            </div>
+            <div className='card'>
+                <img src= "https://homes-and-villas.marriott.com/assets/images/Tile_TrendingHomes_Desktop.jpg" alt="" />
+                <div className="card__info">
+                    <h2>Austin</h2>
+                    <h4>"View Offer"</h4>
+                    <h3>America's Finest City</h3>
+                </div>
+            </div>
         </div>
     //  </div>
    

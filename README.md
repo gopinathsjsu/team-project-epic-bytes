@@ -70,3 +70,4 @@ Every Monday, Wednesday and Friday.
 7. [Wireframes](https://github.com/gopinathsjsu/team-project-epic-bytes/tree/main/Documents/Wireframes)
 8. [Screenshots](https://github.com/gopinathsjsu/team-project-epic-bytes/tree/main/Documents)
 9. [Postman Collection](https://github.com/gopinathsjsu/team-project-epic-bytes/tree/main/Documents)
+
