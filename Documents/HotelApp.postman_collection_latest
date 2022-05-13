@@ -1,0 +1,616 @@
+{
+	"info": {
+		"_postman_id": "b4c19d20-bf51-41d0-8521-ffcd3ea04c5e",
+		"name": "HotelApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "signup",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"\r",
+							"postman.setEnvironmentVariable(\"authJWT\", data.jwt);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"sanjay123\",\r\n    \"password\": \"sanjay123\",\r\n    \"firstName\": \"Sanjay\",\r\n    \"lastName\": \"Agrawal\",\r\n    \"email\": \"sanjay123@gmail.com\",\r\n    \"phone\": \"6503503506\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{awsUrl}}/users",
+					"host": [
+						"{{awsUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"\r",
+							"postman.setEnvironmentVariable(\"authJWT\", data.jwt);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"teethi123\",\r\n    \"password\": \"teethi123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{awsUrl}}/login",
+					"host": [
+						"{{awsUrl}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addHotel",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authJWT}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hotelName\": \"Marriott Hotel Al Jaddaf\",\r\n    \"location\": \"Mumbai\",\r\n    \"description\":\"Modern Mumbai 5-star hotel near downtown Dubai with a spa, pool, gym, restaurants and event venues.\",\r\n    \"hotelAddress\": \"Oud Metha Road, Al Jaddaf Area Mumbai\",\r\n    \"hotelEmail\": \"mariottmumbai@gmail.com\",\r\n    \"hotelPhone\": \"4157718603\",\r\n    \"hotelBasePrice\": \"284\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{awsUrl}}/hotels",
+					"host": [
+						"{{awsUrl}}"
+					],
+					"path": [
+						"hotels"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getHotelById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/hotels/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"hotels",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "summaryofcharges",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"checkInDate\", Date.parse(new Date('12/27/2022')));\r",
+							"postman.setEnvironmentVariable(\"checkOutDate\", Date.parse(new Date('12/31/2022')));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authJWT}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n        \"customerName\": \"Pooja\",\r\n        \"hotelId\": 7,\r\n        \"email\": \"pooja123@gmail.com\",\r\n        \"phone\": \"1234567890\",\r\n        \"numberOfGuestsPerRoom\": 4,\r\n        \"numberOfRooms\": 2,\r\n        \"roomId\": 3,\r\n        \"checkInDate\": {{checkInDate}},\r\n        \"checkOutDate\": {{checkOutDate}},\r\n        \"amenitiesMap\" : {\"MI\":1, \"FR\":0},\r\n        \"payment\": true\r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{awsUrl}}/bookings",
+					"host": [
+						"{{awsUrl}}"
+					],
+					"path": [
+						"bookings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteHotelById",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authJWT}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/hotels/32",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"hotels",
+						"32"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateHotelById",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authJWT}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hotelName\": \"JW Mariott Downtown\",\r\n    \"location\": \"Maldives\",\r\n    \"description\": \"5-star resort with overwater villas, fine dining and beach access\",\r\n    \"hotelAddress\": \"Miriandhoo Island Baa Atoll, 6060\",\r\n    \"hotelEmail\": \"mariott3@gmail.com\",\r\n    \"hotelPhone\": \"1234567890\",\r\n    \"hotelBasePrice\": \"250.0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/hotels/20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"hotels",
+						"20"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addRooms",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authJWT}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"roomNumber\": 107,\r\n    \"roomType\": \"King\",\r\n    \"perNightPrice\": 300,\r\n    \"beds\": 4\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/rooms",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"rooms"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllRooms/getRoombyNumberOfGuests",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/rooms?noOfGuests=8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"rooms"
+					],
+					"query": [
+						{
+							"key": "noOfGuests",
+							"value": "8"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "searchHotelByLocation/getAllHotels",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{awsUrl}}/hotels",
+					"host": [
+						"{{awsUrl}}"
+					],
+					"path": [
+						"hotels"
+					],
+					"query": [
+						{
+							"key": "location",
+							"value": "mumbai",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getRoomById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/rooms/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"rooms",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteRoomById",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authJWT}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/rooms/8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"rooms",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateRoom",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"roomNumber\": 108,\r\n    \"roomType\": \"King\",\r\n    \"perNightPrice\": 300,\r\n    \"beds\": 5\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/rooms/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"rooms",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllBookings",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authJWT}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/bookings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"bookings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBookingsForUser",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authJWT}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{awsUrl}}/bookings/users",
+					"host": [
+						"{{awsUrl}}"
+					],
+					"path": [
+						"bookings",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteBookingById",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authJWT}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{awsUrl}}/bookings/104",
+					"host": [
+						"{{awsUrl}}"
+					],
+					"path": [
+						"bookings",
+						"104"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updatebooking",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"postman.setEnvironmentVariable(\"checkInDate\", Date.parse(new Date('05/28/2022')));\r",
+							"postman.setEnvironmentVariable(\"checkOutDate\", Date.parse(new Date('05/31/2022')));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authJWT}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n        \"customerName\": \"Pooja\",\r\n        \"hotelId\": 8,\r\n        \"email\": \"pooja123@gmail.com\",\r\n        \"phone\": \"1234567890\",\r\n        \"numberOfGuestsPerRoom\": 4,\r\n        \"numberOfRooms\": 5,\r\n        \"roomId\": 2,\r\n        \"checkInDate\": {{checkInDate}},\r\n        \"checkOutDate\": {{checkOutDate}},\r\n        \"amenitiesMap\" : {\"MI\":1, \"FR\":2},\r\n        \"payment\": true\r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{awsUrl}}/bookings/105",
+					"host": [
+						"{{awsUrl}}"
+					],
+					"path": [
+						"bookings",
+						"105"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBookingById",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authJWT}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/bookings/15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"bookings",
+						"15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addAmenities",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{authJWT}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"GR\",\r\n    \"description\": \"Access to game room\",\r\n    \"price\": 100\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/amenities",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"amenities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllAmenities",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/amenities",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"amenities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{localhost}}/health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{localhost}}/health",
+					"host": [
+						"{{localhost}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
