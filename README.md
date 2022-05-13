@@ -68,3 +68,4 @@ Every Monday, Wednesday and Friday.
 6. [Design and Diagrams](https://github.com/gopinathsjsu/team-project-epic-bytes/tree/main/Documents/Diagrams)
 7. [Wireframes](https://github.com/gopinathsjsu/team-project-epic-bytes/tree/main/Documents/Wireframes)
 8. [Screenshots](https://github.com/gopinathsjsu/team-project-epic-bytes/tree/main/Documents)
+
